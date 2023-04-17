@@ -1,0 +1,373 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_contractOverseer",
+        "type": "address"
+      },
+      { "internalType": "uint256", "name": "_launchPadFee", "type": "uint256" },
+      { "internalType": "address", "name": "_padToken", "type": "address" },
+      { "internalType": "address", "name": "_feeReceiver", "type": "address" },
+      {
+        "internalType": "uint256",
+        "name": "_LaunchPadTSupply",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_preSaleTokenSupply",
+        "type": "uint256"
+      },
+      { "internalType": "uint256", "name": "_PadDuration", "type": "uint256" },
+      { "internalType": "address", "name": "_moderator", "type": "address" },
+      {
+        "internalType": "uint256",
+        "name": "_percentagePresalePriceIncrease",
+        "type": "uint256"
+      },
+      { "internalType": "address", "name": "_nativeToken", "type": "address" },
+      {
+        "internalType": "uint256",
+        "name": "_rewardCondition",
+        "type": "uint256"
+      },
+      { "internalType": "address", "name": "_GeneRouter", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  { "inputs": [], "name": "Already_Claimed_Token", "type": "error" },
+  { "inputs": [], "name": "Amount_Exceeds_Balance", "type": "error" },
+  { "inputs": [], "name": "Didnt_Participate_in_Launchpad", "type": "error" },
+  { "inputs": [], "name": "Insufficient_Presale_Liquidity", "type": "error" },
+  { "inputs": [], "name": "LaunchPad_Still_In_Progress", "type": "error" },
+  { "inputs": [], "name": "No_Presale_Liquidity", "type": "error" },
+  { "inputs": [], "name": "Pad_ended", "type": "error" },
+  { "inputs": [], "name": "Pad_ended_check_presale", "type": "error" },
+  { "inputs": [], "name": "Presale_Closed", "type": "error" },
+  { "inputs": [], "name": "Presale_Must_Be_Closed", "type": "error" },
+  { "inputs": [], "name": "Presale_Not_Open_Yet", "type": "error" },
+  { "inputs": [], "name": "invalidTransferAmount", "type": "error" },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_depositor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_ammount",
+        "type": "uint256"
+      }
+    ],
+    "name": "DepositedToLaunchPad",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "ExpirydateExtended",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "admin",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "GenesWithdrawnByAdmin",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_ammount",
+        "type": "uint256"
+      }
+    ],
+    "name": "LaunchPadTokenWithdrawn",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "minter",
+        "type": "address"
+      }
+    ],
+    "name": "NftMinted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "admin",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "presaleTotalSupply",
+        "type": "uint256"
+      }
+    ],
+    "name": "PresaleLiquidityEmptied",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "PresaleStarted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "moderator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "padtoken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "padDuration",
+        "type": "uint256"
+      }
+    ],
+    "name": "launchpadCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenReceived",
+        "type": "uint256"
+      }
+    ],
+    "name": "newPresale",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "DisplayRateFromLaunchPad",
+    "outputs": [
+      { "internalType": "uint256", "name": "rate", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "WithdrawGenes",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "WithdrawLaunchPadToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "displayLaunchPadContributors",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "displayNoOfLaunchPadContributors",
+    "outputs": [
+      { "internalType": "uint256", "name": "contributors", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "displayPresaleParticipants",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "emergencyCancelLaunchpad",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "emergencyRefund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "endPresale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "extraMinutes", "type": "uint256" }
+    ],
+    "name": "extendLaunchPadExpiry",
+    "outputs": [{ "internalType": "bool", "name": "success", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "getGenesDepositedByUser",
+    "outputs": [
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "participateInLaunchPad",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "participateInPresale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewGenesRaisedFromLaunchPad",
+    "outputs": [
+      { "internalType": "uint256", "name": "Raised", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewGenesRaisedFromPreSale",
+    "outputs": [
+      { "internalType": "uint256", "name": "Raised", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewGenesRaisedFromPresale",
+    "outputs": [
+      { "internalType": "uint256", "name": "Genes", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewPresaleTokenBalance",
+    "outputs": [
+      { "internalType": "uint256", "name": "tokenBalance", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawExcessPresaleTokken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

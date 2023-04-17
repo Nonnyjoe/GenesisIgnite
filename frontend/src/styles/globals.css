@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@600;700&family=Poppins:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "EudoxusSans-Bold";
+    src: url("../fonts//EudoxusSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: "EudoxusSans-Light";
+    src: url("../fonts/EudoxusSans-Light.ttf");
+}
