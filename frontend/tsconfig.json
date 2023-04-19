@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/form2.jsx", "src/pages/form1.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/form2.jsx", "src/pages/form1.jsx", "src/components/Navbar.jsx", "src/pages/swapPad/index.jsx"],
   "exclude": ["node_modules"]
 }

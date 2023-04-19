@@ -1,0 +1,31 @@
+.container{
+ background: url("../images/meshbackground2.png") no-repeat;
+}
+
+.Dcontents {
+    margin-left: 23.5vw;
+    width: 73vw;
+    height: 78vh;
+    position: fixed;
+    margin-top: 8rem;
+
+    border-radius: 1rem;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-top: 20px;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px) !important;
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    background-size: cover;
+    padding: 2rem;
+
+}
+
+.Dcontents::-webkit-scrollbar {
+    display: none;
+}
