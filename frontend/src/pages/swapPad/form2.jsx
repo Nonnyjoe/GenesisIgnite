@@ -21,7 +21,7 @@ import styles from "../../styles/swap.module.css";
 import dailogo from "../../images/dailogoo.png";
 import usdclogo from "../../images/usdcc.png";
 import ethlogo from "../../images/ethlogoo.png";
-import GITlogo from "../../images/GITlogo.png";
+import GITlogo from "../../images/2.png";
 import swapp from "../../images/swapp.png";
 import Image from "next/image";
 import { ToastContainer, toast } from 'react-toastify';

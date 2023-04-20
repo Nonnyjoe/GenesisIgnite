@@ -52,7 +52,7 @@ const [userAddress, setUserAddress] =  useState([]);
       setUserBalance(Math.floor(data[0]).toString());
       setLaunchPads((data[1])?.slice(-5));
         console.log(UserBalance);
-        setUserAddress(`${addressFP}....${addressLP}`)
+        setUserAddress(`${(addressFP) ?? "0X00"}....${(addressLP) ?? "0000"}`)
   }})
 
 
@@ -95,7 +95,7 @@ const [userAddress, setUserAddress] =  useState([]);
                        <div>
                         <div className={`${styles.flex} ${styles.statgap} font-pop`}>
                             <div className={styles.userstats}>
-                                <h5>{LaunchPads?.length}</h5>
+                                <h5>{(LaunchPads?.length)??"0"}</h5>
                                 <p>LaunchPads</p>
                             </div>
                             <div className={styles.userstats}>
@@ -133,7 +133,7 @@ const [userAddress, setUserAddress] =  useState([]);
                         <p className="mb-3">You can get quick responses to any question and chat with the team on Discord "Link here"</p>
                         <p className="mb-5"> Don&apos;t hesistate to refer friends</p>
                     <div className={styles.buyToken2}>
-                    <Link href={`./swapPad`}>
+                    <Link href={`https://github.com/Nonnyjoe/BunzzGenesisIgnite`}>
                         <p>Github</p>
                     </Link>
                     </div>
@@ -145,7 +145,7 @@ const [userAddress, setUserAddress] =  useState([]);
                 </div>
                 <div className={styles.dashboardcardsbtm}>
                     <div className={styles.salesdetails}>
-                        <div className={`${styles.flex} ${styles.salesprogress} font-EudoxusSansBold`}>
+                        <div className={`${styles.flex} ${styles.salesprogress} font-EudoxusSansBold flex justify-center items-center`}>
                             <h5>LaunchPad History</h5>
                         </div>
                             <hr />

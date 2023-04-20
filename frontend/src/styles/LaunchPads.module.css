@@ -1,0 +1,433 @@
+.LaunchpadWhite {
+    color: #fff;
+    margin: 0 3rem;
+    margin-left: 23.5vw;
+    width: 73vw;
+    height: 78vh;
+    position: fixed;
+    margin-top: 8rem;
+    border-radius: 1rem;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    /* overflow-y: scroll; */
+    padding-top: 20px;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px) !important;
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    background-size: cover;
+    padding: 2rem 2rem;
+    transition: all 0.3s ease-out;
+}
+
+  .LaunchpadWhite::-webkit-scrollbar {
+      display: none;
+  }
+
+  .LaunchpadSecondWhite {
+    width: 100%;
+    padding: 1.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px) !important;
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    background-size: cover;
+    border-radius: 1rem;
+    transition: all 0.3s ease-out;
+  }
+.Banner{
+    width: 100%;
+    height: 7rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    background-size: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(2px) !important;
+        /* background: url("../images/cryptoBanner2.jpg") no-repeat; */
+    background-size: cover;
+}
+
+.tokenLogo{
+    width: 6rem;
+    height: 6rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 3rem;
+    margin-left: 0rem;
+    margin-top: -1.5rem;
+    box-shadow: 5px 1px 17px rgba(10, 10, 10, 0.25);
+    animation: dance 4s ease-in-out infinite alternate;
+}
+
+@keyframes dance {
+    from {
+        transform: rotate(0deg) translateX(0);
+    }
+
+    to {
+        transform: rotate(360deg) translateX(10px);
+    }
+}
+
+.cardwrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.leading-7 {
+    line-height: 1.75rem;
+}
+
+.lauchpadscards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1.5rem;
+    column-gap: 0;
+    margin: 3rem 1rem 0;
+    /* margin: 1rem; */
+   
+}
+
+.cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 0;
+    margin:0;
+    border: 1px solid rgba(214, 207, 223, 0.1);
+    background-color: rgba(214, 207, 223, 0.1);
+    border-radius: 1rem;
+    height: 22rem;
+    width: 20rem;
+    position: relative;
+    z-index: 1;
+}
+
+.cardimage{
+    /* margin-bottom: 50rem; */
+    height: 14rem;
+    width: 14rem;
+    position: absolute;
+    /* z-index: 2; */
+    top: 1rem;
+}
+
+.status{
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    border: 1px solid purple;
+    background-color: purple;
+    border-radius: 1rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.namestatusdetails , .symboladdress{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6rem;
+}
+
+.namestatusdetails p , .symboladdress p{
+    margin: 0;
+    text-align: left;
+}
+
+.launchpadname, .launchongoing, .launchended{
+    margin: 0;
+}
+
+.launchongoing{
+    border: 1px solid green;
+    background-color: green;
+    color: white;
+    padding: 0.2rem;
+    border-radius: 1rem;
+}
+
+.launchended {
+    border: 1px solid rgb(225, 45, 45);
+    background-color: rgb(225, 45, 45);
+    color: white;
+    padding: 0.2rem .5rem;
+    border-radius: 1rem;
+}
+
+.namestatusdetails{
+    margin: 10rem 0 1.5rem;
+}
+
+.dynamiclaunch{
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 1rem 0rem 0rem;
+    width: 50%;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.dynamicheader{
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* background-color: rgba(214, 207, 223, 0.1); */
+    /* border-radius: 1rem; */
+    /* padding: 1rem 2rem; */
+    /* margin: 1rem 0 2rem; */
+}
+
+.launchpadname{
+    margin: 0.5rem 0rem;
+    font-size: 2rem;
+}
+
+.launchpadsymbol{
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 2rem 1rem;
+    margin: 2rem 0;
+}
+.history {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(140, 50, 239) ;
+    /* gap: 1rem; */
+    justify-content: space-between;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    border-radius: .5rem;
+    width: 100%;
+}
+
+.history:hover{
+    cursor: pointer;
+}
+
+.leftside{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.participate{
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    border: 2px solid rgba(214, 207, 223, 0.1);
+    background-color: rgba(214, 207, 223, 0.1);
+    box-shadow: -15px 10px 17px rgba(10, 10, 10, 0.25);
+    border-radius: 0.5rem;
+    color: white;
+    padding: 2rem 0;
+    width: 100%;
+    margin-top: 1rem;
+
+}
+
+.flex1{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.generaldetails{
+    display: flex;
+    gap: 1rem;
+    border: 2px solid rgba(214, 207, 223, 0.1);
+    background-color: rgba(214, 207, 223, 0.1);
+    box-shadow: -15px 10px 17px rgba(10, 10, 10, 0.25);
+    border-radius: 1rem;
+    margin: 1rem 0 0 0;
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+
+.generaldetails h5{
+    font-size: 1rem;
+    font-weight: 200;
+    margin: 0;
+}
+
+.launcpdetailed{
+    font-weight: 400;
+}
+
+.flexpage{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    width:100%;
+}
+
+.launchendtime{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(214, 207, 223, 0.1);
+    background-color: rgba(214, 207, 223, 0.1);
+    box-shadow: -15px 10px 17px rgba(10, 10, 10, 0.25);
+    border-radius: 0.5rem;
+    padding:0;
+    margin: 1.5rem 0 0.8rem;
+    width: 100%;
+    height: 3rem;
+}
+
+.launchendtime h5{
+    /* font-size: 0.7rem; */
+    font-weight: 300;
+}
+
+.launchendtime p{
+    /* font-size: 1.2rem; */
+
+}
+
+.participationparagraph{
+    margin: 0;
+    width: 100%;
+    border: 2px solid rgba(214, 207, 223, 0.1);
+    border-left: 0px;
+    border-right: 0px;
+    padding: 0.8rem  2rem;
+}
+
+.participationheader{
+    padding: 0 0 0 2rem;
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+}
+
+.pl2{
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.participatewith{
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+   
+}
+
+.selectToken{
+    margin: 0;
+    padding: 0.3rem 1rem;
+    border: 1px solid white;
+    border-radius: 1rem;
+
+
+}
+
+.amountbar{
+    width: 23rem;
+    height: 2.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #D0D5DD;
+    margin-bottom: 1.2rem;
+    margin-left: -1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border:none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 1px;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.launchpadbtn{
+        width: 16.75rem;
+          height: 2.75rem;
+          border-radius: 0.5rem;
+          border: 1px solid #D0D5DD;
+          /* margin-bottom: 1.2rem; */
+          background: rgba(255, 255, 255, 0.1);
+          /* background-color: red; */
+          border: none;
+          outline: none;
+          padding: 10px 20px;
+          border-radius: 2rem;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          border-right: 1px solid rgba(255, 255, 255, 0.2);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          letter-spacing: 1px;
+          color: #fff;
+          /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); */
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        transition: all 0.3s ease-out;
+}
+
+
+
+
+.launchpadbtn:hover{
+    background: rgba(255, 255, 255, 0.485);
+    color: rgb(86, 6, 87);
+    border: 1px solid rgba(255, 255, 255, 0.597);
+    cursor: pointer;
+}
+
+.m0{
+    margin: 0;
+}
+
+.moreDetails{
+    border: 2px solid rgba(214, 207, 223, 0.1);
+    background-color: rgba(214, 207, 223, 0.1);
+    box-shadow: -15px 10px 17px rgba(10, 10, 10, 0.25);
+    height: 100%;
+    padding: 0rem 1rem 2.5rem 1rem;
+    color: white;
+    border-radius: 1rem;
+}

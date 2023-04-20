@@ -6,6 +6,8 @@ import twitterlogo from "../images/twitterlogo.png"
 import githublogo from "../images/githublogo.png"
 import discordlogo from "../images/discordlogo.png"
 import logo from "../images/web2.png"
+import Link from 'next/link';
+
 
 
 
@@ -34,8 +36,12 @@ const FooterSec = () => {
             <p> Copyright © 2023, Ignite Team </p>
           </div>
           <div className='flex flex-row gap-7'>
+            <Link href={`https://twitter.com/GenesisIgnite`}>
             <div className={styles3.footerSocials}><Image src={twitterlogo} /></div>
+            </Link>
+            <Link href={`https://github.com/Nonnyjoe/BunzzGenesisIgnite`}>
             <div className={styles3.footerSocials}><Image src={githublogo} /></div>
+            </Link>
             <div className={styles3.footerSocials}><Image src={discordlogo} /></div>
           </div>
         </div>

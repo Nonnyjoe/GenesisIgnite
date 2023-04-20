@@ -22,7 +22,7 @@ import usdclogo from "../../images/usdcc.png";
 import ethlogo from "../../images/ethlogoo.png";
 import swapp from "../../images/swapp.png";
 import Image from "next/image";
-import GITlogo from "../../images/GITlogo.png";
+import GITlogo from "../../images/2.png";
 
 
 // import (useState)
@@ -88,16 +88,16 @@ export default function SwappOut() {
 
   // ARRAY OF TOKENS FOR THE DROP DOWN MENU
   const DropdownOptions3 = [
-    { id: 0, name: "Eth", address: "", image: { ethlogo } },
+    { id: 0, name: "ETH", address: "", image: { ethlogo } },
     {
       id: 1,
-      name: "Dai",
+      name: "DAI",
       address: "0xb9e916833acbB55ee9b0714C67Cebe9Bb267FbC6",
       image: { dailogo },
     },
     {
       id: 2,
-      name: "Usdc",
+      name: "USDC",
       address: "0xb9e916833acbB55ee9b0714C67Cebe9Bb267FbC2",
       image: { usdclogo },
     },

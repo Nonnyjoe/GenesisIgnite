@@ -31,7 +31,7 @@ function Sidebar() {
           <li className={styles.item}>
             <div className='flex flex-row gap-6'>
             <div className={`${styles.Launch} w-7 h-7 mt-[.5rem]`}></div>
-            <Link href="/">
+            <Link href="/launchpad">
               <a>LaunchPad</a>
             </Link>
             </div>
@@ -39,7 +39,7 @@ function Sidebar() {
           <li className={styles.item}>
             <div className='flex flex-row gap-6'>
             <div className={`${styles.presale} w-7 h-7 mt-[.5rem]`}></div>
-            <Link href="/">
+            <Link href="/presale">
               <a>Presale</a>
             </Link>
             </div>

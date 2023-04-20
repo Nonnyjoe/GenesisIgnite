@@ -52,8 +52,8 @@ const [swapBalance, setSwapBalance] = useState();
     ],
       watch: true,
       onSuccess: (data) => {
-      setUserBalance(Math.floor(data[0]).toString());
-      setSwapBalance(Math.floor(data[1]).toString());
+      setUserBalance((Math.floor(data[0]).toString()) ?? "0.00");
+      setSwapBalance((Math.floor(data[1]).toString()) ?? "0.00");
         console.log(UserBalance);
   }})
 
@@ -76,7 +76,7 @@ const [swapBalance, setSwapBalance] = useState();
                 </div>
                 <div className="ml-4">
                   <p className={`${styles.lhsheader} uppercase text-xs leading-8 font-pop`}>Your Balance</p>
-                  <p className={styles.lhschild}>{Math.floor(UserBalance / 10**18)}</p>
+                  <p className={styles.lhschild}>{(Math.floor(UserBalance / 10**18))}</p>
                 </div>
               </div>
             </div>
