@@ -38,9 +38,4 @@ Genesis Ignite's ultimate goal is to provide a comprehensive and user-friendly e
   
 
 ## Running tests
-cd ./src/hardhat
-npx hardhat test ./test/FraxSwap/fraxswap-twamm-test.js
-  
-
-## Running tests
 forge test
