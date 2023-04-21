@@ -4,6 +4,7 @@ import styles3 from "../../styles/reusables.module.css";
 import PageLayout from "../../layout/PageLayout";
 import Image from "next/image";
 import ignitelogo from "../../images/web2.png";
+import nonso from "../../images/Nonso.jpg";
 import Link from "next/link";
 
 export default function Documentation() {
@@ -76,6 +77,47 @@ export default function Documentation() {
             Genesis Ignite is a leading crypto company Based in Nigeria. 
 
             </h6>
+    <div className="flex flex-wrap max-w-sm mx-auto justify-center gap-4">
+        <div>
+        <Image src={nonso} width={100} height={100} className="rounded-full"/>
+        <h6>pter</h6>
+        <p>pter</p>
+        <a href="#">git</a>
+        <a href="#">git</a>
+        </div>
+
+        <div>
+        <Image src={nonso} width={100} height={100} className="rounded-full"/>
+        <h6>pter</h6>
+        <p>pter</p>
+        <a href="#">git</a>
+        <a href="#">git</a>
+        </div>
+
+        <div>
+        <Image src={nonso} width={100} height={100} className="rounded-full"/>
+        <h6>pter</h6>
+        <p>pter</p>
+        <a href="#">git</a>
+        <a href="#">git</a>
+        </div>
+
+        <div>
+        <Image src={nonso} width={100} height={100} className="rounded-full"/>
+        <h6>pter</h6>
+        <p>pter</p>
+        <a href="#">git</a>
+        <a href="#">git</a>
+        </div>
+
+        <div>
+        <Image src={nonso} width={100} height={100} className="rounded-full"/>
+        <h6>pter</h6>
+        <p>pter</p>
+        <a href="#">git</a>
+        <a href="#">git</a>
+        </div>
+            </div>
           </div>
         </div>
       </div>
