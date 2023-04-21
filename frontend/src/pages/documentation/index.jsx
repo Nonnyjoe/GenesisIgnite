@@ -18,18 +18,15 @@ import web3afrika from "../../images/web3afrika.png";
 import web3bridge from "../../images/web3bridge.jpg";
 import doc from "../../images/doc.png";
 
-
-
-
-
-
 import Link from "next/link";
 
 export default function Documentation() {
   return (
     <div className={` mt-20 ${styles2.aboutUs}`}>
       <div className={styles.innerDiv}></div>
-      <div className={`${styles2.padding} ${styles.glassCard4} mx-auto px-24 py-24`}>
+      <div
+        className={`${styles2.padding} ${styles.glassCard4} mx-auto px-24 py-24`}
+      >
         <nav className={`${styles.navi} flex flex-row  p-5`}>
           <div className={`${styles.Image}`}>
             <Image src={ignitelogo} alt="iginite logo" />
@@ -160,10 +157,12 @@ export default function Documentation() {
               <a href="https://github.com/">🐙 : GitHub</a>
               <a href="https://twitter.com/">🐦 : Twitter</a>
             </div>
-            
           </div>
 
-          <p  className="text-1xl font-EudoxusSansBold text-white mt-6 mb-6">With a wealth of experience and a shared passion for the blockchain industry, we work 	collaboratively to develop innovative solutions and drive the growth of the crypto space.
+          <p className="text-1xl font-EudoxusSansBold text-white mt-6 mb-6">
+            With a wealth of experience and a shared passion for the blockchain
+            industry, we work collaboratively to develop innovative solutions
+            and drive the growth of the crypto space.
           </p>
 
           <h2 className="text-2xl font-EudoxusSansBold text-white mt-10 mb-10">
@@ -214,64 +213,61 @@ export default function Documentation() {
                 className="rounded-full"
               />
             </div>
-            </div>
+          </div>
         </div>
 
         <h2 className="text-2xl text-center font-EudoxusSansBold text-white mt-10 mb-10">
-            Investors
-          </h2>
-          <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
-            <div>
-              <Image
-                src={scarface}
-                width={150}
-                height={150}
-                className="rounded-full"
-              />
-            </div>
+          Investors
+        </h2>
+        <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
+          <div>
+            <Image
+              src={scarface}
+              width={150}
+              height={150}
+              className="rounded-full"
+            />
+          </div>
 
-            <div>
-              <Image
-                src={jay}
-                width={150}
-                height={150}
-                className="rounded-full"
-              />
-            </div>
-           </div>
+          <div>
+            <Image
+              src={jay}
+              width={150}
+              height={150}
+              className="rounded-full"
+            />
+          </div>
+        </div>
 
-           <h2 className="text-2xl text-center font-EudoxusSansBold text-white mt-10 mb-10">
-            Read Full Documentation here...
-          </h2>
-          {/* <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
-            <div>
-              <Image
-                src={doc}
-                width={150}
-                height={200}
-              />
-
-            </div>
-
-           </div> */}
-           <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
-  <div className="flex flex-col items-center">
-    <Image
-      src={doc}
-      width={150}
-      height={200}
-    />
-    <a href="https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=share_link" target="_blank" rel="noopener noreferrer" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-2">
-      <span>Read Documentation</span>
-      <svg xmlns="http://www.w3.org/2000/svg" className="ml-2.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M13.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 112 0v7.586l2.293-2.293a1 1 0 011.414 0z" clipRule="evenodd" />
-      </svg>
-    </a>
-  </div>
-</div>
-  
+        <h2 className="text-2xl text-center font-EudoxusSansBold text-white mt-10 mb-10">
+          Read Full Documentation here...
+        </h2>
+        <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
+          <div className="flex flex-col items-center">
+            <Image src={doc} width={150} height={200} />
+            <a
+              href="https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=share_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-2"
+            >
+              <span>Read Documentation</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="ml-2.5 h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M13.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 112 0v7.586l2.293-2.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
-      
     </div>
   );
 }
