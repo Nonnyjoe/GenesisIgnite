@@ -14,6 +14,8 @@ const IndPresale = ({ contractAddress }) => {
     
   const [LaunchPadData, setLaunchPadData] = useState({});
   const [LaunchPadEndTime, setLaunchPadEndTime] = useState();
+  const [LaunchPadToken, setLaunchPadToken] = useState();
+  const [cid, setCid] = useState();
 
   const {
     data: BuyersData,
@@ -53,6 +55,30 @@ const IndPresale = ({ contractAddress }) => {
   };
 
 
+    useContractRead({
+    address: contractAddress,
+    abi: LPABI,
+    functionName: "viewLaunchPadToken",
+    onSuccess(data) {
+      setLaunchPadToken((data).toString());
+      console.log(data);
+    },
+  });
+
+
+    useContractRead({
+    address: LaunchPadFacoryAddr(),
+    abi: LPFactoryABI,
+    functionName: "returnCid",
+    args:[LaunchPadToken??"0x00"],
+    onSuccess(data) {
+      setCid((data).toString());
+      console.log(data);
+    },
+  });
+  
+
+
 function getTimeAgo(epochTime) {
   const now = new Date().getTime() / 1000;
   const diffInSeconds = now - epochTime;
@@ -74,13 +100,25 @@ function getTimeAgo(epochTime) {
 
   return (
     <div>
-    <div className={styles.cardlink}>
+    <div className={`${styles.cardlink} cursor-pointer`}>
     <Link href={`./presale/${contractAddress}`}>
       <div className={styles.cardwrapper}>
         <div className={styles.cards}>
-          <div className={styles.cardimage}>
-            <Image src={igniteNft} />
-          </div>
+           {cid ? (
+                <div className={styles.cardimage}>
+                  <img
+                    src={`https://${cid}.ipfs.w3s.link/tokenLogo`}
+                    alt="Dummy image"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+              ) : (
+                <div className={styles.cardimage}>
+                  <Image src={igniteNft} />
+
+                </div>
+              )}
 
           <p className={` text-sm ${styles.status}`}>{epochTime() ? `NEW` : getTimeAgo(LaunchPadEndTime)}</p>
 
@@ -95,7 +133,7 @@ function getTimeAgo(epochTime) {
           </div>
 
           <div className={`${styles.symboladdress} mt-[0rem] flex flex-row-reverse`}>
-          <p className={`text-sm ${launchStatusClassName}`}>{epochTime() ? `ONGOING` : `ENDED`}</p>
+          <p className={`text-sm ${styles.launchongoing}`}>{ `ONGOING` }</p>
        
           <p className=" text-sm ">{`${contractAddress.slice(
             0,

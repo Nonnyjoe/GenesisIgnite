@@ -4,7 +4,7 @@ import ignitelogopure from "../../images/ignitelogopure.png"
 import Link from 'next/link';
 import rocketicon from "../../images/rocketicon.png"
 import usericon from "../../images/usericon.png"
-import rocket from "../../images/rocket.png"
+import rocket from "../../images/223.png"
 import cylinder from "../../images/cylinder.png"
 import Image from "next/image"
 import { useAccount, useContractRead, Suspense, useContractReads, usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'

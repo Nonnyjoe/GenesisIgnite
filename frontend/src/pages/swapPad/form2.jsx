@@ -24,6 +24,7 @@ import ethlogo from "../../images/ethlogoo.png";
 import GITlogo from "../../images/2.png";
 import swapp from "../../images/swapp.png";
 import Image from "next/image";
+import { Decimal } from 'decimal.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
   
@@ -187,7 +188,7 @@ const notify = () => toast("Wow so easy !");
   const DropdownOptions2 = [
     {
       id: 0,
-      name: "GENE",
+      name: "GIT",
       address: "0xb9e916833acbB55ee9b0714C67Cebe9Bb267FbC2",
     },
   ];
@@ -293,7 +294,7 @@ const notify = () => toast("Wow so easy !");
           <div className="">
             <p className={`mb-8 ${styles.optiondescription} font-pop mt-[1.2rem] text-xl`}>
               {" "}
-              SWAPP OTHER TOKENS TO GENE TOKEN{" "}
+              SWAPP OTHER TOKENS TO GIT TOKEN{" "}
             </p>
             
             <div className="flex flex-row gap-4 justify-center items-center mb-3">

@@ -9,6 +9,7 @@ import click from "../../../images/click.png"
 import Link from "next/link";
 import { LaunchPadFacoryAddr } from "../../../utils/addresses";
 import LPFactory from "../../../utils/LPFactory.json";
+import tokenABI from "../../../utils/token_ABI.json";
 import { ethers } from "ethers";
 
 const token = process.env.API_TOKEN
@@ -48,12 +49,40 @@ console.log(JSON.stringify(convert(7580, 'ether').wei))
 
   function handleSubmit(e) {
     e.preventDefault();
-    createLaunchPad?.();
+    getAlawee?.();
   }  
 
 
+    // GRANT ALLOWANCE
+  const {
+    data: alawee,
+    write: getAlawee,
+    isLoading: alaweeLoading,
+  } = useContractWrite({
+    mode: "recklesslyUnprepared",
+    address: formData?.tokenAddress ? ethers.utils.getAddress(formData.tokenAddress) : undefined,
+    abi: tokenABI,
+    functionName: "approve",
+    args: [LaunchPadFacoryAddr(), ethers.utils.parseEther(formData.LPTotalSupply ? String(formData.LPTotalSupply) : "0")],
+  });
 
-// GRANT ALLOWANCE
+  const { data: alaweeWaitData, isLoading: loadingAlaweeWaitData } =
+    useWaitForTransaction({
+      hash: alawee?.hash,
+      onSuccess(result) {
+      createLaunchPad?.();
+
+      },
+      onError(error) {
+        console.log("Error: ", error);
+      },
+    });
+
+
+
+
+
+// CREATE LAUNCHPAD
   const {
     data: createLaunchPadData,
     write: createLaunchPad,
@@ -80,7 +109,7 @@ console.log(JSON.stringify(convert(7580, 'ether').wei))
       },
     });
 
-
+  
 
 
   return (

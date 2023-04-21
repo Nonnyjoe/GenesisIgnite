@@ -9,11 +9,14 @@ import Image from "next/image";
 import LPABI from "../../utils/LPABI.json";
 
 // import PageLayout from "../../layout/PageLayoutt";
+// https://${cid}.ipfs.w3s.link/tokenLogo
 
 const IndLaunchpads = ({ contractAddress }) => {
     
   const [LaunchPadData, setLaunchPadData] = useState({});
   const [LaunchPadEndTime, setLaunchPadEndTime] = useState();
+  const [LaunchPadToken, setLaunchPadToken] = useState();
+  const [cid, setCid] = useState();
 
   const {
     data: BuyersData,
@@ -38,6 +41,27 @@ const IndLaunchpads = ({ contractAddress }) => {
     functionName: "viewLaunchPadEndTime",
     onSuccess(data) {
       setLaunchPadEndTime((data).toString());
+      console.log(data);
+    },
+  });
+
+  useContractRead({
+    address: contractAddress,
+    abi: LPABI,
+    functionName: "viewLaunchPadToken",
+    onSuccess(data) {
+      setLaunchPadToken((data).toString());
+      console.log(data);
+    },
+  });
+
+    useContractRead({
+    address: LaunchPadFacoryAddr(),
+    abi: LPFactoryABI,
+    functionName: "returnCid",
+    args:[LaunchPadToken??"0x00"],
+    onSuccess(data) {
+      setCid((data).toString());
       console.log(data);
     },
   });
@@ -73,14 +97,27 @@ function getTimeAgo(epochTime) {
   const launchStatusClassName = epochTime() ? styles.launchongoing : styles.launchended;
 
   return (
-    <div>
+    <div className="cursor-pointer">
     <div className={styles.cardlink}>
     <Link href={`./launchpad/${contractAddress}`}>
       <div className={styles.cardwrapper}>
         <div className={styles.cards}>
-          <div className={styles.cardimage}>
-            <Image src={igniteNft} />
-          </div>
+              {cid ? (
+                <div className={styles.cardimage}>
+                  <img
+                    src={`https://${cid}.ipfs.w3s.link/tokenLogo`}
+                    alt="Dummy image"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+              ) : (
+                <div className={styles.cardimage}>
+                  <Image src={igniteNft} />
+
+                </div>
+              )}
+
 
           <p className={` text-sm ${styles.status}`}>{epochTime() ? `NEW` : getTimeAgo(LaunchPadEndTime)}</p>
 

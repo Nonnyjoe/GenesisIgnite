@@ -17,6 +17,9 @@ import { GeneAddress } from "../../utils/addresses";
 import { ethers } from "ethers";
 import Header from "../../components/header";
 import styles from "../../styles/LaunchPads.module.css";
+import Image from "next/image";
+import igniteNft from "../../images/dodge.png";
+
 
 const LaunchPadDetails = (props) => {
   const { address } = useAccount();
@@ -46,6 +49,10 @@ const { contractAddress } = props;
   const [userAllowance, setUserAllowance] = useState();
   const [UserBalance, setUserBalance] = useState();
   const [hovered, setHovered] = useState(false);
+  const [cid, setCid] = useState();
+  const [LaunchPadToken, setLaunchPadToken] = useState();
+  const [priceIncrease, setPriceIncrease] = useState();
+
 
   /// FETCH THE CONTRACT TOKEN NAME AND SYMBOL
   const {
@@ -63,6 +70,37 @@ const { contractAddress } = props;
   });
 
 
+  /// SET THE PRICE INCREASE:
+ useContractRead({
+    address: contractAddress,
+    abi: LPABI,
+    functionName: "PercentagePriceIncrease",
+    onSuccess(data) {
+      setPriceIncrease(data);
+    },
+  });
+
+
+    useContractRead({
+    address: contractAddress,
+    abi: LPABI,
+    functionName: "viewLaunchPadToken",
+    onSuccess(data) {
+      setLaunchPadToken((data).toString());
+      console.log(data);
+    },
+  });
+
+    useContractRead({
+    address: LaunchPadFacoryAddr(),
+    abi: LPFactoryABI,
+    functionName: "returnCid",
+    args:[LaunchPadToken??"0x00"],
+    onSuccess(data) {
+      setCid((data).toString());
+      console.log(data);
+    },
+  });
 
   //// CHECK THE ALLOWANCE THE USER HAS GRANTED THE CONTRACT
   useContractRead({
@@ -268,11 +306,21 @@ const { contractAddress } = props;
   function handleSubmit2b() {
     getParticipate?.();
   }
-
-
+  
+  const epochTime = () => {
+    const now = new Date();
+    const epochTime = Math.floor(now.getTime() / 1000);
+    if (epochTime > LaunchPadDeadline) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  
+  const launchStatusClassName = epochTime() ? styles.launchongoing : styles.launchended;
 
   return (
-    <div className={styles.LaunchpadWhite}>
+    <div className={styles.LaunchpadWhite1}>
     <div className={styles.LaunchpadSecondWhite}>
       <div className={styles.Banner}></div>
       <div className={styles.flexpage}>
@@ -284,11 +332,26 @@ const { contractAddress } = props;
             </div>
             <div className="flex justify-between flex-row">
             <p className={`${styles.launchpadsymbol} font-pop`}>{LaunchPadData.symbol}</p>
-            <p className={`${styles.launchended} font-pop`}>{Lstatus()}</p>
+            <p className={`${launchStatusClassName} font-pop`}>{Lstatus()}</p>
             </div>
           </div>
             <div className="">
-                <div className={`${styles.tokenLogo}`}></div>
+                {cid ? (
+                <div className={styles.tokenLogo}>
+                  <img
+                    src={`https://${cid}.ipfs.w3s.link/tokenLogo`}
+                    alt="Dummy image"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+                  ) : (
+                <div className={styles.tokenLogo}>
+                  <Image src={igniteNft} />
+
+                </div>
+              )}    
+            
             </div>
           </div>
           <div className="flex flex-col gap-6 h-[100%]">
@@ -305,7 +368,7 @@ const { contractAddress } = props;
                 <h5 class="mt-4 font-pop">
                   Total Suppy:{" "}
                   <span className={styles.launcpdetailed}>
-                    {LaunchPadTotalSupply / 10 ** 18} {LaunchPadData.symbol}{" "}
+                    {Math.floor(LaunchPadTotalSupply / 10 ** 18)} {LaunchPadData.symbol}{" "}
                   </span>
                 </h5>
               </div>
@@ -313,7 +376,7 @@ const { contractAddress } = props;
                 <h5 class="mt-4 font-pop">
                   GIT RAISED : {" "}
                   <span className={styles.launcpdetailed}>
-                    {genesRaisedFromLaunchPad / 10 ** 18} GIT
+                    {Math.floor(genesRaisedFromLaunchPad / 10 ** 18)} GIT
                   </span>
                 </h5>
               </div>
@@ -338,7 +401,7 @@ const { contractAddress } = props;
               <h5 class="mt-4 font-pop">
                Price increase after Launchpad:{" "}
               </h5>
-              <p>{presaleTokenBalance / 10 ** 18}</p>
+              <p>{`${priceIncrease} %`}</p>
             </div>
           </div>
               <div className="">
@@ -396,7 +459,7 @@ const { contractAddress } = props;
                     loadingParticipateWaitData
                   }
                 >
-                  {"Withdraw Reward"}
+                  {loadingWithdrawWaitData || withdrawalLoading ? ".....Processing" : "Withdraw Reward"}
                 </button> : 
                  <button
                   type="submit"

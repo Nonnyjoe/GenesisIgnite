@@ -19,6 +19,8 @@ import Header from "../../components/header";
 import styles from "../../styles/LaunchPads.module.css";
 import Image from "next/image";
 import dodge from "../../images/dodge.png";
+import igniteNft from "../../images/dodge.png";
+
 
 const PresaleDetails = (props) => {
    const { contractAddress } = props;
@@ -33,6 +35,9 @@ const PresaleDetails = (props) => {
   const [activateButton, setActivateButton] = useState(true);
   const [LPEndDate, setLPEndDate] = useState(null);
   const [genesDepositedByUser, setGenesDepositedByUser] = useState(null);
+  const [cid, setCid] = useState();
+  const [LaunchPadToken, setLaunchPadToken] = useState();
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -60,16 +65,26 @@ const PresaleDetails = (props) => {
   });
 
 
+    useContractRead({
+    address: contractAddress,
+    abi: LPABI,
+    functionName: "viewLaunchPadToken",
+    onSuccess(data) {
+      setLaunchPadToken((data).toString());
+      console.log(data);
+    },
+  });
 
-
-
-
-
-
-
-
-
-
+    useContractRead({
+    address: LaunchPadFacoryAddr(),
+    abi: LPFactoryABI,
+    functionName: "returnCid",
+    args:[LaunchPadToken??"0x00"],
+    onSuccess(data) {
+      setCid((data).toString());
+      console.log(data);
+    },
+  });
 
 
 
@@ -128,7 +143,7 @@ const PresaleDetails = (props) => {
       setUserBalance(data[4]?.toString());
       setLaunchPadTotalSupply(data[5]?.toString());
       setLPEndDate(new Date(data[6] * 1000));
-      console.log(noOfLaunchPadContributors);
+      // console.log(data[1]);
     },
   });
 
@@ -259,6 +274,7 @@ const PresaleDetails = (props) => {
       onSuccess: (data) => {
       setTokenPrice((data[0])?.toString());
       setGenesRaisedFromPresale((data[1])?.toString());
+      console.log(`${data[1]} raised`)
       setPresaleTokenBalance((data[2]?.toString()));
       setUserBalance((data[3])?.toString());
       setPTAddress((data[4])?.toString());
@@ -329,7 +345,7 @@ const PresaleDetails = (props) => {
 
 
   return (
-    <div className={styles.LaunchpadWhite}>
+    <div className={styles.LaunchpadWhite1}>
     <div className={styles.LaunchpadSecondWhite}>
       <div className={styles.Banner}></div>
       <div className={styles.flexpage}>
@@ -341,13 +357,25 @@ const PresaleDetails = (props) => {
             </div>
             <div className="flex justify-between flex-row">
             <p className={`${styles.launchpadsymbol} font-pop`}>{LaunchPadData.symbol}</p>
-            <p className={`${styles.launchended} font-pop`}>{`active`}</p>
+            <p className={`${styles.launchongoing} font-pop`}>{`active`}</p>
             </div>
           </div>
             <div className="">
-                <div className={`${styles.tokenLogo}`}>
-                  <Image src={dodge} />
+                {cid ? (
+                <div className={styles.tokenLogo}>
+                  <img
+                    src={`https://${cid}.ipfs.w3s.link/tokenLogo`}
+                    alt="Dummy image"
+                    width="100%"
+                    height="100%"
+                  />
                 </div>
+                  ) : (
+                <div className={styles.tokenLogo}>
+                  <Image src={igniteNft} />
+
+                </div>
+              )}   
             </div>
           </div>
           <div className="flex flex-col gap-6 h-[100%]">
@@ -370,7 +398,7 @@ const PresaleDetails = (props) => {
               </div>
               <div>
                 <h5 class="mt-4 font-pop">
-                  TOTAL GIT RAISED : {" "} <br/>
+                  TOTAL GIT RAISED: {" "} <br/>
                   <span className={styles.launcpdetailed}>
                     {GenesRaisedFromPresale / 10 ** 18} GIT
                   </span>
@@ -395,7 +423,7 @@ const PresaleDetails = (props) => {
 
             <div className="">
               <h5 class="mt-4 font-pop">
-                PERCENTAGE PRICE INCREASE AFTER LAUNCHPAD:{" "}
+              PRICE INCREASE AFTER LAUNCHPAD:{" "}
               </h5>
               <p>{`100%`}</p>
             </div>
@@ -415,7 +443,7 @@ const PresaleDetails = (props) => {
         <div className={styles.leftside}>
           <div className={`${styles.launchendtime} font-pop mb-6`}>
             <h5 class="">TOKEN EXCHANGE RATE: </h5>
-            <p className="">{`1 GIT == ${TokenPrice / (10**18)} ${LaunchPadData.symbol}`}</p>
+            <p className="">{`1 GIT == ${Math.floor(TokenPrice / (10**18))} ${LaunchPadData.symbol}`}</p>
           </div>
           <form onSubmit={handleSubmit}>
             <div className={`${styles.participate} mb-6`}>
@@ -449,7 +477,7 @@ const PresaleDetails = (props) => {
                   className={styles.launchpadbtn}
                   disabled={ alaweeLoading || loadingAlaweeWaitData || participateLoading || loadingParticipateWaitData}
                 >
-             { (userAllowance < (Amount * 10**18)) ? "APPROVE" : hovered ? " LAUNCHPAD ENDED" : alaweeLoading || loadingAlaweeWaitData || participateLoading || loadingParticipateWaitData ? "LOADING...." : "PARTICIPATE"}
+             { (userAllowance < (Amount * 10**18)) ? "APPROVE"  : alaweeLoading || loadingAlaweeWaitData || participateLoading || loadingParticipateWaitData ? "LOADING...." : "PARTICIPATE"}
                 </button>
               </div>
             </div>

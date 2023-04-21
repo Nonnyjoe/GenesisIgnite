@@ -17,7 +17,7 @@ import { useContext, useState } from "react";
 import SwappOut from "./form1";
 import SwappIn from "./form2";
 import tokenABI from "../../utils/token_ABI.json"
-
+import Tilt from 'react-parallax-tilt';
 
 
 export default function Dcontents(){
@@ -81,6 +81,7 @@ const [swapBalance, setSwapBalance] = useState();
               </div>
             </div>
             <div className="">
+              <Tilt>
                 <div className={`${styles.swapForm}`}>
                     <div>
                         <div className={styles.swapoptiontop}>
@@ -103,6 +104,7 @@ const [swapBalance, setSwapBalance] = useState();
                       {showDetails ? <SwappIn /> : <SwappOut />}
                     </div>
                 </div>
+              </Tilt>
             </div>
         </div>
     )

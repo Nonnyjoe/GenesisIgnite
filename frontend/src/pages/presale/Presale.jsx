@@ -7,7 +7,7 @@ import IndPresale from "./IndPresale";
 import Link from "next/link";
 import Image from "next/image";
 import plus from "../../images/plus.png";
-
+import Tilt from 'react-parallax-tilt';
 
 
 export default function Presale(){
@@ -39,8 +39,10 @@ return(
           {PresalePads?.map((e, i) => {
             return (
               <div key={i}>
+                 <Tilt glareEnable={true} glareBorderRadius={"2rem"}>
                 {/* // {e} */}
                 <IndPresale key={i} contractAddress={e} />
+                </Tilt>
               </div>
             )
           })}

@@ -122,6 +122,15 @@
   },
   {
     "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "RecordUserPresaleParticipation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "uint256", "name": "regId", "type": "uint256" },
       { "internalType": "address", "name": "_padToken", "type": "address" },
       { "internalType": "string", "name": "_tokenName", "type": "string" },
@@ -188,11 +197,35 @@
   },
   {
     "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "displayUsersPresaleParticipation",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "_userPressales",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "address", "name": "_pad", "type": "address" }
     ],
     "name": "emergencyCancelLaunchPad",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllPresaleSupporters",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -236,11 +269,35 @@
       },
       { "internalType": "address", "name": "PadToken", "type": "address" },
       { "internalType": "uint256", "name": "regId", "type": "uint256" },
-      { "internalType": "uint256", "name": "_startTime", "type": "uint256" }
+      { "internalType": "uint256", "name": "_startTime", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_LaunchpadTotalSupply",
+        "type": "uint256"
+      }
     ],
     "name": "registerLaunchPads",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "TokenAddress", "type": "address" },
+      { "internalType": "string", "name": "cid", "type": "string" }
+    ],
+    "name": "requestLaunchPad",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "TokenAddress", "type": "address" }
+    ],
+    "name": "returnCid",
+    "outputs": [{ "internalType": "string", "name": "cid", "type": "string" }],
+    "stateMutability": "view",
     "type": "function"
   },
   {

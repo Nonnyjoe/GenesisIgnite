@@ -1,19 +1,37 @@
 import { React, useState, useReducer } from "react";
+const { utils } = require("ethers");
 import Header from "../../../components/header";
 import styles from "../../../styles/requestlaunchpad.module.css";
 import reusable from "../../../styles/reusable.module.css";
 import { create, Web3Storage } from 'web3.storage'
 import Image from "next/image";
 import click from "../../../images/click.png"
+import loader from "../../../images/loading.png"
+import good from "../../../images/good.png"
 import Link from "next/link";
+import { LaunchPadFacoryAddr } from "../../../utils/addresses";
+import LPFactoryABI from "../../../utils/LPFactory.json";
+import {
+  erc20ABI,
+  useContractRead,
+  useContractReads,
+  useAccount,
+  useContractWrite,
+  useWaitForTransaction,
+  wagmi,
+} from "wagmi";
 
 const token = process.env.API_TOKEN
 
 export default function RequestLaunchPad() {
+  const LaunchPadFactory = LaunchPadFacoryAddr();
   const [messages, showMessage] = useReducer((msgs, m) => msgs.concat(m), [])
   const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGIyMjlDQjE4MTU3QUU2NTBhMEIzMkNhNjZFNzczYzNFQjYzOUI2QzAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE1NjM0NTI0ODAsIm5hbWUiOiJHZW5lc2lzSWduaXRlIn0.5dVJUn5YTwFuEZC10Mv4PD7IpWdNIHj0hgu3EkSGEjA')
   const [files, setFiles] = useState([])
   const [imageCID, setimageCID] = useState('');
+  const [showImageAndText, setShowImageAndText] = useState(false);
+  const [uploadText, setUploadText] = useState("Upload file");
+  const [loaderImage, setLoaderImage] = useState(loader);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,10 +55,41 @@ export default function RequestLaunchPad() {
   }
 
 
+    // SAVE IMAGE CID TO SMART CONTRACT
+const {
+  data: tokenCid,
+  write: setTokenCid,
+  isLoading: setTokenCidLoading,
+} = useContractWrite({
+  mode: "recklesslyUnprepared",
+  address: LaunchPadFactory?.toLowerCase(),
+  abi: LPFactoryABI,
+  functionName: "requestLaunchPad",
+  args: [
+    formData?.tokenAddress ? utils.getAddress(formData.tokenAddress) : undefined,
+    (imageCID).toString() || undefined,
+  ],
+});
+
+  const { data: tokenCidWaitData, isLoading: loadingTokenCidWaitData } =
+    useWaitForTransaction({
+      hash: tokenCid?.hash,
+      onSuccess(result) {
+        console.log("stored succesfully")
+      },
+      onError(error) {
+        console.log("Error: ", error);
+      },
+    });
+
+
 /// HANDLES SENDING TO IPFS AND DISPLAYING TRANSACTION STATUS
-async function handleSubmit(event) {
+async function handleSubmit2() {
     // don't reload the page!
-    event.preventDefault()
+    // event.preventDefault()
+    setShowImageAndText(true); 
+    setUploadText("Sending to IPFS please wait........");
+    setLoaderImage(loader);
 
     showMessage('> 📦 creating web3.storage client')
     const client = new Web3Storage({ token })
@@ -65,13 +114,26 @@ async function handleSubmit(event) {
     })
     // setimageCID({cid}.cid);
     showMessage(`> ✅ web3.storage now hosting ${cid}`)
+    setimageCID((cid).toString());
     showLink(`https://${cid}.ipfs.w3s.link/tokenLogo`)
 
     // update the useState for the item details 
      setFormData(prevFormData => ({...prevFormData, imageCID: {cid}.cid}))
     console.log(formData);
 
-    showMessage('> 📡 fetching the list of all unique uploads on this account')
+    showMessage('> 📡 fetching the list of all unique uploads on this account');
+    showMessage('> 📡 SENDING DATA TO CONTRACT PLESASE SIGN TRANSACTION');
+    console.log(formData.tokenAddress);
+    console.log(`CIDDDD is ${imageCID}`);
+
+
+    setUploadText("Upload complete, proceed with request");
+    setLoaderImage(good); // assuming there is a loader image for after the upload
+
+    setTimeout(() => {
+    setShowImageAndText(false); 
+      
+    }, 4000);
   }
 
   function showLink(url) {
@@ -79,6 +141,20 @@ async function handleSubmit(event) {
   }
 
 
+
+  function uploadFiles(e) {
+    e.preventDefault();
+    handleSubmit2();
+  }
+
+
+  async function handleSubmit(event) {
+    // e.preventDefault();
+    event.preventDefault()
+    console.log(`CIDDDD is ${imageCID}`);
+    setTokenCid?.();
+
+  }
   //////// ---------- function to convert the form input to a json file ------------- ////////
 
 
@@ -191,7 +267,26 @@ async function handleSubmit(event) {
             <div className={`mb-5 mt-2 font-pop text-base`}>
              <label className="" htmlFor='filepicker'>Upload Token Logo (only .png files are allowed)</label>
              <br/>
-            <input type='file' id='filepicker' name='fileList' accept='.png' onChange={e => setFiles(e.target.files)} multiple required />
+             <div className="mt-3">
+              <input type='file' id='filepicker' name='fileList' accept='.png' onChange={e => setFiles(e.target.files)} multiple required />
+             <br/>
+            <div className="flex flex-row gap-6 text-center">
+              <button
+                className={`mt-5 font-pop ${styles.btnSubmit2}`}
+                onClick={(e) => uploadFiles(e)}
+              >
+                Upload File
+              </button>
+              {showImageAndText && (
+                <div className="flex flex-row gap-3">
+                  <div className="h-6 w-6 mt-5 animate-spin">
+                    <Image src={loaderImage} />
+                  </div>
+                  <p className="mt-5 text-green-500">{uploadText}</p>
+                </div>
+              )}
+            </div>
+             </div>
             </div>
             <div className="mb-5 gap-3 font-pop text-base">
             <input
@@ -210,11 +305,11 @@ async function handleSubmit(event) {
             <button className={` font-pop mt-4 ${styles.btnSubmit}`}>Request Lauchpad</button>
           </form>
 
-        <div id='output1' className={styles.ipfsResult}>
+        {/* <div id='output1' className={styles.ipfsResult}>
         &gt; ⁂ waiting for form submission...
         {messages.map((m, i) =>
          <div key={m + i}>{m}</div>)}
-      </div>
+      </div> */}
         </div>
       </div>
   );

@@ -138,18 +138,18 @@
 }
 
 .automate{
-    height: 2rem;
-    width: 2rem;
+    height: 3rem;
+    width: 3rem;
     z-index: 9;
-    background: url("../images/synergy.png") no-repeat;
+    background: url("../images/automated.png") no-repeat;
     background-size: cover;
 }
 
 .secure {
-    height: 2rem;
-    width: 2rem;
-    z-index: 9;
-    background: url("../images/security.png") no-repeat;
+    height: 3rem;
+    width: 3rem;
+    z-index: 11;
+    background: url("../images/secure.png") no-repeat;
     background-size: cover;
 }
 

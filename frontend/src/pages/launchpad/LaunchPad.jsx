@@ -7,8 +7,8 @@ import IndLaunchpads from "./IndLaunchpads";
 import Link from "next/link";
 import Image from "next/image";
 import plus from "../../images/plus.png";
-
-
+import Tilt from 'react-parallax-tilt';
+import "aos/dist/aos.css"
 
 export default function Launchpad(){
 
@@ -47,9 +47,12 @@ return(
           {LaunchPads?.map((e, i) => {
             return (
               <div key={i}>
+                 <Tilt glareEnable={true} glareBorderRadius={"2rem"}>
                 {/* // {e} */}
                 <IndLaunchpads key={i} contractAddress={e} />
-              </div>
+              </Tilt>
+              </div>  
+             
             )
           })}
       </div>

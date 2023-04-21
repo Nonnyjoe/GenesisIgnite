@@ -1,18 +1,19 @@
 export const LaunchPadFacoryAddr = () => {
-    return("0x74EBAD5E6975D917E6261632946358bC8aaa2b65");
+    return("0xECE2662b7D6726408C7603e7F1F36bDDE3e041d2");
 }
 export const GenesisigniteTokenAddr = () => {
-    return("0x7b061BF3e978b387Ed22d1b0812B764Fb421014B");
-}
-export const swapPadAddr = () => {
-    return("0x2da0cA791DdBcb7eBBd74997c7e758e507247f5f");
-}
-export const DaiAddress = () => {
-    return("0x7b061BF3e978b387Ed22d1b0812B764Fb421014B");
+    return("0xf6331218F26643AD596DAa065457Bfe5ac1d5Ba6");
 }
 export const GeneAddress = () => {
-    return("0x7b061BF3e978b387Ed22d1b0812B764Fb421014B");
+    return("0xf6331218F26643AD596DAa065457Bfe5ac1d5Ba6");
+}
+export const swapPadAddr = () => {
+    return("0x9FA98Fb2593dbf28C397F09AF0f7A9413CA4Fd05");
+}
+
+export const DaiAddress = () => {
+    return("0x2a823F856dc4c15beF1A87CB0237df8d922AAAF7");
 }
 export const UsdcAddr = () => {
-    return("0x7b061BF3e978b387Ed22d1b0812B764Fb421014B");
+    return("0x911a9715A8Ff0E84F844EA009dc339D6BCfC6Fd0");
 }

@@ -105,7 +105,7 @@ export default function SwappOut() {
   const DropdownOptions2 = [
     {
       id: 0,
-      name: "GENE",
+      name: "GIT",
       address: "0xb9e916833acbB55ee9b0714C67Cebe9Bb267FbC2",
     },
   ];
@@ -219,7 +219,7 @@ export default function SwappOut() {
           <div className="">
             <p className={`${styles.optiondescription} font-pop mt-[2.4rem] text-xl mb-8`}>
               {" "}
-              SWAP GENE TOKENS TO OTHER TOKENS{" "}
+              SWAP GIT TOKENS TO OTHER TOKENS{" "}
             </p>
             <div className="flex flex-row gap-4 justify-center items-center mb-3">
             <div className={styles.optiondiv}>

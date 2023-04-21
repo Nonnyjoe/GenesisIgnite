@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      pop: ["Poppins"],
+      pop: ["Poppins", "sans-serif"],
       headers: ["Oswald"],
       contents: ["Lato"],
       EudoxusSansBold: ["EudoxusSans-Bold"],

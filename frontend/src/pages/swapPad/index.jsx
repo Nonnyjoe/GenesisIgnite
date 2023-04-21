@@ -10,8 +10,8 @@ export default function Dashboard(){
     <div className={`${styles.container} h-[100vh] pt-4`}>
         <Navbar />
         <div className="flex flex-row mt-10 gap-11">
-            <Sidebar />
-            <SwapPad />
+            <Sidebar check={2}/>
+            <SwapPad  />
         </div>
 
     </div>
