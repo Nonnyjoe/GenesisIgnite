@@ -1,0 +1,229 @@
+.swappage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* height: 32rem; */
+    align-items: center;
+    color: white;
+    /* border:  1px solid rgba(214, 207, 223, 0.1); */
+    border-radius: 1rem;
+
+
+
+    /* background-color: rgba(214, 207, 223, 0.1); */
+}
+
+.swapd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20rem;
+}
+
+.swapoptiontop {
+    display: flex;
+    /* gap: 3rem; */
+    justify-content: center;
+    align-items: center;
+    gap: 0.1rem;
+}
+
+.swapheader {
+    text-align: center;
+    font-size: 3rem;
+    margin: 0;
+    padding: 1rem 0;
+}
+
+.swapInOut {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+/* .swapContainer{
+
+} */
+
+.labels {
+    font-size: 1.2rem;
+    margin: 0 0 1.2rem;
+    color: white;
+
+}
+
+.optionbar {
+    /* margin-bottom: 1rem; */
+    /* padding: 0.5rem;
+    border: 1px solid rgb(214, 207, 223);
+    border-radius: 0.3rem;
+    margin: 0;
+    background-color: rgb(214, 207, 223); */
+        width: 6rem;
+        height: 30px;
+        /* border: 1px solid #999; */
+        font-size: 18px;
+        background-color: rgba(238, 238, 238, 0);
+        border-radius: 5px;
+        outline: none;
+        /* box-shadow: 4px 4px #ccc; */
+}
+.option{
+    color:white;
+    background-color: #450d62;
+    border: none;
+    outline:none;
+    /* border */
+}
+
+.optiondiv {
+    display: flex;
+    height: 4rem;
+    gap: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.415);
+    box-shadow: -5px 10px 17px rgba(10, 10, 10, 0.25);
+    /* background-color: white; */
+    border-radius: 1rem;
+    padding: 0.1rem;
+    padding-left: .5rem;
+    margin: 0;
+}
+
+.amountbar {
+    /* width: 100%;
+    height: 3.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.415);
+    background-color: rgba(255, 255, 255, 0.223);
+    
+    padding: 0.5rem 2rem;
+  
+    outline: rgba(255, 255, 255, 0.415);
+    box-shadow: -5px 10px 17px rgba(10, 10, 10, 0.25); */
+    margin: 0 1 1rem 1rem;
+    border-radius: 0.9rem;
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #D0D5DD;
+    /* margin-bottom: 1.2rem; */
+    background: rgba(255, 255, 255, 0.2);
+    border:none;
+    outline: none;
+    padding: 10px 30px;
+    /* border-radius: 2rem; */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 1px;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.amountbar:active{
+    background-color: rgba(255, 255, 255, 0.223);
+}
+
+.optiondescription {
+    inline-size: 25rem;
+    color: white;
+    text-align: center;
+}
+
+.swaprhs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    /* padding: 0 0.5rem; */
+    border: 2px solid rgba(214, 207, 223, 0.1);
+    background-color: rgba(214, 207, 223, 0.1);
+    border-radius: 1rem;
+}
+
+.swaplhstop,
+.swaplhsbottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.swaplhstop {
+    margin-bottom: 2rem;
+}
+
+.lhsheader {
+    font-size: 1.5rem;
+}
+
+.lhschild {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.buttons {
+    border: 0;
+    /* background-color: rgba(255, 255, 255, 0.592); */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background-color: #450d62;
+    padding: 1rem;
+    width: 50%;
+    margin-top: 0rem;
+    box-shadow: 1px 2px 17px rgba(10, 10, 10, 0.25);
+
+}
+
+
+.buttons:nth-of-type(1) {
+    border-radius: 1rem 0 0 0;
+}
+
+.buttons:nth-of-type(2) {
+    border-radius: 0 1rem 0 0;
+}
+
+.button2{
+        border: 0;
+    /* background-color: rgba(255, 255, 255, 0.592); */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.373);
+    padding: 1rem;
+    width: 50%;
+    margin-top: 0rem;
+    box-shadow: 1px 2px 17px rgba(10, 10, 10, 0.25);
+}
+
+.swapForm{
+    width: 36vw;
+    height: 68vh;
+    margin-left: 5rem;
+    margin-right:0rem;
+    border-radius: 1rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px) !important;
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    background-size: cover;
+    position: relative;
+    animation: move 5s infinite linear;
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(calc(1vw - 1%), calc(1vh - 1%));
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}

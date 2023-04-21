@@ -1,0 +1,389 @@
+.dashboard{
+    color: white;
+    margin: 0;
+   
+}
+
+.dashboardHead{
+    display: flex;
+    align-items: center;
+    background-color: rgb(72,18,146);
+    padding: 0.5rem 0 0.5rem 4rem;
+    gap: 5rem;
+}
+
+.dashboardTop{
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    margin: 0rem 0rem 1rem;
+    gap: 1rem;
+}
+
+.flex{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+}
+
+.flex2{
+    display: flex;
+    flex-direction: column;
+}
+
+.userTokenBal{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
+    
+}
+
+
+.dashcards{
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    /* float: left; */
+    /* width: 33%; */
+    padding: 1rem;
+    width: 33.7%;
+    height: 12rem;
+    border-radius: 1rem;   
+    transition: all 0.3s ease-out;
+}
+
+.dashcards:hover{
+    transform: translateY(-1rem);
+    /* background-color: rgb(140, 50, 239) ; */
+}
+/* 
+.dashcards p{
+    margin: 0;
+    padding: 0;
+} */
+
+.dashcards1{
+    background-color: rgb(72, 18, 146);
+    overflow: hidden
+}
+
+.dashboardbottom{
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    gap: 1rem;
+    margin: 1rem 0rem;
+   
+}
+
+.dashboardcardsbtm{
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    border-radius: 1rem;
+    padding: 3rem 1rem;
+    height: 28rem;
+}
+
+.dashboardcardsbtm:nth-of-type(1){
+    width: 67%;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.dashboardcardsbtm:nth-of-type(2){
+    width: 33%;
+}
+
+.cardlogo{
+    height: 4rem;
+    width: 4rem;
+    /* border: 1px solid rgba(128, 128, 128, 0.5); */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 0.4rem;
+    border-radius: 3rem;
+    background-color: rgba(128, 128, 128, 0.5);
+    box-shadow: 1px 1px 17px rgba(10, 10, 10, 0.25);
+}
+
+.rocketlogo{
+    height: 4rem;
+    width: 4rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem;
+    border-radius: 4rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 1px 1px 17px rgba(10, 10, 10, 0.25);
+    margin: 0;
+    /* margin-top: -1.7rem; */
+}
+.usericonimg{
+    height: 4rem;
+    width: 4rem;
+    /* border:  1px solid rgb(140, 50, 239) ; */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 1px 1px 17px rgba(10, 10, 10, 0.25);
+    padding: 1rem;
+    background-color: rgb(72, 18, 146);
+    border-radius: 3rem;
+    margin: 0;
+}
+
+.textleft{
+    text-align: left;
+}
+
+.textleft h4 {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.textleft p{
+    margin: 0;
+    padding: 0;
+}
+
+.userstats h5{
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.userstats, .userstats p{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.statgap{
+    gap: 5rem;
+    padding: .7rem 0.3rem 0;
+}
+
+.demodash p, .demodash h5{
+    margin: 0;
+    padding: 0;
+}
+
+.demodash h5{
+    font-size: 1.5rem;
+}
+
+.demogap{
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.demotopparagraph{
+    margin: 0 12rem 0.5rem 6rem;
+    padding: 0.2rem;
+    width: 4rem;
+    border: 1px solid rgba(0, 128, 0, 0.7);
+    outline: none;
+    text-align: center;
+    border-radius: 0.5rem;
+    background-color: rgba(0, 128, 0, 0.7);
+
+    /* text-align: right; */
+}
+.verifiedstats{
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+.verifiedstats p{
+    padding: 0.2rem 0.5rem;
+    border: 1px solid green;
+    text-align: center;
+    border-radius: 0.5rem;
+    background-color: rgba(0, 128, 0, 0.7);
+}
+
+.buyToken{
+    margin-top: 1rem;
+    text-align: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.buyToken p{
+    text-align: center;
+    border: 1px solid blueviolet;
+    background-color: blueviolet;
+    border-radius: 1rem;
+    margin-left: 10rem;
+    padding: 0.2rem;
+    box-shadow: 1px 1px 17px rgba(10, 10, 10, 0.25);
+    transition: all 0.3s ease-out;
+}
+.buyToken p:hover{
+    background-color: rgb(72, 18, 146);
+    cursor: pointer;
+    transform: scale(1.05, 1.05);
+}
+
+.buyToken2 {
+    margin-top: 1rem;
+    text-align: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.buyToken2 p {
+    text-align: center;
+    border: 1px solid blueviolet;
+    background-color: blueviolet;
+    border-radius: 1rem;
+    margin-right: 10rem;
+    padding: 0.2rem;
+    box-shadow: 1px 1px 17px rgba(10, 10, 10, 0.25);
+    transition: all 0.3s ease-out;
+}
+
+.buyToken2 p:hover {
+    background-color: rgb(72, 18, 146);
+    cursor: pointer;
+    transform: scale(1.05, 1.05);
+}
+
+
+.usercard p{
+    margin: 0;
+    
+}
+
+.usercard .flex{
+    margin-top: 0rem;
+    text-align: left;
+    gap: 1rem;
+}
+
+.usercard .flex h4{
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.appreciation {
+    width: 60%;
+    text-align: left;
+    
+}
+.bottomrocket{
+    width: 40%;
+}
+
+.appreciation {
+   margin: 0rem 0 0 1rem;
+}
+
+.appreciation h3{
+    font-size: 2rem;
+    margin: 0;
+}
+
+.appreciation button{
+    padding: 0.5rem;
+    border: 1px solid rgb(218, 112, 214);
+    background-color: rgb(218, 112, 214);
+    color: white;
+    border-radius: 1rem;
+}
+
+.salesdetails{
+    margin: 0rem 0.5rem;
+}
+
+.cylinderimage{
+    margin: 0;
+}
+
+.salesprogress{
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.salesprogress h5{
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.amountprogress{
+    gap: 0.5rem;
+}
+
+.tokendetails{
+    border: 1px solid white;
+    width: 50%;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tokendetails h5, .tokendetails p{
+    margin: 0.2rem;
+    text-align: left;
+}
+
+.tokendetails p{
+    font-size: 0.8rem;
+}
+
+.tokendetails h5{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.salesend{
+    margin: 1rem 0 0;
+    text-align: center;
+}
+
+.timerwrap{
+    gap: 1rem;
+    margin-top: 1rem;
+    /* text-align: center; */
+}
+.salestimer{
+    width: 25%;
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 2rem 1rem 1rem;
+}
+
+.salestimer h3{
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+
+.salestimer p{
+    margin: 0;
+    font-weight: 200;
+}
+
+.flexColumn{
+    flex-direction: column;
+}
+
+.full{
+    width: 100%;
+}
+
+.history{
+   border-bottom: 1px dotted grey;
+   cursor: pointer;
+   padding: .5rem 0.4rem;
+   border-radius: .5rem;
+   
+}
+
+.history:hover {
+    background-color: rgba(204, 204, 204, 0.483);
+}
+

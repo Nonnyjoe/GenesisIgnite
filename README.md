@@ -8,7 +8,7 @@
 
 🖥 **Website** – https://genesis.ignite
 
-📖 **Documentation** – https://drive.google.com/file/d/1mVL1C5B2PiVwuvZjMlcQj3eaUNTrMCRU/view?usp=share_link
+📖 **Documentation** – https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=sharing
 
 🐦 **Twitter** – https://twitter.com/GenesisIgnite
 </p>
