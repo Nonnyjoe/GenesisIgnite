@@ -4,7 +4,25 @@ import styles3 from "../../styles/reusables.module.css";
 import PageLayout from "../../layout/PageLayout";
 import Image from "next/image";
 import ignitelogo from "../../images/web2.png";
-import nonso from "../../images/scar.jpg";
+import nonso from "../../images/Nonso.jpg";
+import scar from "../../images/scar.jpg";
+import chris from "../../images/chris.jpeg";
+import uche from "../../images/uche.jpeg";
+import williams from "../../images/williams.jpeg";
+import bunz from "../../images/bunzz.jpg";
+import bunzz from "../../images/bunzz.png";
+import chain from "../../images/chainide.png";
+import jay from "../../images/jay.jpg";
+import scarface from "../../images/scarface.jpg";
+import web3afrika from "../../images/web3afrika.png";
+import web3bridge from "../../images/web3bridge.jpg";
+import doc from "../../images/doc.png";
+
+
+
+
+
+
 import Link from "next/link";
 
 export default function Documentation() {
@@ -93,59 +111,167 @@ export default function Documentation() {
 
             <div>
               <Image
-                src={nonso}
+                src={scar}
                 width={150}
                 height={150}
                 className="rounded-full"
               />
-              <h6>Nonso</h6>
-              <p>Smart Contract and Front-End developer</p>
-              <a href="https://github.com/Nonnyjoe">🐙 : GitHub</a>
-              <a href="https://twitter.com/ChinonsoIdogwu">🐦 : Twitter</a>
+              <h6>Scar Face dot ETH</h6>
+              <p>Blockchain Engineer and Market Analyst</p>
+              <a href="https://github.com/scarfacedotcom">🐙 : GitHub</a>
+              <a href="https://twitter.com/scarfacedotcom">🐦 : Twitter</a>
             </div>
 
             <div>
               <Image
-                src={nonso}
+                src={williams}
                 width={150}
                 height={150}
                 className="rounded-full"
               />
-              <h6>Nonso</h6>
+              <h6>Willams dot sol</h6>
               <p>Smart Contract and Front-End developer</p>
-              <a href="https://github.com/Nonnyjoe">🐙 : GitHub</a>
-              <a href="https://twitter.com/ChinonsoIdogwu">🐦 : Twitter</a>
+              <a href="https://github.com/Bill-Adepoju">🐙 : GitHub</a>
+              <a href="https://twitter.com/flippantVibe">🐦 : Twitter</a>
             </div>
 
             <div>
               <Image
-                src={nonso}
+                src={uche}
                 width={150}
                 height={150}
                 className="rounded-full"
               />
-              <h6>Nonso</h6>
-              <p>Smart Contract and Front-End developer</p>
-              <a href="https://github.com/Nonnyjoe">🐙 : GitHub</a>
-              <a href="https://twitter.com/ChinonsoIdogwu">🐦 : Twitter</a>
+              <h6>Uchene Okolo</h6>
+              <p>Smart Contract developer</p>
+              <a href="https://github.com/Ucheokolo">🐙 : GitHub</a>
+              <a href="https://twitter.com/uche2v">🐦 : Twitter</a>
             </div>
 
             <div>
               <Image
-                src={nonso}
+                src={chris}
                 width={150}
                 height={150}
                 className="rounded-full"
               />
-              <h6>Nonso</h6>
-              <p>Smart Contract and Front-End developer</p>
-              <a href="https://github.com/Nonnyjoe">🐙 : GitHub</a>
-              <a href="https://twitter.com/ChinonsoIdogwu">🐦 : Twitter</a>
+              <h6>Mr. Chris</h6>
+              <p>Smart Contract developer</p>
+              <a href="https://github.com/">🐙 : GitHub</a>
+              <a href="https://twitter.com/">🐦 : Twitter</a>
             </div>
             
           </div>
+
+          <p  className="text-1xl font-EudoxusSansBold text-white mt-6 mb-6">With a wealth of experience and a shared passion for the blockchain industry, we work 	collaboratively to develop innovative solutions and drive the growth of the crypto space.
+          </p>
+
+          <h2 className="text-2xl font-EudoxusSansBold text-white mt-10 mb-10">
+            Partners
+          </h2>
+          <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
+            <div>
+              <Image
+                src={bunz}
+                width={150}
+                height={150}
+                className="rounded-full"
+              />
+            </div>
+
+            <div>
+              <Image
+                src={bunzz}
+                width={150}
+                height={150}
+                className="rounded-full"
+              />
+            </div>
+
+            <div>
+              <Image
+                src={chain}
+                width={150}
+                height={150}
+                className="rounded-full"
+              />
+            </div>
+
+            <div>
+              <Image
+                src={web3afrika}
+                width={150}
+                height={150}
+                className="rounded-full"
+              />
+            </div>
+
+            <div>
+              <Image
+                src={web3bridge}
+                width={150}
+                height={150}
+                className="rounded-full"
+              />
+            </div>
+            </div>
         </div>
+
+        <h2 className="text-2xl text-center font-EudoxusSansBold text-white mt-10 mb-10">
+            Investors
+          </h2>
+          <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
+            <div>
+              <Image
+                src={scarface}
+                width={150}
+                height={150}
+                className="rounded-full"
+              />
+            </div>
+
+            <div>
+              <Image
+                src={jay}
+                width={150}
+                height={150}
+                className="rounded-full"
+              />
+            </div>
+           </div>
+
+           <h2 className="text-2xl text-center font-EudoxusSansBold text-white mt-10 mb-10">
+            Read Full Documentation here...
+          </h2>
+          {/* <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
+            <div>
+              <Image
+                src={doc}
+                width={150}
+                height={200}
+              />
+
+            </div>
+
+           </div> */}
+           <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
+  <div className="flex flex-col items-center">
+    <Image
+      src={doc}
+      width={150}
+      height={200}
+    />
+    <a href="https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=share_link" target="_blank" rel="noopener noreferrer" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-2">
+      <span>Read Documentation</span>
+      <svg xmlns="http://www.w3.org/2000/svg" className="ml-2.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M13.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 112 0v7.586l2.293-2.293a1 1 0 011.414 0z" clipRule="evenodd" />
+      </svg>
+    </a>
+  </div>
+</div>
+  
       </div>
+      
     </div>
   );
 }
