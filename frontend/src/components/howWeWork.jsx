@@ -13,8 +13,8 @@ const HowWeWork = () => {
 
             </div>
              <div className={` ${styles2.glassCard7} p-[6rem] pt-[4rem]`}>
-                <p className="font-header font-headers uppercase text-xl mb-5 text-indigo-600">How Genesis Ignite Works</p>
-                <h1 className="font-EudoxusSansBold text-4xl mb-8"> Get started with just a few clicks</h1>
+                <p className="font-header font-headers uppercase text-4xl text-center mb-5 text-indigo-600">How Genesis Ignite Works</p>
+                <h1 className="font-EudoxusSansBold text-3xl text-center mb-8"> Get started with just a few clicks</h1>
 
                <div className={`flex flex-row  space-x-4 mb-5 ${styles2.shift}`}>
                 <div className={`${styles2.bullet} font-headers text-2xl`}>
