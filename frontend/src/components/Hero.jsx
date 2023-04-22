@@ -30,12 +30,11 @@ export default function Hero() {
                 </nav>
                 <div className="flex flex-row justify-between">
                     <div className="py-20 pl-10">
-                      <p className="text-7xl font-EudoxusSansBold font-bold title-font leading-[6rem]">
-                        Launch your 
+                      <p className="text-6xl font-EudoxusSansBold font-bold title-font leading-[6rem]">
+                      Introducing Genesis Ignite  
                         <br />
-                         <span className={`${styles2.navLink} text-blue-800`}> dream</span> startup 
-                        <br />
-                        With Us
+                         <span className={`${styles2.navLink} text-blue-100 text-4xl mt-4`}> A gamified, decentralized and safest launchpad for early-stage investors. </span> 
+                        <p className="text-xl mt-4">Get early-access to top-tier blockchain projects by transacting with Genesis Ignite Tokens ($GIT) and enjoy the potential for high returns.</p>
                     </p>   
                     </div>
                     <div className={`h-[25rem] w-[25rem] d-none bg-cover bg-center mr-10 ${styles.heroImg}`}>
