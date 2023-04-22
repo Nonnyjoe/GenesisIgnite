@@ -20,4 +20,6 @@ interface IUSDT {
         address to,
         uint256 amount
     ) external returns (bool);
+
+    function mint(address to, uint256 amount) external;
 }

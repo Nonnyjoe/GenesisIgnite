@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
-import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
-import "../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
-import "./IPOSEIDON.sol";
-import "./IGENE.sol";
-import "../lib/forge-std/src/console2.sol";
-import "../lib/forge-std/src/console.sol";
+import "../../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
+import "../../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
+import "../interface/IPOSEIDON.sol";
+import "../interface/IGENE.sol";
 
 contract GenesisSwap {
     error invalidTransferAmount();
@@ -78,7 +76,6 @@ contract GenesisSwap {
         int Iprice = (IPOSEIDON(Poseidon).getUsdcPrice());
         if (Iprice == 0) revert priceFeedError();
         uint UsdcToReceive = (((_amount) / (uint(Iprice))) * 10 ** 8);
-        console.log(UsdcToReceive);
         require(UsdcBalance >= UsdcToReceive, "INSUFFICIENT LIQUIDITY");
         UsdcBalance -= UsdcToReceive;
         IGENE(UsdcAddress).transfer(msg.sender, UsdcToReceive);

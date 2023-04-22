@@ -12,5 +12,10 @@ interface IPOSEIDON {
 
     function getUsdcPrice() external returns (int);
 
+    function initialize(
+        address _LaunchPadFactory,
+        address _NftAddress
+    ) external;
+
     // function getUniPrice() external returns (int);
 }

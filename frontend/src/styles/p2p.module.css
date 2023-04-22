@@ -1,0 +1,147 @@
+.card2{
+    width: 100%;
+    padding: 3rem 3rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    /* backdrop-filter: blur(5px) !important; */
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    border-radius: 1rem;
+    transition: all 0.3s ease-out;
+}
+
+.card3{
+    width: auto;
+    min-height: 100%;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    /* backdrop-filter: blur(5px) !important; */
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    border-radius: 1rem;
+    transition: all 0.3s ease-out;
+}
+
+.cardTitle{
+    margin-bottom: 2rem;
+}
+
+.cardContent{
+    margin-bottom: .5rem;
+}
+
+.cardContainer{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.364);
+}
+
+.launchpad {
+    margin-left: 23.5vw;
+    width: 73vw;
+    height: 78vh;
+    position: fixed;
+    margin-top: 8rem;
+    border-radius: 1rem;
+    top: 0;
+    left: 0;
+    /* overflow-x: hidden; */
+    overflow-y: scroll;
+    padding-top: 20px;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px) !important;
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    background-size: cover;
+    padding: 2rem;
+
+}
+
+.launchpad::-webkit-scrollbar {
+    display: none;
+}
+
+.header{
+    padding-bottom: .5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.337);
+}
+
+.indAdds{
+    border-bottom: 2px solid rgba(255, 255, 255, 0.378);
+    padding: .7rem 1rem;
+    border-radius: .8rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.indAdds:hover{
+    background: rgba(255, 255, 255, 0.301);
+}
+
+.buyBtn{
+    border: 1px solid green;
+    background-color: green;
+    color: white;
+    padding: 0.2rem 2rem;
+    border-radius: .5rem;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+.buyBtn:hover{
+    border: 1px solid rgb(124, 221, 124);
+}
+
+.sellBtn{
+    border: 1px solid rgb(225, 45, 45);
+    background-color: rgb(225, 45, 45);
+    color: white;
+    padding: 0.2rem 2rem;
+    border-radius: .5rem;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;;
+}
+
+.sellBtn:hover{
+    border: 1px solid rgb(154, 67, 67);
+    background-color: rgb(239, 9, 9);
+}
+
+.tokens{
+    border-right: 1px solid rgba(255, 255, 255, 0.345);
+    padding: 0rem 1rem;
+    border-radius: .5rem;
+}
+
+.tokensSelected{
+    border: 1px solid rgba(255, 255, 255, 0.269);
+}
+
+.options{
+    border: 1px solid rgba(255, 255, 255, 0.331);
+    border-radius: 1rem;
+}
+
+.SelectedSell{
+    background-color: rgb(239, 9, 9);
+    border: 1px solid rgb(239, 9, 9);
+    padding: .1rem 1rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+}
+
+.SelectedBuy{
+    background-color: green;
+    border: 1px solid green;
+    padding: .1rem 1rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+}
+
+.Options1{
+    padding: .1rem 1rem;
+}

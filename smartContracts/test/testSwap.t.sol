@@ -2,10 +2,10 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "../src/swapDexPoseidon.sol";
-import "../src/GenesisSwap.sol";
+import "../src/contracts/swapDexPoseidon.sol";
+import "../src/contracts/GenesisSwap.sol";
 
-import "../src/StarDaoToken.sol";
+import "../src/contracts/StarDaoToken.sol";
 
 contract testSwap is Test {
     swapDexPoseidon public SwapDexPoseidon;
@@ -16,7 +16,7 @@ contract testSwap is Test {
 
     function setUp() public {
         SwapDexPoseidon = new swapDexPoseidon();
-        starDaoToken = new StarDaoToken(deployer);
+        starDaoToken = new StarDaoToken(deployer, "TEST TOKEN", "TST");
         genesisSwap = new GenesisSwap(
             address(SwapDexPoseidon),
             address(starDaoToken)

@@ -17,3 +17,17 @@ export const DaiAddress = () => {
 export const UsdcAddr = () => {
     return("0x911a9715A8Ff0E84F844EA009dc339D6BCfC6Fd0");
 }
+export const Shiba = () => {
+    return("0xDB54BACFd6918f777c5fCcffA4C730989429EeBa");
+}
+
+export const Arbitrum = () => {
+    return("0xaae2f0D513c3C7ddB66c01cA8744a9be3507D93A");
+}
+
+export const EthClasic = () => {
+    return("0x56D07e34E89b3615ee8e955D70A2eA7ac468Ca31");
+}
+export const Swapp = () => {
+    return("0x646A4990b2dEaDEebdF85ADa22129F1651339f51");
+}

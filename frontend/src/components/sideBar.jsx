@@ -46,7 +46,7 @@ const Sidebar = (props) => {
            <li className={`${styles.item} ${check == 5 ? styles.active : ""}`}>
             <div className='flex flex-row gap-6'>
             <div className={`${styles.p2p} w-7 h-7 mt-[.5rem]`}></div>
-            <Link href="/">
+            <Link href="/p2p">
               <a>P2P</a>
             </Link>
             </div>

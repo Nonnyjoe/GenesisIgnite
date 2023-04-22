@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
-import "./INFT.sol";
-import "../lib/chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
+import "../interface/INFT.sol";
+import "../../lib/chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "../../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
 
 contract swapDexPoseidon {
+    event launcpadRegistered(address _launchPad);
+
     AggregatorV3Interface internal priceFeedDai;
     AggregatorV3Interface internal priceFeedEth;
     AggregatorV3Interface internal priceFeedUni;

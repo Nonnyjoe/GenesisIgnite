@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./IUSDT.sol";
-import "./IROUTER.sol";
-import "./ILAUNCHPAD.sol";
-import "../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
+import "../interface/IUSDT.sol";
+import "../interface/IROUTER.sol";
+import "../interface/ILAUNCHPAD.sol";
+import "../../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
 
 // import "../lib/forge-std/src/console.sol";
 
@@ -222,12 +222,10 @@ contract IgniteLaunchPad {
         if (_amount > ((GenesRaisedByPad + GenesRaisedFromPresale) - totalFees))
             revert Amount_Exceeds_Balance();
         if (totalFees > 0) {
-            (bool success, ) = payable(feeReceiver).call{value: totalFees}("");
-            require(success, "TRANSFER FAILED");
+            transfer_(IUSDT(GenesisToken), totalFees, feeReceiver);
             totalFees = 0;
         }
-        // EthWithdrawnFromPad = EthWithdrawnFromPad.add(totalFees + _amount);
-        payable(msg.sender).transfer(_amount);
+        transfer_(IUSDT(GenesisToken), _amount, msg.sender);
         emit GenesWithdrawnByAdmin(msg.sender, _amount);
     }
 
@@ -445,5 +443,9 @@ contract IgniteLaunchPad {
         address _user
     ) external view returns (bool status) {
         status = hasClaimedLaunchpadTokens[_user];
+    }
+
+    function returnPadModerator() public view returns (address) {
+        return padModerator;
     }
 }

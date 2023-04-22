@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./IUSDT.sol";
-import "./IROUTER.sol";
+import "../interface/IUSDT.sol";
+import "../interface/IROUTER.sol";
 import "./IgniteLaunchPad.sol";
-import "./ILAUNCHPAD.sol";
+import "../interface/ILAUNCHPAD.sol";
 
 // import "../lib/forge-std/src/console.sol";
 
@@ -56,6 +56,10 @@ contract IgniteLaunchPadFactory {
     mapping(address => mapping(address => bool)) hasUserParticipatedInPresale;
     mapping(address => address[]) UserPresales;
 
+    mapping(address => bool) LPrequested;
+    mapping(address => address) LPrequester;
+    mapping(address => string) LPTokenCid;
+
     modifier IsAdmin() {
         require(msg.sender == ProjectAdmin, "NOT THE PROJECT ADMIN");
         _;
@@ -102,6 +106,28 @@ contract IgniteLaunchPadFactory {
         GenesisNft = _GenesisNft;
         GenesRouter = _GenesRouter;
         rewardCondition = _rewardCondition;
+    }
+
+    function requestLaunchPad(address TokenAddress, string memory cid) public {
+        if (LPrequested[TokenAddress] == true) {
+            require(
+                msg.sender == LPrequester[TokenAddress],
+                "NOT PROJECT ADMIN"
+            );
+            require(
+                LaunchpadIdRecord[TokenAddress] == 0,
+                "LAUNCHPAD ALREADY REGISTERED"
+            );
+        }
+        LPrequested[TokenAddress] = true;
+        LPrequester[TokenAddress] = msg.sender;
+        LPTokenCid[TokenAddress] = cid;
+    }
+
+    function returnCid(
+        address TokenAddress
+    ) public view returns (string memory cid) {
+        cid = LPTokenCid[TokenAddress];
     }
 
     function registerLaunchPads(

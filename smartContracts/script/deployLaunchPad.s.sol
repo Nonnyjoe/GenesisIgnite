@@ -3,10 +3,10 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Script.sol";
 
-import "../src/swapDexPoseidon.sol";
-import "../src/GenesisSwap.sol";
+import "../src/contracts/swapDexPoseidon.sol";
+import "../src/contracts/GenesisSwap.sol";
 
-import "../src/StarDaoToken.sol";
+import "../src/contracts/StarDaoToken.sol";
 
 contract deployLaunchPad is Script {
     swapDexPoseidon public SwapDexPoseidon;
