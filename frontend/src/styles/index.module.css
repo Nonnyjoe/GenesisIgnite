@@ -33,9 +33,10 @@
 
 
 .glassCard2 {
-    height: 90vh;
+    height: fit-content;
     width: 90vw;
     padding: 0, 20px;
+    margin-top: 150px;
     background: rgba(255, 255, 255, 0.1);
     z-index: 10;
     display: flex;
