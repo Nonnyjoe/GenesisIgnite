@@ -8,8 +8,8 @@ export default function WhatsNew() {
         <div className={`p-[6rem] px-[4rem] flex flex-row gap-11 `}>
 
              <div className={` ${styles2.glassCard4} p-[4rem] pt-[4rem] `}>
-                <p className="font-headers uppercase text-5xl text-center mb-5 text-indigo-600"> What's Different</p>
-                <h1 className="font-EudoxusSansBold text-4xl text-center mb-9"> What's Different About Genesis Ignite</h1>
+                <p className="font-headers uppercase text-5xl mb-5 text-indigo-600"> What's Different</p>
+                <h1 className="font-EudoxusSansBold text-4xl mb-9"> What's Different About Genesis Ignite</h1>
                  <div className="flex flex-row  space-x-12 mb-4">
                     <div className="">
                         <div className={`${styles2.WDcover}`}>

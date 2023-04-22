@@ -26,9 +26,9 @@ export default function Sponsors() {
         <div className={`flex flex-row pl-[rem] flex justify-center items-center`}>
             <div className={` ${styles2.glassCard5}  flex flex-row p-[6rem] gap-10`}>
               <div className="w-[60%]">
-                <p className="font-headers uppercase text-5xl text-center mb-5 text-indigo-600">Partners </p>
-                <h1 className="font-EudoxusSansBold text-4xl text-center leading-[3.9rem] mb-5"> We Collaborate with Leading Tech Giant Companies</h1>
-                <p className="text-xl font-pop text-center leading-[1.9rem]">
+                <p className="font-headers uppercase text-5xl mb-5 text-indigo-600">Partners </p>
+                <h1 className="font-EudoxusSansBold text-4xl leading-[3.9rem] mb-5"> We Collaborate with Leading Tech Giant Companies</h1>
+                <p className="text-xl font-pop leading-[1.9rem]">
                 Our vision is fueled by the power of strategic partnerships with industry leaders. These esteemed brands play a vital role in driving our progress towards success.
                 </p> 
             </div>
