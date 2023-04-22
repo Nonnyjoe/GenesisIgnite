@@ -6,8 +6,8 @@ export default function IgniteNFT() {
         <div className={`  ${styles2.aboutUs} mt-[1rem] mb-[6rem]`}>
         <div className={`flex justify-center items-center flex-row gap-11 pt-[6rem] px-[4rem]`}>
              <div className={` ${styles2.glassCard4} p-[6rem] `}>
-                <p className="text-xl font-headers mb-5 text-indigo-600">NFT</p>
-                <h1 className=" text-4xl mb-5 font-EudoxusSansBold"> Our NFT</h1>
+                <p className="text-4xl text-center font-headers mb-6 text-indigo-600">NFT (Non Fungible Tokens)</p>
+                <h1 className=" text-4xl mb-5 font-EudoxusSansBold"> Our NFT Rewards</h1>
 
                 <p className="text-xl font-pop leading-10 ">
                      Explore our captivating collection of NFT gift cards, where loyal
