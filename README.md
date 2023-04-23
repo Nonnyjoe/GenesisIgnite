@@ -6,11 +6,11 @@
 
 <p align="center">
 
-🖥 **Website** – https://genesis.ignite
+🖥 **Website** – [Genesis Ignite](https://genesisignite-iugvdgnvo-nonnyjoe.vercel.app/)
 
-📖 **Documentation** – https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=sharing
+📖 **Documentation** – [Docs](https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=sharing)
 
-🐦 **Twitter** – https://twitter.com/GenesisIgnite
+🐦 **Twitter** – [Genesis](https://twitter.com/GenesisIgnite)
 </p>
 
 ## What is Genesis Ignite??
@@ -34,8 +34,4 @@ Genesis Ignite's ultimate goal is to provide a comprehensive and user-friendly e
 
   * <b>One Token</b> – Genesis Ignite (GIT) is the stablecoin targeting a tight band around $1/coin. Genesis Ignite Token (GIT) is the governance token which accrues fees, seigniorage revenue, and excess collateral value.
 
-  * <b> NFT-based Incentives </b> – The platform incentivizes users to actively participate by issuing NFTs based on their level of activeness and trade volume on the platform, creating a gamified experience for users and encouraging them to continue using the platform.
-  
-
-## Running tests
-forge test
+  * <b> NFT-based Incentives </b> – The platform incentivizes users to actively participate by issuing NFTs based on their level of activeness and trade volume on the platform, creating a gamified experience for users and encouraging them to continue using the platform
