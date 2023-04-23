@@ -34,7 +34,7 @@ export default function Hero() {
                       Introducing Genesis Ignite   </p>  
                         <br />
                          <span className={`${styles2.navLink} text-blue-100 text-4xl mt-4`}> A safe gamified and decentralized launchpad for early-stage investors. </span> 
-                        <p className="text-xl mt-4">Get early-access to top-tier blockchain projects by transacting with Genesis Ignite Tokens ($GIT) and enjoy the potential for high returns.</p>
+                        <p className="text-xl mt-4">Get early-access to top-tier blockchain projects by transacting with Genesis Ignite and enjoy the potential for high returns.</p>
                     
                     </div>
                     <div className={`h-[25rem] w-[35rem] d-none bg-cover bg-center mr-10 ${styles.heroImg}`}>

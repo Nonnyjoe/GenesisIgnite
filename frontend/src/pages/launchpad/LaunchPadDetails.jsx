@@ -366,7 +366,7 @@ const { contractAddress } = props;
               </div>
               <div>
                 <h5 class="mt-4 font-pop">
-                  Total Suppy:{" "}
+                  Total Supply:{" "}
                   <span className={styles.launcpdetailed}>
                     {Math.floor(LaunchPadTotalSupply / 10 ** 18)} {LaunchPadData.symbol}{" "}
                   </span>
