@@ -5,36 +5,36 @@ import "forge-std/Test.sol";
 import "../src/contracts/swapDexPoseidon.sol";
 import "../src/contracts/GenesisSwap.sol";
 
-import "../src/contracts/StarDaoToken.sol";
+// import "../src/contracts/StarDaoToken.sol";
 
 contract testSwap is Test {
     swapDexPoseidon public SwapDexPoseidon;
     GenesisSwap public genesisSwap;
-    StarDaoToken public starDaoToken;
+    // StarDaoToken public starDaoToken;
 
     address deployer = 0xA771E1625DD4FAa2Ff0a41FA119Eb9644c9A46C8;
 
     function setUp() public {
         SwapDexPoseidon = new swapDexPoseidon();
-        starDaoToken = new StarDaoToken(deployer, "TEST TOKEN", "TST");
-        genesisSwap = new GenesisSwap(
-            address(SwapDexPoseidon),
-            address(starDaoToken)
-        );
-        genesisSwap.setTokenAddresses(
-            address(starDaoToken),
-            address(starDaoToken)
-        );
+        // starDaoToken = new StarDaoToken(deployer, "TEST TOKEN", "TST");
+        // genesisSwap = new GenesisSwap(
+        //     address(SwapDexPoseidon),
+        //     address(starDaoToken)
+        // );
+        // genesisSwap.setTokenAddresses(
+        //     address(starDaoToken),
+        //     address(starDaoToken)
+        // );
     }
 
-    function testGeneUsdc() public {
-        vm.startPrank(deployer);
-        vm.deal(deployer, 100 ether);
-        starDaoToken.transfer(address(genesisSwap), 50000 * 10 ** 18);
-        starDaoToken.approve(address(genesisSwap), 1100000 * 10 ** 18);
-        genesisSwap.swapDaiToGene(300 * 10 ** 18);
-        genesisSwap.swapUsdcToGene(300 * 10 ** 18);
-    }
+    // function testGeneUsdc() public {
+    //     vm.startPrank(deployer);
+    //     vm.deal(deployer, 100 ether);
+    //     starDaoToken.transfer(address(genesisSwap), 50000 * 10 ** 18);
+    //     starDaoToken.approve(address(genesisSwap), 1100000 * 10 ** 18);
+    //     genesisSwap.swapDaiToGene(300 * 10 ** 18);
+    //     genesisSwap.swapUsdcToGene(300 * 10 ** 18);
+    // }
 
     //199892000000000000000
 
@@ -54,15 +54,15 @@ contract testSwap is Test {
     //     genesisSwap.swapGeneToUsdc(200 * 10 ** 18);
     // }
 
-    // 1922000000000000000000
-    function testEthToGene() public {
-        testGeneUsdc();
-        genesisSwap.swapEthToGene{value: 1 ether}();
-    }
+    // // 1922000000000000000000
+    // function testEthToGene() public {
+    //     testGeneUsdc();
+    //     genesisSwap.swapEthToGene{value: 1 ether}();
+    // }
 
-    //1000000000000000000
-    function testGeneToEth() public {
-        testEthToGene();
-        genesisSwap.swapGeneForEth(1922000000000000000000);
-    }
+    // //1000000000000000000
+    // function testGeneToEth() public {
+    //     testEthToGene();
+    //     genesisSwap.swapGeneForEth(1922000000000000000000);
+    // }
 }

@@ -1,249 +1,131 @@
 [
-  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
-  { "inputs": [], "name": "Insufficient_Liquidity", "type": "error" },
-  { "inputs": [], "name": "escrowCanceled", "type": "error" },
-  { "inputs": [], "name": "escrowPurchased", "type": "error" },
   {
-    "anonymous": false,
     "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "escrowId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "creator",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
+      { "internalType": "address", "name": "nativeToken", "type": "address" }
     ],
+    "type": "constructor",
+    "stateMutability": "nonpayable"
+  },
+  { "name": "Insufficient_Liquidity", "type": "error" },
+  { "name": "escrowCanceled", "type": "error" },
+  { "name": "escrowPurchased", "type": "error" },
+  {
     "name": "buyAddCreated",
+    "inputs": [
+      { "internalType": "uint256", "name": "escrowId", "type": "uint256" },
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "creator", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "escrowId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "filler",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
     "name": "buyAddFilled",
+    "inputs": [
+      { "internalType": "uint256", "name": "escrowId", "type": "uint256" },
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "filler", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "escrowId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "creator",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
     "name": "sellAddCreated",
+    "inputs": [
+      { "internalType": "uint256", "name": "escrowId", "type": "uint256" },
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "creator", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "escrowId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "filler",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
     "name": "sellAddFilled",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "admin",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "escrowId", "type": "uint256" },
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "filler", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
     ],
-    "name": "tokenRecovered",
     "type": "event"
   },
   {
+    "name": "tokenRecovered",
+    "inputs": [
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "address", "name": "admin", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "type": "event"
+  },
+  {
+    "name": "cancelEscrow",
     "inputs": [
       { "internalType": "uint256", "name": "_escrowID", "type": "uint256" }
     ],
-    "name": "cancelEscrow",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "nonpayable"
   },
   {
-    "inputs": [],
     "name": "displayAllAdds",
     "outputs": [
       { "internalType": "uint256[]", "name": "escrows", "type": "uint256[]" }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
+    "name": "displayBuyAdds",
     "inputs": [
       { "internalType": "address", "name": "_token", "type": "address" }
     ],
-    "name": "displayBuyAdds",
     "outputs": [
       { "internalType": "uint256[]", "name": "escrows", "type": "uint256[]" }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
+    "name": "displayEscrowDetails",
     "inputs": [
       { "internalType": "uint256", "name": "_escrowId", "type": "uint256" }
     ],
-    "name": "displayEscrowDetails",
     "outputs": [
       {
-        "components": [
-          { "internalType": "uint256", "name": "escrowID_", "type": "uint256" },
-          {
-            "internalType": "address",
-            "name": "tokenContract",
-            "type": "address"
-          },
-          { "internalType": "address", "name": "proposer", "type": "address" },
-          { "internalType": "uint256", "name": "amount", "type": "uint256" },
-          { "internalType": "uint256", "name": "rate", "type": "uint256" },
-          {
-            "internalType": "uint256",
-            "name": "expectedExchangeAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "enum Escrow.SellStatus",
-            "name": "status",
-            "type": "uint8"
-          }
-        ],
-        "internalType": "struct Escrow.EscrowDetails",
+        "internalType": "struct p2p.EscrowDetails",
         "name": "_escrows",
         "type": "tuple"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
+    "name": "displayGeneratedFees",
     "inputs": [
       { "internalType": "address", "name": "_add", "type": "address" }
     ],
-    "name": "displayGeneratedFees",
     "outputs": [
       { "internalType": "uint256", "name": "fees", "type": "uint256" }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
+    "name": "displaySellAdds",
     "inputs": [
       { "internalType": "address", "name": "_token", "type": "address" }
     ],
-    "name": "displaySellAdds",
     "outputs": [
       { "internalType": "uint256[]", "name": "escrows", "type": "uint256[]" }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "name": "escrowDetails",
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "outputs": [
-      { "internalType": "uint256", "name": "escrowID_", "type": "uint256" },
       { "internalType": "address", "name": "tokenContract", "type": "address" },
       { "internalType": "address", "name": "proposer", "type": "address" },
       { "internalType": "uint256", "name": "amount", "type": "uint256" },
@@ -254,99 +136,94 @@
         "type": "uint256"
       },
       {
-        "internalType": "enum Escrow.SellStatus",
+        "internalType": "enum p2p.SellStatus",
         "name": "status",
         "type": "uint8"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
-    "inputs": [
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "_escrowID", "type": "uint256" }
-    ],
     "name": "fillBuyAdd",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "uint256", "name": "_amount", "type": "uint256" },
       { "internalType": "uint256", "name": "_escrowID", "type": "uint256" }
     ],
-    "name": "fillSellAdd",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "nonpayable"
   },
   {
+    "name": "fillSellAdd",
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "_escrowID", "type": "uint256" }
+    ],
+    "type": "function",
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "fillerDetails",
     "inputs": [
       { "internalType": "uint256", "name": "", "type": "uint256" },
       { "internalType": "uint256", "name": "", "type": "uint256" }
     ],
-    "name": "fillerDetails",
     "outputs": [
       { "internalType": "address", "name": "filler", "type": "address" },
       { "internalType": "uint256", "name": "paid", "type": "uint256" },
       { "internalType": "uint256", "name": "received", "type": "uint256" }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
-    "name": "genesisIgnite",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "openEscrows",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "p2pTokens",
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "view"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "_tokenAddr", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "_rate", "type": "uint256" }
-    ],
     "name": "placeBuyAdd",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "address", "name": "_tokenAddr", "type": "address" },
       { "internalType": "uint256", "name": "_amount", "type": "uint256" },
       { "internalType": "uint256", "name": "_rate", "type": "uint256" }
     ],
-    "name": "placeSellAdd",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "nonpayable"
   },
   {
+    "name": "placeSellAdd",
+    "inputs": [
+      { "internalType": "address", "name": "_tokenAddr", "type": "address" },
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "_rate", "type": "uint256" }
+    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "type": "function",
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "recoverTokens",
     "inputs": [
       { "internalType": "uint256", "name": "_amount", "type": "uint256" },
       { "internalType": "address", "name": "_tokenAddr", "type": "address" }
     ],
-    "name": "recoverTokens",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "tokenIgnite",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "type": "function",
+    "stateMutability": "view"
   }
 ]

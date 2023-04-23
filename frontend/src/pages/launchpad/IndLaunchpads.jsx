@@ -127,7 +127,7 @@ function getTimeAgo(epochTime) {
 
           <div className={styles.namestatusdetails}>
           
-          <p className={`${styles.lauchpadname} font-semibold font-EudoxusSansBold uppercase`}>
+          <p className={`${styles.lauchpadname} font-semibold font-pop uppercase`}>
             {LaunchPadData.name}
           </p>
              <p className="font-semibold">

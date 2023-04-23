@@ -53,14 +53,14 @@ export default function Documentation() {
           </div>
         </nav>
         <div className="mt-[4rem] flex align-middle justify-center text-center">
-          <h1 className="text-4xl text-white font-EudoxusSansBold">
+          <h1 className="text-4xl text-white font-pop">
             {" "}
             DOCUMENTATION{" "}
           </h1>
         </div>
 
         <div className={`${styles2.marginTop} text-center`}>
-          <h2 className="text-2xl font-EudoxusSansBold text-white mt-6 mb-6">
+          <h2 className="text-2xl font-pop text-white mt-6 mb-6">
             About us
           </h2>
           <p className="text-white text-lg mb-6 max-8xl mx-auto text-left">
@@ -78,7 +78,7 @@ export default function Documentation() {
             to disrupt the traditional fundraising industry and create new
             opportunities for businesses of all sizes.
           </p>
-          <h2 className="text-2xl font-EudoxusSansBold text-white mt-6 mb-6">
+          <h2 className="text-2xl font-pop text-white mt-6 mb-6">
             The Core Team
           </h2>
           <p>
@@ -89,7 +89,7 @@ export default function Documentation() {
             network effects for projects joining our incubator with ease.
           </p>
 
-          <h6 className="text-2xl font-EudoxusSansBold text-white mt-6 mb-6">
+          <h6 className="text-2xl font-pop text-white mt-6 mb-6">
             Genesis Ignite is a leading crypto company Based in Nigeria.
           </h6>
           <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-4">
@@ -160,13 +160,13 @@ export default function Documentation() {
             </div>
           </div>
 
-          <p className="text-1xl font-EudoxusSansBold text-white mt-6 mb-6">
+          <p className="text-1xl font-pop text-white mt-6 mb-6">
             With a wealth of experience and a shared passion for the blockchain
             industry, we work collaboratively to develop innovative solutions
             and drive the growth of the crypto space.
           </p>
 
-          <h2 className="text-2xl font-EudoxusSansBold text-white mt-10 mb-10">
+          <h2 className="text-2xl font-pop text-white mt-10 mb-10">
             Partners
           </h2>
           <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
@@ -217,7 +217,7 @@ export default function Documentation() {
           </div>
         </div>
 
-        <h2 className="text-2xl text-center font-EudoxusSansBold text-white mt-10 mb-10">
+        <h2 className="text-2xl text-center font-pop text-white mt-10 mb-10">
           Investors
         </h2>
         <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">
@@ -240,7 +240,7 @@ export default function Documentation() {
           </div>
         </div>
 
-        <h2 className="text-2xl text-center font-EudoxusSansBold text-white mt-10 mb-10">
+        <h2 className="text-2xl text-center font-pop text-white mt-10 mb-10">
           Want to know more about Genesis Ignite 🔥🔥🔥🔥...
         </h2>
         <div className="flex flex-wrap max-w-6xl mx-auto justify-center gap-8">

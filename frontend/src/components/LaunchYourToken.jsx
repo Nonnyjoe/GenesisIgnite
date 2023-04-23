@@ -12,7 +12,7 @@ export default function LaunchYourToken() {
             <div>
 
                 <p className="font-headers uppercase text-4xl mb-5 text-indigo-600">Launches</p>
-                <h1 className="text-4xl font-EudoxusSansBold mb-5"> Launch Your Token</h1>
+                <h1 className="text-4xl font-pop mb-5"> Launch Your Token</h1>
 
                <div className={`flex flex-row  space-x-4 mb-5 ${styles2.shift}`}>
                <div className={`${styles2.bullet} font-headers text-2xl`}>

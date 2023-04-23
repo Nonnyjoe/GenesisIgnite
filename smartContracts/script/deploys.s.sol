@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Script.sol";
 import "../lib/forge-std/src/Test.sol";
-import "../src/contracts/StarDaoToken.sol";
+// import "../src/contracts/StarDaoToken.sol";
 import "../src/contracts/IgniteLaunchPad.sol";
 import "../src/contracts/swapDexPoseidon.sol";
 import "../src/contracts/IgniteLaunchPadFactory.sol";
@@ -16,12 +16,12 @@ contract mint is Script {
     GenesisSwap public swapPad;
     swapDexPoseidon public router;
     // IgniteLaunchPadFactory public igniteLaunchPadFactory;
-    StarDaoToken public starDaoToken;
-    StarDaoToken public launchpadToken1;
-    StarDaoToken public launchpadToken2;
-    StarDaoToken public launchpadToken3;
-    StarDaoToken public launchpadToken4;
-    StarDaoToken public launchpadToken5;
+    // StarDaoToken public starDaoToken;
+    // StarDaoToken public launchpadToken1;
+    // StarDaoToken public launchpadToken2;
+    // StarDaoToken public launchpadToken3;
+    // StarDaoToken public launchpadToken4;
+    // StarDaoToken public launchpadToken5;
     address Admin = 0xA771E1625DD4FAa2Ff0a41FA119Eb9644c9A46C8;
     address padCreator = 0xA771E1625DD4FAa2Ff0a41FA119Eb9644c9A46C8;
     uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
@@ -171,7 +171,7 @@ contract mint is Script {
         //     Admin,
         //     "INCOGNITOBLISS",
         //     "IGB",
-        //     800,
+        //     10080,
         //     15
         // );
 
@@ -181,7 +181,7 @@ contract mint is Script {
         //     Admin,
         //     "FUTURES LIGHT",
         //     "FTL",
-        //     500,
+        //     2880,
         //     5
         // );
 
@@ -191,49 +191,49 @@ contract mint is Script {
             Admin,
             "STAR LIGHT",
             "SRL",
-            600,
+            7200,
             8
         );
 
-        // registerLaunchPad(
-        //     105,
-        //     0x358aE5C64bBF71851Cf817fE0e4b975594DbA78e,
-        //     Admin,
-        //     "LAST DAWN",
-        //     "LDN",
-        //     120,
-        //     20
-        // );
+        //     registerLaunchPad(
+        //         105,
+        //         0x358aE5C64bBF71851Cf817fE0e4b975594DbA78e,
+        //         Admin,
+        //         "LAST DAWN",
+        //         "LDN",
+        //         4320,
+        //         20
+        //     );
 
-        // registerLaunchPad(
-        //     106,
-        //     0x77A61844D548E8bbD221AEff646fde357006d525,
-        //     Admin,
-        //     "LIGHTS SONG",
-        //     "LGS",
-        //     220,
-        //     3
-        // );
+        //     registerLaunchPad(
+        //         106,
+        //         0x77A61844D548E8bbD221AEff646fde357006d525,
+        //         Admin,
+        //         "LIGHTS SONG",
+        //         "LGS",
+        //         10080,
+        //         3
+        //     );
 
-        // registerLaunchPad(
-        //     107,
-        //     0xC8610Db0D58A4F71a1F2f17cf6AFcb3f659F3d4d,
-        //     Admin,
-        //     "INTERCONNECTED",
-        //     "ITD",
-        //     320,
-        //     16
-        // );
+        //     registerLaunchPad(
+        //         107,
+        //         0xC8610Db0D58A4F71a1F2f17cf6AFcb3f659F3d4d,
+        //         Admin,
+        //         "INTERCONNECTED",
+        //         "ITD",
+        //         12960,
+        //         16
+        //     );
 
-        // registerLaunchPad(
-        //     108,
-        //     0x6E7A13CfD3D35319C91EED0F69822B54055f7D3C,
-        //     Admin,
-        //     "BRAVE",
-        //     "BRV",
-        //     120,
-        //     9
-        // );
+        //     registerLaunchPad(
+        //         108,
+        //         0x6E7A13CfD3D35319C91EED0F69822B54055f7D3C,
+        //         Admin,
+        //         "BRAVE",
+        //         "BRV",
+        //         2880,
+        //         9
+        //     );
     }
 
     // function mintTokens(address add) internal {
@@ -250,14 +250,14 @@ contract mint is Script {
         uint pIncrease
     ) internal {
         ILAUNCHPADFACTORY igniteLaunchPadFactory = ILAUNCHPADFACTORY(
-            0xECE2662b7D6726408C7603e7F1F36bDDE3e041d2
+            0x063F23aAfaA0B39a1Cf42827f77da0CA04840523
         );
         igniteLaunchPadFactory.registerLaunchPads(
             _padCreator,
             address(tokenAddr),
             regNo,
             (block.timestamp - 10),
-            (100000 * 10 ** 18)
+            (29000 * 10 ** 18)
         );
         IUSDT(tokenAddr).approve(
             address(igniteLaunchPadFactory),
@@ -268,8 +268,8 @@ contract mint is Script {
             address(tokenAddr),
             Name,
             Symbol,
-            (100000 * 10 ** 18),
-            (140000 * 10 ** 18),
+            (29000 * 10 ** 18),
+            (29000 * 10 ** 18),
             duration,
             pIncrease
         );

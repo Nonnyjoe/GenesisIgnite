@@ -262,7 +262,7 @@ function handleSubmit2b() {
   } = useContractRead({
     address: Swapp(),
     abi: EscrowAbi,
-    functionName: "displayEscrowDetails",
+    functionName: "escrowDetails",
     args: [(escrowId)?.toString()],
     onSuccess: (data) => {
       console.log("Success", EscrowDetails);
@@ -284,7 +284,7 @@ function handleSubmit2b() {
       <Tilt>
 
       <div className={`${styles.card3}`}>
-        <p className={`${styles.cardTitle} font-EudoxusSansBold text-3xl`}> FILL AD #{escrowId}</p>
+        <p className={`${styles.cardTitle} font-pop text-3xl`}> FILL AD #{escrowId}</p>
 
         <div className={`${styles.cardContainer}`}>
           <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Token:</span>  {`${ Escrowdata[1] == EthClasic()

@@ -125,7 +125,7 @@ const [userAddress, setUserAddress] =  useState([]);
             <div className={styles.dashboardbottom}>
                 <div className={`${styles.flex2} ${styles.dashboardcardsbtm}`}>
                     <div className="mb-[1.5rem]"> 
-                        <p className="text-4xl ml-4 font-EudoxusSansBold leading-[3rem]">Thank you for you interest in GENESIS IGNITE</p>
+                        <p className="text-4xl ml-4 font-pop leading-[3rem]">Thank you for you interest in GENESIS IGNITE</p>
                     </div>
                 <div className="flex">
                     <div className={`${styles.appreciation} text-md font-pop`}>
@@ -145,7 +145,7 @@ const [userAddress, setUserAddress] =  useState([]);
                 </div>
                 <div className={styles.dashboardcardsbtm}>
                     <div className={styles.salesdetails}>
-                        <div className={`${styles.flex} ${styles.salesprogress} font-EudoxusSansBold flex justify-center items-center`}>
+                        <div className={`${styles.flex} ${styles.salesprogress} font-pop flex justify-center items-center`}>
                             <h5>LaunchPad History</h5>
                         </div>
                             <hr />

@@ -126,7 +126,7 @@ console.log(JSON.stringify(convert(7580, 'ether').wei))
         </div>
         </Link>
         <div className={styles.formdetails}>
-          <h1 className={`font-EudoxusSansBold text-4xl mb-10`}>CREATE LAUNCHPAD </h1>
+          <h1 className={`font-pop text-4xl mb-10`}>CREATE LAUNCHPAD </h1>
           <form onSubmit={handleSubmit} id="contact-field" className={`requestForm`} enctype="multipart/form-data">
             <div className={styles.names}>
             <div className={`flex flex-row text-base font-pop gap-9`}>

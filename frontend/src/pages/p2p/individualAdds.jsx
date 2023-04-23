@@ -28,7 +28,7 @@ export default function IndividualAdds(props) {
   } = useContractRead({
     address: Swapp(),
     abi: EscrowAbi,
-    functionName: "displayEscrowDetails",
+    functionName: "escrowDetails",
     args: [escrowId],
     onSuccess: (data) => {
       console.log("Success", EscrowDetails);

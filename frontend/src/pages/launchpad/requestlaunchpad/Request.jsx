@@ -173,7 +173,7 @@ async function handleSubmit2() {
         </div>
         </Link>
         <div className={styles.formdetails}>
-          <h1 className={`font-EudoxusSansBold text-4xl mb-10`}>REQUEST LAUNCHPAD </h1>
+          <h1 className={`font-pop text-4xl mb-10`}>REQUEST LAUNCHPAD </h1>
           <form onSubmit={handleSubmit} id="contact-field" className={`requestForm`} enctype="multipart/form-data">
             <div className={styles.names}>
             <div className={`flex flex-row text-base font-pop gap-9`}>
@@ -302,7 +302,7 @@ async function handleSubmit2() {
             </label>
             </div>
 
-            <button className={` font-pop mt-4 ${styles.btnSubmit}`}>Request Lauchpad</button>
+            <button className={` font-pop mt-4 ${styles.btnSubmit}`}> {setTokenCidLoading || loadingTokenCidWaitData ? `Loading.........` : `Request Lauchpad`}</button>
           </form>
 
         {/* <div id='output1' className={styles.ipfsResult}>

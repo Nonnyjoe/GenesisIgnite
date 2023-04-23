@@ -18,7 +18,7 @@ const FooterSec = () => {
         <div className={` ${styles2.glassCard6}  flex flex-col p-[6rem] pt-[4rem]`}>
         <div className='flex flex-row gap-10 justify-between'>
           <div className='w-[74vw]'>
-            <p className='text-4xl font-EudoxusSansBold'> PARTICIPATE IN LAUNCHPADS</p>
+            <p className='text-4xl font-pop'> PARTICIPATE IN LAUNCHPADS</p>
           </div>
           <div className='w-[35%] mt-2'>
             <button className={`${styles3.btnHover} ${styles3.color7}`}>Launch App</button>

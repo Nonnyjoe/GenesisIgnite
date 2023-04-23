@@ -334,7 +334,7 @@ const PresaleDetails = (props) => {
           <div className={`${styles.dynamicheader} flex-row-reverse flex gap-6 w-[100%] p-0 m-0 ${styles.uppercase}`}>
             <div className="w-[75%]">
             <div className={styles.flex1}>
-              <p className={`${styles.launchpadname} font-EudoxusSansBold`}>{LaunchPadData.name}</p>
+              <p className={`${styles.launchpadname} font-pop`}>{LaunchPadData.name}</p>
             </div>
             <div className="flex justify-between flex-row">
             <p className={`${styles.launchpadsymbol} font-pop`}>{LaunchPadData.symbol}</p>
@@ -428,7 +428,7 @@ const PresaleDetails = (props) => {
           </div>
           <form onSubmit={handleSubmit}>
             <div className={`${styles.participate} mb-6`}>
-              <h5 className={`${styles.participationheader} font-EudoxusSansBold`}>PARTICIPATE</h5>
+              <h5 className={`${styles.participationheader} font-pop`}>PARTICIPATE</h5>
               <p className={`${styles.participationparagraph} text-base`}>
                 {" "}
                 <span className="uppercase">Requirement : </span> To participate, you need GIT Token{" "}

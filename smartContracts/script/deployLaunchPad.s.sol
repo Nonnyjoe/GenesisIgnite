@@ -6,12 +6,13 @@ import "forge-std/Script.sol";
 import "../src/contracts/swapDexPoseidon.sol";
 import "../src/contracts/GenesisSwap.sol";
 
-import "../src/contracts/StarDaoToken.sol";
+// import "../src/contracts/StarDaoToken.sol";
 
 contract deployLaunchPad is Script {
     swapDexPoseidon public SwapDexPoseidon;
     GenesisSwap public genesisSwap;
-    StarDaoToken public starDaoToken;
+
+    // StarDaoToken public starDaoToken;
 
     function setUp() public {}
 
