@@ -325,25 +325,6 @@ const PresaleDetails = (props) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div className={styles.LaunchpadWhite1}>
     <div className={styles.LaunchpadSecondWhite}>
