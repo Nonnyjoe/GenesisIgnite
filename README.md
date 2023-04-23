@@ -6,7 +6,7 @@
 
 <p align="center">
 
-🖥 **Website** – [Genesis Ignite](https://genesisignite-iugvdgnvo-nonnyjoe.vercel.app/)
+🖥 **Website** – [Genesis Ignite](https://genesisignite.vercel.app/)
 
 📖 **Documentation** – [Docs](https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=sharing)
 
