@@ -272,7 +272,7 @@ function handleSubmit2b() {
       Escrowdata[1] == EthClasic()
                   ? setEscrowToken("EthClassic")
                   : Escrowdata[1] == Arbitrum()
-                    console.log(Escrowdata.tokenContract)
+                    console.log(Escrowdata[0])
                     console.log(Arbitrum())
                   ? setEscrowToken("Arbitrum")
                   : Escrowdata[1] == Shiba()
@@ -289,7 +289,7 @@ function handleSubmit2b() {
         <p className={`${styles.cardTitle} font-pop text-3xl`}> FILL AD #{escrowId}</p>
 
         <div className={`${styles.cardContainer}`}>
-          <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Token:</span>  {`${ Escrowdata[1] == EthClasic()
+          <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Token:</span>  {`${ Escrowdata[0] == EthClasic()
                   ? "ETC"
                   : Escrowdata[1] == Arbitrum()
                   ? "ARB"
@@ -298,7 +298,7 @@ function handleSubmit2b() {
                   : " " }`} 
                   </p> 
 
-          <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Rate:</span>{`1 GIT = ${(Escrowdata.rate)?.toString()} ${ Escrowdata[1] == EthClasic()
+          <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Rate:</span>{`1 GIT = ${(Escrowdata.rate)?.toString()} ${ Escrowdata[0] == EthClasic()
                   ? "ETC"
                   : Escrowdata[1] == Arbitrum()
                   ? "ARB"
