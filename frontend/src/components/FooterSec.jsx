@@ -21,10 +21,10 @@ const FooterSec = () => {
             <p className='text-4xl font-EudoxusSansBold'> PARTICIPATE IN LAUNCHPADS</p>
           </div>
           <div className='w-[35%] mt-2'>
-            <button class={`${styles3.btnHover} ${styles3.color7}`}>Launch App</button>
+            <button className={`${styles3.btnHover} ${styles3.color7}`}>Launch App</button>
           </div>
         </div>
-       <hr class="border-t border-gray-300 my-8 h-5 z-13"></hr>
+       <hr className="border-t border-gray-300 my-8 h-5 z-13"></hr>
         <div className='flex flex-row gap-[10rem] font-pop'>
           <div className='flex flex-row gap-3'>
               <div className={`${styles3.footerSocials2} mt-[-1rem]`}>

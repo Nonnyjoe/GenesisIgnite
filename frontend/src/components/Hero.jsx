@@ -22,7 +22,7 @@ export default function Hero() {
                         <div className={`${styles2.navLink}`}><Link href="/documentation">Documentation</Link> </div>
                     <div>
                         <Link href="/dashboard">
-                        <button class={`${styles2.btnHover} ${styles2.color7} text-2xl`}>Launch App</button>
+                        <button className={`${styles2.btnHover} ${styles2.color7} text-2xl`}>Launch App</button>
                         </Link>
                     </div>
                    
@@ -31,11 +31,11 @@ export default function Hero() {
                 <div className="flex flex-row justify-between">
                     <div className="py-20 pl-10">
                       <p className="text-6xl font-EudoxusSansBold font-bold title-font leading-[4rem]">
-                      Introducing Genesis Ignite  
+                      Introducing Genesis Ignite   </p>  
                         <br />
                          <span className={`${styles2.navLink} text-blue-100 text-4xl mt-4`}> A gamified, decentralized and safest launchpad for early-stage investors. </span> 
                         <p className="text-xl mt-4">Get early-access to top-tier blockchain projects by transacting with Genesis Ignite Tokens ($GIT) and enjoy the potential for high returns.</p>
-                    </p>   
+                    
                     </div>
                     <div className={`h-[25rem] w-[35rem] d-none bg-cover bg-center mr-10 ${styles.heroImg}`}>
                         {/* <Image src={rocket} alt= "iginite logo" className={`${styles.image} hidden`}/> */}
