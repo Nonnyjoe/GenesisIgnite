@@ -8,9 +8,9 @@
 
 🖥 **Website** – [Genesis Ignite](https://genesisignite-iugvdgnvo-nonnyjoe.vercel.app/)
 
-📖 **Documentation** – https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=sharing
+📖 **Documentation** – [Docs](https://drive.google.com/drive/folders/1qM_SuBrOxzmrRoZd2LuAPmKsiraRC4CW?usp=sharing)
 
-🐦 **Twitter** – https://twitter.com/GenesisIgnite
+🐦 **Twitter** – [Genesis](https://twitter.com/GenesisIgnite)
 </p>
 
 ## What is Genesis Ignite??
