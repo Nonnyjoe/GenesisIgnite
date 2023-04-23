@@ -272,6 +272,7 @@ function handleSubmit2b() {
       Escrowdata[1] == EthClasic()
                   ? setEscrowToken("EthClassic")
                   : Escrowdata[1] == Arbitrum()
+                    console.log(Escrowdata[1])
                   ? setEscrowToken("Arbitrum")
                   : Escrowdata[1] == Shiba()
                   ? setEscrowToken("Shiba")
@@ -303,7 +304,7 @@ function handleSubmit2b() {
                   : Escrowdata[1] == Shiba()
                   ? "SHIB"
                   : " " }`}</p> 
-          <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Order Type:</span>{(Tstatus) == "true" ? 'BUY AD.' : 'SELL ADD'} </p> 
+          <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Order Type:</span>{(Tstatus) == "true" ? 'BUY AD.' : 'SELL AD.'} </p> 
           <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Created By:</span>{Escrowdata.proposer} </p> 
           <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Available:</span>{(Escrowdata.expectedExchangeAmount / 10**18).toFixed(2)}</p> 
         </div>
