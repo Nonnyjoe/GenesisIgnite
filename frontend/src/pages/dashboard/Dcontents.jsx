@@ -12,7 +12,7 @@ import {LaunchPadFacoryAddr} from "../../utils/addresses";
 import LPFactoryABI from "../../utils/LPFactory.json";
 import {GeneAddress} from "../../utils/addresses"
 import { useContext, useState } from "react";
-import {Launchpads} from "./History";
+import Launchpads from "./History";
 import tokenABI from "../../utils/token_ABI.json"
 
 
@@ -130,7 +130,7 @@ const [userAddress, setUserAddress] =  useState([]);
                 <div className="flex">
                     <div className={`${styles.appreciation} text-md font-pop`}>
                         <p className="mb-3">You can Buy our token for transactions on the Buy Token page</p>
-                        <p className="mb-3">You can get quick responses to any question and chat with the team on Discord "Link here"</p>
+                        <p className="mb-3">You can get quick responses to any question and chat with the team on Discord &quot;Link here&quot;</p>
                         <p className="mb-5"> Don&apos;t hesistate to refer friends</p>
                     <div className={styles.buyToken2}>
                     <Link href={`https://github.com/Nonnyjoe/BunzzGenesisIgnite`}>

@@ -94,6 +94,10 @@ function getTimeAgo(epochTime) {
   }
 }
 
+
+  const FP = contractAddress ? contractAddress.slice( 0, 4): `0X000`;
+  const LP =contractAddress ? contractAddress.slice(-4) : `0000`;
+
   const launchStatusClassName = epochTime() ? styles.launchongoing : styles.launchended;
 
   return (
@@ -134,10 +138,8 @@ function getTimeAgo(epochTime) {
           <div className={`${styles.symboladdress} mt-[0rem] flex flex-row-reverse`}>
           <p className={`text-sm ${launchStatusClassName}`}>{epochTime() ? `ONGOING` : `ENDED`}</p>
        
-          <p className=" text-sm ">{`${contractAddress.slice(
-            0,
-            4
-          )}...${contractAddress.slice(-4)}`}</p>
+          <p>{`${FP}...${LP}`}</p>
+
           </div>
         </div>
       </div>

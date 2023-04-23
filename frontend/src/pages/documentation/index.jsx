@@ -102,8 +102,8 @@ export default function Documentation() {
               />
               <h6>Idogwu Chinonso</h6>
               <p>Smart Contract and Front-End developer</p>
-              <a href="https://github.com/Nonnyjoe">🐙 : GitHub , </a>
-              <a href="https://twitter.com/ChinonsoIdogwu"  target="_blank">🐦 : Twitter</a>
+              <Link href="https://github.com/Nonnyjoe" target="_blank">🐙 : GitHub </Link>
+              <Link href="https://twitter.com/ChinonsoIdogwu" target="_blank">🐦 : Twitter </Link>
             </div>
 
             <div>
@@ -115,8 +115,9 @@ export default function Documentation() {
               />
               <h6>Scar Face dot ETH</h6>
               <p>Blockchain Engineer and Market Analyst</p>
-              <a href="https://github.com/scarfacedotcom"  target="_blank">🐙 : GitHub , </a>
-              <a href="https://twitter.com/scarfacedotsol"  target="_blank">🐦 : Twitter</a>
+              <Link href="https://github.com/scarfacedotcom" target="_blank">🐙 : GitHub </Link>
+              <Link href="https://twitter.com/scarfacedotsol" target="_blank">🐦 : Twitter </Link>
+
             </div>
 
             <div>
@@ -128,8 +129,8 @@ export default function Documentation() {
               />
               <h6>William Adepoju</h6>
               <p>Smart Contract and Front-End developer</p>
-              <a href="https://github.com/Bill-Adepoju">🐙 : GitHub , </a>
-              <a href="https://twitter.com/flippantVibe"  target="_blank">🐦 : Twitter</a>
+              <Link href="https://github.com/Bill-Adepoju" target="_blank">🐙 : GitHub </Link>
+              <Link href="https://twitter.com/flippantVibe" target="_blank">🐦 : Twitter </Link>
             </div>
 
             <div>
@@ -141,8 +142,8 @@ export default function Documentation() {
               />
               <h6>Uchene Okolo</h6>
               <p>Smart Contract developer</p>
-              <a href="https://github.com/Ucheokolo">🐙 : GitHub , </a>
-              <a href="https://twitter.com/uche2v"  target="_blank">🐦 : Twitter</a>
+              <Link href="https://github.com/Ucheokolo" target="_blank">🐙 : GitHub </Link>
+              <Link href="https://twitter.com/uche2v" target="_blank">🐦 : Twitter </Link>
             </div>
 
             <div>
@@ -154,8 +155,8 @@ export default function Documentation() {
               />
               <h6>Mr. Chris</h6>
               <p>Smart Contract developer</p>
-              <a href="https://github.com/Enenche23">🐙 : GitHub , </a>
-              <a href="https://twitter.com/ejeh_elias"  target="_blank">🐦 : Twitter</a>
+              <Link href="https://github.com/Enenche23" target="_blank">🐙 : GitHub </Link>
+              <Link href="https://twitter.com/ejeh_elias" target="_blank">🐦 : Twitter </Link>
             </div>
           </div>
 

@@ -98,6 +98,9 @@ function getTimeAgo(epochTime) {
 
   const launchStatusClassName = epochTime() ? styles.launchongoing : styles.launchended;
 
+  const FP = contractAddress ? contractAddress.slice( 0, 4): `0X000`;
+  const LP =contractAddress ? contractAddress.slice(-4) : `0000`;
+
   return (
     <div>
     <div className={`${styles.cardlink} cursor-pointer`}>
@@ -135,10 +138,7 @@ function getTimeAgo(epochTime) {
           <div className={`${styles.symboladdress} mt-[0rem] flex flex-row-reverse`}>
           <p className={`text-sm ${styles.launchongoing}`}>{ `ONGOING` }</p>
        
-          <p className=" text-sm ">{`${contractAddress.slice(
-            0,
-            4
-          )}...${contractAddress.slice(-4)}`}</p>
+          <p className=" text-sm ">{`${FP}...${LP}`}</p>
           </div>
         </div>
       </div>

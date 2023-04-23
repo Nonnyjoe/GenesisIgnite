@@ -8,10 +8,12 @@ import styles from "../../styles/dashboard.module.css";
 import igniteNft from "../../images/pngwing.com.png";
 import Image from "next/image";
 
-export const Launchpads = ({ contractAddress }) => {
+const Launchpads = ({ contractAddress }) => {
  const [userContribution, setUserContribution] = useState();
 const { address } = useAccount();
 
+  const FP = contractAddress ? contractAddress.slice( 0, 4): `0X000`;
+  const LP =contractAddress ? contractAddress.slice(-4) : `0000`;
 
  useContractRead({
     address: contractAddress,
@@ -28,10 +30,7 @@ const { address } = useAccount();
     <div>
         <Link href={`./launchpad/${contractAddress}`}>
         <div className={`${styles.history} flex flex-row gap-[5rem] mt-2`}>
-          <p>{`${contractAddress.slice(
-            0,
-            4
-          )}...${contractAddress.slice(-4)}`}</p>
+          <p>{`${FP}...${LP}`}</p>
           <p>{userContribution / 10**18} GIT</p>
         </div>
         </Link>
@@ -39,3 +38,5 @@ const { address } = useAccount();
   )
 
 }
+
+export default Launchpads;
