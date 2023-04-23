@@ -37,7 +37,7 @@ function handleShowDetails(value) {
 return (
   <div className={`py-4 pl-8 ${styles.launchpad}`}>
 
-    <div className={`${styles.card2} `}>
+    <div className={`${styles.card2}`}>
       <div className={`flex flex-row justify-between`}>
       <h1 className="text-5xl pb-3">P2P</h1>
         <div className={`${styles2.topBar} flex flex-row `}>
