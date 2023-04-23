@@ -291,18 +291,18 @@ function handleSubmit2b() {
         <div className={`${styles.cardContainer}`}>
           <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Token:</span>  {`${ Escrowdata[0] == EthClasic()
                   ? "ETC"
-                  : Escrowdata[1] == Arbitrum()
+                  : Escrowdata[0] == Arbitrum()
                   ? "ARB"
-                  : Escrowdata[1] == Shiba()
+                  : Escrowdata[0] == Shiba()
                   ? "SHIB"
                   : " " }`} 
                   </p> 
 
           <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Rate:</span>{`1 GIT = ${(Escrowdata.rate)?.toString()} ${ Escrowdata[0] == EthClasic()
                   ? "ETC"
-                  : Escrowdata[1] == Arbitrum()
+                  : Escrowdata[0] == Arbitrum()
                   ? "ARB"
-                  : Escrowdata[1] == Shiba()
+                  : Escrowdata[0] == Shiba()
                   ? "SHIB"
                   : " " }`}</p> 
           <p className={`${styles.cardContent} font-pop`}> <span className="text-md font-headers mr-10">Order Type:</span>{(Tstatus) == "true" ? 'BUY AD.' : 'SELL AD.'} </p> 

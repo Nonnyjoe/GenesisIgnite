@@ -57,11 +57,11 @@ const id = escrowId;
             <p>{`${addressFP}.....${addressLP}`}</p>
         </div>
         <div>
-            <p>{`1 GIT = ${(Escrowdata.rate)?.toString()} ${ Escrowdata[1] == EthClasic()
+            <p>{`1 GIT = ${(Escrowdata.rate)?.toString()} ${ Escrowdata[0] == EthClasic()
                   ? "ETC"
-                  : Escrowdata[1] == Arbitrum()
+                  : Escrowdata[0] == Arbitrum()
                   ? "ARB"
-                  : Escrowdata[1] == Shiba()
+                  : Escrowdata[0] == Shiba()
                   ? "SHIB"
                   : " " }`}
             </p>
@@ -72,21 +72,21 @@ const id = escrowId;
         <div>
         {type ? (
         <div>
-            <button onClick={() => console.log('Buy clicked')} className={`${styles.buyBtn} font-pop`}>Buy {` ${ Escrowdata[1] == EthClasic()
+            <button onClick={() => console.log('Buy clicked')} className={`${styles.buyBtn} font-pop`}>Buy {` ${ Escrowdata[0] == EthClasic()
                   ? "ETC"
-                  : Escrowdata[1] == Arbitrum()
+                  : Escrowdata[0] == Arbitrum()
                   ? "ARB"
-                  : Escrowdata[1] == Shiba()
+                  : Escrowdata[0] == Shiba()
                   ? "SHIB"
                   : " " }`}</button>
         </div>
         ) : (
         <div>
-            <button onClick={() => console.log('Sell clicked')} className={`${styles.sellBtn} font-pop`}>Sell {` ${ Escrowdata[1] == EthClasic()
+            <button onClick={() => console.log('Sell clicked')} className={`${styles.sellBtn} font-pop`}>Sell {` ${ Escrowdata[0] == EthClasic()
                   ? "ETC"
-                  : Escrowdata[1] == Arbitrum()
+                  : Escrowdata[0] == Arbitrum()
                   ? "ARB"
-                  : Escrowdata[1] == Shiba()
+                  : Escrowdata[0] == Shiba()
                   ? "SHIB"
                   : " " }`}</button>
         </div>
