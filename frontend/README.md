@@ -1,29 +1,54 @@
-This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](https://github.com/rainbow-me/rainbowkit/tree/main/packages/create-rainbowkit).
+# Bunzz Hackathon Project
 
-## Getting Started
+## Authors: Idogwu Nonso, Scar-Face, Okolo Uchenna, Mr. Chris, Williams Adepoju
 
-First, run the development server:
+## Title: Genesis Ignite (A Launchpad, Swap and P2P smart contract)
 
-```bash
-npm run dev
-```
+<hr>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Contents
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Project Overview
+- ScreenShots
+- Languages
+- FrameWorks
 
-## Learn More
+### Overview
 
-To learn more about this stack, take a look at the following resources:
+Genesis Ignite consists of a five man project team that aims at supporting start-ups to raise necessary funds to advance their unique projects, provide an exchange platform for its users to trade major tokens and a p2p service that enables users trade amongst themselves. The Genesis Ignite team has built a project which consists of three major contract layers;
 
-- [RainbowKit Documentation](https://rainbowkit.com) - Learn how to customize your wallet connection flow.
-- [wagmi Documentation](https://wagmi.sh) - Learn how to interact with Ethereum.
-- [Next.js Documentation](https://nextjs.org/docs) - Learn how to build a Next.js application.
+- a LaunchPad
+- a Swap Platform
+- a P2P Interface
 
-You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-me/rainbowkit) - your feedback and contributions are welcome!
+The project infrastructure consists of a technical Team that evaluates launchpad projects before deciding whether they qualify for listing on the Platform. The success of this phase is further advanced to a pre-sales stage with the former setting the price for current stage.
+Through this process, Genesis Ignite amongst raising funds, also brings exposure to the project through its diverse customer base.
+The Swap and P2P platforms are essentially aimed at providing a decentralised unique exchange experience to its users.
 
-## Deploy on Vercel
+With a robust front-end design, Genesis Ignite offers the ultimate UI/UX experience to its users with seamless navigation through the differents product offerings on its website.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Screen Shots
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+_User Dashboards_
+
+![Dashboard](./images/dashboard.png "DashBoard")
+
+_P2P Section_
+
+![Dashboard](./images/p2p.png "p2p")
+
+_Swap Interface_
+
+![Dashboard](./images/swap.png "swap")
+
+### Language
+
+- TypeScript
+- JavaScript
+
+### Frameworks
+
+- NextJs
+- Wagmi
+- RainbowKit
+- EthersJs
