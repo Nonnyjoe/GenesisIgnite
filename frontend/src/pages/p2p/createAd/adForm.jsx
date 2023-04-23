@@ -195,7 +195,11 @@ const AdForm = (props) => {
             }
       }
     } else if ((anotherProp).toString() == "false") {
-            getAlawee?.()
+            if(UserAllowanceGIT < amount) {
+              getAlawee?.()
+            } else {
+                handleSubmit2b();
+            }
 
     }
   }
