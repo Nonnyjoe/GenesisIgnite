@@ -6,6 +6,8 @@
 
 <hr>
 
+![Dashboard](./images/interaction.png "interaction")
+
 ### Contents
 
 - Project Overview
