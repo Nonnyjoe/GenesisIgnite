@@ -3,6 +3,7 @@ pragma solidity ^0.8.9;
 
 import "../../lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import "../../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
+import "../../lib/forge-std/src/console.sol";
 
 contract Escrow {
     event buyAddCreated(
@@ -63,12 +64,12 @@ contract Escrow {
         uint received;
     }
 
-    address public tokenIgnite;
+    address public tokenIgnite = 0x68164C5890179267255ab9FE6d2Ad0DEAb47BEA5;
     address private arbitrator;
-    address private shibaInu = 0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE;
-    address private uniToken = 0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984;
-    address private linkToken = 0x514910771AF9Ca656af840dff83E8264EcF986CA;
-    address private flokiToken = 0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E;
+    address private shibaInu = 0x0d7aDD117A8F7B987Ea2Afe69d9D4b8c28f5367c;
+    address private uniToken = 0x9C513c5b33E9b005972956Ba7B8d5aFb1192Fe6F;
+    address private linkToken = 0xE98f7E8BFe055767cB7bb4525d5C07620F8aE790;
+    address private flokiToken = 0x0e9A422E75FF56ba26a2642D7E9cA7A3a19420BD;
 
     uint private escrowID;
     uint[] private escrowsTracker;
@@ -86,6 +87,7 @@ contract Escrow {
         p2pTokens[uniToken] = true;
         p2pTokens[linkToken] = true;
         p2pTokens[flokiToken] = true;
+        p2pTokens[tokenIgnite] = true;
     }
 
     function openEscrows() public view returns (uint) {
@@ -157,10 +159,10 @@ contract Escrow {
         escrowID = escrowID + 1;
         escrowDetails[escrowID] = _escrowDetails;
         escrowsTracker.push(escrowID);
+        tokenToEscrowPosition[_tokenAddr][false].push(escrowID);
         EscrowIndexTracker[escrowID] =
             tokenToEscrowPosition[_tokenAddr][false].length -
             1;
-        tokenToEscrowPosition[_tokenAddr][false].push(escrowID);
         emit sellAddCreated(escrowID, _tokenAddr, msg.sender, _amount);
         return escrowID;
     }
@@ -278,7 +280,7 @@ contract Escrow {
         require(escrowStatus == SellStatus.pending, "Escrow Closed");
         require(escrowBal > 0, "Escrow Empty");
 
-        bool position = escrowPosition[escrowID];
+        bool position = escrowPosition[_escrowID];
         uint escrowIndex = EscrowIndexTracker[_escrowID];
 
         tokenToEscrowPosition[Etoken][position][
@@ -292,7 +294,8 @@ contract Escrow {
 
         escrowDetails[_escrowID].amount = 0;
         escrowDetails[_escrowID].status = SellStatus.canceled;
-        IERC20(Etoken).transfer(proposer, escrowBal);
+        escrowPosition[_escrowID] == true?
+        IERC20(Etoken).transfer(proposer, escrowBal): IERC20(tokenIgnite).transfer(proposer, escrowBal);
 
         //@dev: lets not delete it so we can have the order details in record
         // delete escrowDetails[_escrowID];
