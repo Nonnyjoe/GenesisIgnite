@@ -49,7 +49,7 @@ const Sidebar = (props) => {
               </Link>
             </div>
           </li>
-           <li className={`${styles.item} ${check == 5 ? styles.active : ""}`}>
+          <li className={`${styles.item} ${check == 6 ? styles.active : ""}`}>
             <div className="flex flex-row gap-6">
               <div className={`${styles.dao} w-7 h-7 mt-[.5rem]`}></div>
               <Link href="/dao">
