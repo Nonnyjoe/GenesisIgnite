@@ -19,6 +19,7 @@ import Header from "../../components/header";
 import styles from "../../styles/LaunchPads.module.css";
 import Image from "next/image";
 import igniteNft from "../../images/dodge.png";
+import Vote from "./votes";
 
 const DaoAddresses = (props) => {
   const { address } = useAccount();
@@ -344,6 +345,8 @@ const DaoAddresses = (props) => {
                 )}
               </div>
             </div>
+
+            <Vote/>
             {/* <div className="flex flex-col gap-6 h-[100%]">
               <div
                 className={`${styles.generaldetails} font-pop text-center justify-center align-middle flex mt-6`}
