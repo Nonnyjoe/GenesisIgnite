@@ -102,7 +102,7 @@ const Daocards = ({ contractAddress }) => {
   return (
     <div className="cursor-pointer">
       <div className={styles.cardlink}>
-        <Link href={`./launchpad/${contractAddress}`}>
+        <Link href={`./dao/${contractAddress}`}>
           <div className={styles.cardwrapper}>
             <div className={styles.cards}>
               {cid ? (
