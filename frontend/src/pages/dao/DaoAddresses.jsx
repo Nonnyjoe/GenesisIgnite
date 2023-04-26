@@ -344,7 +344,7 @@ const DaoAddresses = (props) => {
                 )}
               </div>
             </div>
-            <div className="flex flex-col gap-6 h-[100%]">
+            {/* <div className="flex flex-col gap-6 h-[100%]">
               <div
                 className={`${styles.generaldetails} font-pop text-center justify-center align-middle flex mt-6`}
               >
@@ -403,14 +403,14 @@ const DaoAddresses = (props) => {
                   <p>{contractAddress}</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
-        <div className="flex justify-center items-center">
+        {/* <div className="flex justify-center items-center">
           <button className={`${styles.launchpadbtn2} font-pop text-sm`}>
             Check {LaunchPadData.name} DAO proposals
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
