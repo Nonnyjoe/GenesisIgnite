@@ -114,11 +114,20 @@ contract IgniteLaunchPad {
     mapping(address => uint) userGenesDepositedToLaunchpad;
     mapping(address => uint) launchPadTokensOwned;
 
+    /**
+     * ======================================================================== *
+     * --------------------------- GOVERNANCE RECORD------------------------------ *
+     * ======================================================================== *
+     */
+
+    address Governor;
+    address GovernanceToken;
+    uint Instalments;
+
     constructor(
         address _contractOverseer,
         uint _launchPadFee,
         address _padToken,
-        address _feeReceiver,
         uint256 _LaunchPadTSupply,
         uint256 _preSaleTokenSupply,
         uint256 _PadDuration,
@@ -126,16 +135,18 @@ contract IgniteLaunchPad {
         uint _percentagePresalePriceIncrease,
         address _nativeToken,
         uint _rewardCondition,
-        address _GeneRouter
+        address _GeneRouter,
+        uint _instalments
     ) {
         GeneRouter = _GeneRouter;
         GenesisToken = _nativeToken;
         rewardCondition = _rewardCondition;
+        Instalments = _instalments;
         createLaunchPad(
             _contractOverseer,
             _launchPadFee,
             _padToken,
-            _feeReceiver,
+            msg.sender,
             _LaunchPadTSupply,
             _preSaleTokenSupply,
             _PadDuration,
@@ -152,6 +163,15 @@ contract IgniteLaunchPad {
 
     //////// ADD FUNCTIONALITY TO COMMUNICATE BACK TO MOTHER THAT PRESALE IS OPENED AND CLOSED
     //// send number of launchpads a user has contributed to, to mother which will track an array of routers
+
+    function InitializeGovernance(
+        address _governor,
+        address _governanceToken
+    ) external {
+        require(msg.sender == GeneRouter, "NOT ROUTER CONTRACT");
+        Governor = _governor;
+        GovernanceToken = _governanceToken;
+    }
 
     function createLaunchPad(
         address _contractOverseer,

@@ -26,4 +26,9 @@ interface ILAUNCHPAD {
     function displayUsersParticipation(
         address _user
     ) external view returns (address[] memory _userLaunchpads);
+
+    function InitializeGovernance(
+        address _governor,
+        address _governanceToken
+    ) external;
 }

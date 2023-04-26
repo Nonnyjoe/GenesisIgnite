@@ -1,8 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 import "../interface/INFT.sol";
+import "../interface/ILAUNCHPAD.sol";
 import "../../lib/chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "../../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
+import "../../lib/openzeppelin-contracts/contracts/governance/utils/IVotes.sol";
+
+import "./Dao/GovernanceToken.sol";
+import "./Dao/GovernanceContract.sol";
 
 contract swapDexPoseidon {
     event launcpadRegistered(address _launchPad);
@@ -12,6 +17,11 @@ contract swapDexPoseidon {
     AggregatorV3Interface internal priceFeedUni;
     AggregatorV3Interface internal priceFeedUsdc;
 
+    struct governanceDetails {
+        address governanceToken;
+        address Governor;
+    }
+
     address admin;
     address LaunchPadFactory;
     address NftAddress;
@@ -19,6 +29,7 @@ contract swapDexPoseidon {
     bool init;
     uint256 NftCounter;
     mapping(address => uint256) private LaunchpadIndex;
+    mapping(address => governanceDetails) GovernanceDetails;
 
     // constructor(address _launchpadFactory) {
     constructor() {
@@ -58,9 +69,30 @@ contract swapDexPoseidon {
         NftAddress = _NftAddress;
     }
 
-    function RegisterLaunchpad(address _launchPad) external OnlyLaunchpad {
+    function RegisterLaunchpad(
+        address _launchPad,
+        uint TotalSupply
+    ) external OnlyLaunchpad {
         Launchpads.push(_launchPad);
         LaunchpadIndex[_launchPad] = Launchpads.length;
+
+        GovernanceToken governanceToken = new GovernanceToken(
+            _launchPad,
+            TotalSupply
+        );
+        MyGovernor myGovernor = new MyGovernor(
+            IVotes(governanceToken),
+            _launchPad
+        );
+
+        ILAUNCHPAD(_launchPad).InitializeGovernance(
+            address(myGovernor),
+            address(governanceToken)
+        );
+        GovernanceDetails[_launchPad].governanceToken = address(
+            governanceToken
+        );
+        GovernanceDetails[_launchPad].Governor = address(myGovernor);
     }
 
     function mintNft(address receiver) external validCaller {
