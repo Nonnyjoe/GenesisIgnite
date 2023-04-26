@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "../../styles/Dao.module.css"
 
 export default function vote() {
   const [voteData, setVoteData] = useState();
@@ -53,8 +54,8 @@ export default function vote() {
 
 
   return (
-    <div className="">
-      <h1>Which option do you like the best?</h1>
+    <div className={styles.poll}>
+      <h1>Has the creator met the benchmark to withdraw 30percent of the remaining Mint funds?</h1>
       <ul className={voted ? "results" : "options"}>
         {pollOptions}
       </ul>

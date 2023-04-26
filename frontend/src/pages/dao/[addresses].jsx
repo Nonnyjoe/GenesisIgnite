@@ -12,7 +12,7 @@ import {
   useWaitForTransaction,
   wagmi,
 } from "wagmi";
-import votes from "./votes";
+
 const SelectedLaunchpad = () => {
   const { addresses: contractAddress } = useRouter().query;
 
