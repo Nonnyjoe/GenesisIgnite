@@ -459,3 +459,27 @@
     color: white;
     border-radius: 1rem;
 }
+
+.launchpadbtn2{
+    width: 20rem;
+      height:3.5gtrem;
+      border-radius: 0.5rem;
+      border: 1px solid #D0D5DD;
+      /* margin-bottom: 1.2rem; */
+      background: rgba(255, 255, 255, 0.1);
+      /* background-color: red; */
+      border: none;
+      outline: none;
+      padding: 10px 20px;
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      letter-spacing: 1px;
+      color: #fff;
+      /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); */
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    transition: all 0.3s ease-out;
+}
