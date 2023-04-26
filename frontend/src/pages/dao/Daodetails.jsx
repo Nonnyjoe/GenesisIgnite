@@ -11,13 +11,14 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
-import IndLaunchpads from "../launchpad/IndLaunchpads";
+import Daocards from "./Daocards";
 import Link from "next/link";
 import Image from "next/image";
 import plus from "../../images/plus.png";
 import Tilt from "react-parallax-tilt";
+import Daostyles from "../../styles/Dao.module.css"
 
-export default function Launchpad() {
+export default function Daodetails() {
   const { address } = useAccount();
   const LaunchPadFactory = LaunchPadFacoryAddr();
   const [LaunchPads, setLaunchPads] = useState([]);
@@ -35,13 +36,17 @@ export default function Launchpad() {
 
   return (
     <div className={`${styles.launchpad} flex flex-col`}>
+      <div>
+        <h3 className={Daostyles.headers}>Available DAOs</h3>
+        <p>Note: To join a DAO, you must have the DAO Token</p>
+      </div>
       <div className={styles.lauchpadscards}>
         {LaunchPads?.map((e, i) => {
           return (
             <div key={i}>
               <Tilt glareEnable={true} glareBorderRadius={"2rem"}>
                 {/* // {e} */}
-                <IndLaunchpads key={i} contractAddress={e} />
+                <Daocards key={i} contractAddress={e} />
               </Tilt>
             </div>
           );
