@@ -177,6 +177,7 @@ contract IgniteLaunchPadFactory {
             GenesRouter,
             Instalments
         );
+        LaunchPadRecord[regId].LaunchpadAddress = address(igniteLaunchPad);
         uint totalToken = _LaunchPadTSupply + _preSaleTokenSupply;
         IROUTER(GenesRouter).RegisterLaunchpad(
             address(igniteLaunchPad),
@@ -194,7 +195,6 @@ contract IgniteLaunchPadFactory {
         }
         launchpads.push(address(igniteLaunchPad));
         validCildRecord[address(igniteLaunchPad)] = true;
-        LaunchPadRecord[regId].LaunchpadAddress = address(igniteLaunchPad);
         TokenToLaunchPadRecord[_padToken] = address(igniteLaunchPad);
         emit launchpadCreated(
             address(igniteLaunchPad),

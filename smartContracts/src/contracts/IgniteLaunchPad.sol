@@ -124,6 +124,10 @@ contract IgniteLaunchPad {
     address GovernanceToken;
     uint Instalments;
 
+    struct GovernanceData {
+        uint RequestTime;
+    }
+
     constructor(
         address _contractOverseer,
         uint _launchPadFee,
@@ -311,11 +315,11 @@ contract IgniteLaunchPad {
         rate = TokenRateFromPad;
     }
 
-    function withdrawExcessPresaleTokken() public OnlyModerator PadCanceled {
-        if (isPresaleClosed == false) revert Presale_Must_Be_Closed();
-        transfer_(IUSDT(padToken), presaleTotalSupply, msg.sender);
-        emit PresaleLiquidityEmptied(msg.sender, presaleTotalSupply);
-    }
+    // function withdrawExcessPresaleTokken() public OnlyModerator PadCanceled {
+    //     if (isPresaleClosed == false) revert Presale_Must_Be_Closed();
+    //     transfer_(IUSDT(padToken), presaleTotalSupply, msg.sender);
+    //     emit PresaleLiquidityEmptied(msg.sender, presaleTotalSupply);
+    // }
 
     function viewGenesRaisedFromLaunchPad() public view returns (uint Raised) {
         Raised = GenesRaisedByPad;
