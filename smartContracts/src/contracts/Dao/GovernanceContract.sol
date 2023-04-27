@@ -48,4 +48,14 @@ contract MyGovernor is
     {
         return super.quorum(blockNumber);
     }
+
+    function propose(
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory calldatas,
+        string memory description
+    ) public virtual override returns (uint256) {
+        require(msg.sender == LaunchPad, "NOT A VALID PROPOSER");
+        return super.propose(targets, values, calldatas, description);
+    }
 }

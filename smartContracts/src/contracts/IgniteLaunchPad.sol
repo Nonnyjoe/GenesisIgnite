@@ -5,6 +5,7 @@ import "../interface/IUSDT.sol";
 import "../interface/IROUTER.sol";
 import "../interface/ILAUNCHPAD.sol";
 import "../../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
+import "../../lib/openzeppelin-contracts/contracts/governance/IGovernor.sol";
 
 // import "../lib/forge-std/src/console.sol";
 
@@ -58,6 +59,7 @@ contract IgniteLaunchPad {
     error Presale_Must_Be_Closed();
     error Presale_Not_Open_Yet();
     error Presale_Closed();
+    error Exceededs_Instalment_Limit();
 
     using SafeMath for uint256;
     /**
@@ -119,14 +121,21 @@ contract IgniteLaunchPad {
      * --------------------------- GOVERNANCE RECORD------------------------------ *
      * ======================================================================== *
      */
-
+    struct GovernanceData {
+        uint256 RequestTime;
+        uint256 RequestAmount;
+    }
     address Governor;
     address GovernanceToken;
-    uint Instalments;
+    uint256 Instalments;
+    uint256 WithdrawnInstalments;
+    uint256[] proposalIds;
+    uint256 GovernanceBallance;
+    mapping(uint256 => GovernanceData) ProposalData;
 
-    struct GovernanceData {
-        uint RequestTime;
-    }
+    address[] target = [address(this)];
+    uint[] value = [0];
+    bytes[] calldatas;
 
     constructor(
         address _contractOverseer,
@@ -235,22 +244,71 @@ contract IgniteLaunchPad {
         hasClaimedLaunchpadTokens[msg.sender] = true;
         totalPadTokensClaimed += reward;
         transfer_(IUSDT(padToken), reward, msg.sender);
+        transfer_(IUSDT(GovernanceToken), reward, msg.sender);
         ChangePadState();
         emit LaunchPadTokenWithdrawn(msg.sender, reward);
     }
 
-    function WithdrawGenes(uint _amount) public OnlyModerator PadCanceled {
-        if (_amount == 0) revert invalidTransferAmount();
+    // function WithdrawGenes(uint _amount) public OnlyModerator PadCanceled {
+    //     if (_amount == 0) revert invalidTransferAmount();
+    //     if (block.timestamp < PadDuration) revert LaunchPad_Still_In_Progress();
+    //     ChangePadState();
+    //     if (_amount > ((GenesRaisedByPad + GenesRaisedFromPresale) - totalFees))
+    //         revert Amount_Exceeds_Balance();
+    //     if (totalFees > 0) {
+    //         transfer_(IUSDT(GenesisToken), totalFees, feeReceiver);
+    //         totalFees = 0;
+    //     }
+    //     transfer_(IUSDT(GenesisToken), _amount, msg.sender);
+    //     emit GenesWithdrawnByAdmin(msg.sender, _amount);
+    // }
+
+    function requestInstalmentWithdrawal(
+        string memory _description
+    ) public OnlyModerator PadCanceled returns (uint256 proposalID) {
+        if (Instalments <= WithdrawnInstalments)
+            revert Exceededs_Instalment_Limit();
         if (block.timestamp < PadDuration) revert LaunchPad_Still_In_Progress();
         ChangePadState();
-        if (_amount > ((GenesRaisedByPad + GenesRaisedFromPresale) - totalFees))
-            revert Amount_Exceeds_Balance();
-        if (totalFees > 0) {
-            transfer_(IUSDT(GenesisToken), totalFees, feeReceiver);
-            totalFees = 0;
+        uint amount = GovernanceBallance / Instalments;
+        if (WithdrawnInstalments < 1) {
+            WithdrawnInstalments = WithdrawnInstalments + 1;
+            if (totalFees != 0) {
+                transfer_(IUSDT(GenesisToken), totalFees, feeReceiver);
+                totalFees = 0;
+            }
+            transfer_(IUSDT(GenesisToken), amount, msg.sender);
+            emit GenesWithdrawnByAdmin(msg.sender, amount);
+        } else {
+            setCalldata(amount);
+            proposalID = IGovernor(Governor).propose(
+                target,
+                value,
+                calldatas,
+                _description
+            );
+            proposalIds.push(proposalID);
         }
-        transfer_(IUSDT(GenesisToken), _amount, msg.sender);
-        emit GenesWithdrawnByAdmin(msg.sender, _amount);
+    }
+
+    function setCalldata(uint _amount) internal {
+        bytes memory _calldatas = bytes(
+            abi.encodeWithSignature("TransferToAdmin(uint256)", _amount)
+        );
+        calldatas = [_calldatas];
+    }
+
+    function getProposalIds() external view returns (uint256[] memory) {
+        return proposalIds;
+    }
+
+    function TransferToAdmin(uint256 _amount) external PadCanceled {
+        require(
+            msg.sender == Governor,
+            "GOVERNANCE: ONLY ACCESSIBLE TO GOVERNANCE"
+        );
+        WithdrawnInstalments = WithdrawnInstalments + 1;
+        transfer_(IUSDT(GenesisToken), _amount, padModerator);
     }
 
     function extendLaunchPadExpiry(
@@ -364,6 +422,7 @@ contract IgniteLaunchPad {
         if (hasCalcFees == false) {
             uint Fee = ((launchPadFee * GenesRaisedByPad) / 100);
             totalFees = Fee;
+            GovernanceBallance = GenesRaisedByPad - totalFees;
             hasCalcFees = true;
         }
         if (TokenRateFromPad == 0) {
