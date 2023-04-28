@@ -346,6 +346,10 @@ const DaoAddresses = (props) => {
               </div>
             </div>
 
+            <div className="flex justify-center items-center my-8">
+              <h1 className="text-2xl">PROPOSALS</h1>
+            </div>
+
             <Vote/>
             {/* <div className="flex flex-col gap-6 h-[100%]">
               <div
