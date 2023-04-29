@@ -23,6 +23,7 @@ contract IgniteLaunchPad {
         uint padDuration
     );
     event DepositedToLaunchPad(address _depositor, uint _ammount);
+    event GovernanceInitialized(address Governor, address GovernanceToken);
     event LaunchPadTokenWithdrawn(address _user, uint _ammount);
     event GenesWithdrawnByAdmin(address admin, uint amount);
     event ExpirydateExtended(uint time);
@@ -192,6 +193,7 @@ contract IgniteLaunchPad {
         require(msg.sender == GeneRouter, "NOT ROUTER CONTRACT");
         Governor = _governor;
         GovernanceToken = _governanceToken;
+        emit GovernanceInitialized(Governor, GovernanceToken);
     }
 
     function createLaunchPad(
@@ -242,7 +244,7 @@ contract IgniteLaunchPad {
         emit DepositedToLaunchPad(msg.sender, _amount);
     }
 
-    function WithdrawLaunchPadToken() public PadCanceled {
+    function WithdrawLaunchPadToken() external PadCanceled {
         if (hasClaimedLaunchpadTokens[msg.sender] == true)
             revert Already_Claimed_Token();
         if (userGenesDepositedToLaunchpad[msg.sender] == 0)
@@ -259,7 +261,7 @@ contract IgniteLaunchPad {
 
     function requestInstalmentWithdrawal(
         string memory _description
-    ) public OnlyModerator PadCanceled returns (uint256 proposalID) {
+    ) external OnlyModerator PadCanceled returns (uint256 proposalID) {
         if (Instalments <= WithdrawnInstalments)
             revert Exceededs_Instalment_Limit();
         if (block.timestamp < PadDuration) revert LaunchPad_Still_In_Progress();

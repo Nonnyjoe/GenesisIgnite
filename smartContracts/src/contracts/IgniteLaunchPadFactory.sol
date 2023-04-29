@@ -29,6 +29,7 @@ contract IgniteLaunchPadFactory {
     address GenesisToken;
     address GenesisNft;
     address GenesRouter;
+    address GovernanceTokenFactory;
     uint launchPadFee;
     uint rewardCondition;
 
@@ -99,6 +100,7 @@ contract IgniteLaunchPadFactory {
         address _nativeToken,
         address _GenesisNft,
         address _GenesRouter,
+        address _governanceTokenFactory,
         uint _rewardCondition
     ) {
         ProjectAdmin = admin;
@@ -107,6 +109,7 @@ contract IgniteLaunchPadFactory {
         GenesisNft = _GenesisNft;
         GenesRouter = _GenesRouter;
         rewardCondition = _rewardCondition;
+        GovernanceTokenFactory = _governanceTokenFactory;
     }
 
     function requestLaunchPad(address TokenAddress, string memory cid) public {
@@ -161,7 +164,11 @@ contract IgniteLaunchPadFactory {
         uint256 _preSaleTokenSupply,
         uint256 _PadDuration,
         uint _percentagePresalePriceIncrease
-    ) public onlyVerifiedAdmin(regId, _padToken, _LaunchPadTSupply) {
+    )
+        public
+        onlyVerifiedAdmin(regId, _padToken, _LaunchPadTSupply)
+        returns (address)
+    {
         uint Instalments = LaunchPadRecord[regId].Instalments;
         IgniteLaunchPad igniteLaunchPad = new IgniteLaunchPad(
             ProjectAdmin,
@@ -177,9 +184,10 @@ contract IgniteLaunchPadFactory {
             GenesRouter,
             Instalments
         );
-        LaunchPadRecord[regId].LaunchpadAddress = address(igniteLaunchPad);
         uint totalToken = _LaunchPadTSupply + _preSaleTokenSupply;
-        IROUTER(GenesRouter).RegisterLaunchpad(
+        uint Id = regId;
+        LaunchPadRecord[Id].LaunchpadAddress = address(igniteLaunchPad);
+        IROUTER(GovernanceTokenFactory).CreateGovernanceToken(
             address(igniteLaunchPad),
             totalToken
         );
@@ -195,12 +203,10 @@ contract IgniteLaunchPadFactory {
         }
         launchpads.push(address(igniteLaunchPad));
         validCildRecord[address(igniteLaunchPad)] = true;
-        TokenToLaunchPadRecord[_padToken] = address(igniteLaunchPad);
-        emit launchpadCreated(
-            address(igniteLaunchPad),
-            _padToken,
-            _PadDuration
-        );
+        address pad = _padToken;
+        TokenToLaunchPadRecord[pad] = address(igniteLaunchPad);
+        emit launchpadCreated(address(igniteLaunchPad), pad, _PadDuration);
+        return address(igniteLaunchPad);
     }
 
     function setLaunchPadFee(uint _amount) public IsAdmin {

@@ -12,7 +12,7 @@ import "../../../lib/openzeppelin-contracts/contracts/governance/extensions/Gove
 contract MyGovernor is
     Governor,
     GovernorCountingSimple,
-    // GovernorVotes
+    GovernorVotes,
     GovernorVotesQuorumFraction
 {
     address LaunchPad;
@@ -29,7 +29,7 @@ contract MyGovernor is
     }
 
     function votingDelay() public pure override returns (uint256) {
-        return 1; // 1 block
+        return 0; // 1 block
     }
 
     function votingPeriod() public pure override returns (uint256) {

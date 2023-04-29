@@ -31,4 +31,18 @@ interface ILAUNCHPAD {
         address _governor,
         address _governanceToken
     ) external;
+
+    function requestInstalmentWithdrawal(string memory _description) external;
+
+    function requestEmmergencyWithdrawal(
+        uint _amount,
+        string memory _description
+    ) external returns (uint256 proposalID);
+
+    function WithdrawLaunchPadToken() external;
+
+    function viewGovernanceAddresses()
+        external
+        view
+        returns (address _governor, address _governanceToken);
 }
