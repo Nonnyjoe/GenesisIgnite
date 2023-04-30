@@ -1,151 +1,201 @@
-// // SPDX-License-Identifier: UNLICENSED
-// pragma solidity ^0.8.13;
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
 
-// import "forge-std/Script.sol";
-// import "../lib/forge-std/src/Test.sol";
-// // import "../src/contracts/StarDaoToken.sol";
-// import "../src/contracts/IgniteLaunchPad.sol";
-// import "../src/contracts/swapDexPoseidon.sol";
-// import "../src/contracts/IgniteLaunchPadFactory.sol";
-// import "../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
-// import "../src/interface/IUSDT.sol";
-// import "../src/contracts/GenesisSwap.sol";
-// import "../src/interface/ILAUNCHPADFACTORY.sol";
-// import "../src/contracts/tokens/mockToken.sol";
+import "forge-std/Script.sol";
+import "../lib/forge-std/src/Test.sol";
+// import "../src/contracts/StarDaoToken.sol";
+import "../src/contracts/LaunchPad/IgniteLaunchPad.sol";
 
-// import "../src/interface/ILAUNCHPAD.sol";
-// import "../src/interface/IGToken.sol";
-// import "../src/interface/IGOVERN.sol";
-// import "../src/contracts/Dao/GovernanceTokenFactory.sol";
+import "../src/contracts/LaunchPad/IgniteLaunchPadFactory.sol";
 
-// contract DNP is Script {
-//     address Admin = 0xA771E1625DD4FAa2Ff0a41FA119Eb9644c9A46C8;
-//     address User2 = 0x13B109506Ab1b120C82D0d342c5E64401a5B6381;
-//     address User3 = 0xfd182E53C17BD167ABa87592C5ef6414D25bb9B4;
-//     address User4 = 0xBB9F947cB5b21292DE59EFB0b1e158e90859dddb;
+import "../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
+import "../src/interface/IUSDT.sol";
+import "../src/contracts/GenesisSwap.sol";
+import "../src/interface/IGENESISCONTROLLER.sol";
 
-//     swapDexPoseidon public Router;
-//     GovernanceTokenFactory public GTFactory;
-//     MockToken public GIT;
-//     MockToken public LPToken;
-//     IgniteLaunchPadFactory public Genesis;
-//     uint proposalId =
-//         42263944791628653919593695388098034558077919607370133745859912031683553496920;
+import "../src/contracts/tokens/mockToken.sol";
 
-//     function run() public {
-//         vm.startPrank(Admin);
-//         GIT = new MockToken();
-//         LPToken = new MockToken();
-//         Router = new swapDexPoseidon();
-//         GTFactory = new GovernanceTokenFactory(address this, address(Router));
+import "../src/contracts/LaunchPad/GenesisIgniteController.sol";
 
-//         Genesis = new IgniteLaunchPadFactory(
-//             Admin,
-//             10,
-//             address(GIT),
-//             address(GIT),
-//             address(Router),
-//             500000 * 10 ** 18
-//         );
-//         Router.initialize(address(Genesis), address(GIT));
+import "../src/interface/ILAUNCHPAD.sol";
+import "../src/interface/IGToken.sol";
+import "../src/interface/IGOVERN.sol";
+import "../src/contracts/Dao/GovernanceTokenFactory.sol";
+import "../src/contracts/Dao/GovernanceFactory.sol";
 
-//         Genesis.registerLaunchPads(
-//             Admin,
-//             address(LPToken),
-//             101,
-//             block.timestamp,
-//             (100000 * 10 ** 18),
-//             3
-//         );
+contract DNP is Script {
+    address Admin = 0xA771E1625DD4FAa2Ff0a41FA119Eb9644c9A46C8;
+    address User2 = 0x13B109506Ab1b120C82D0d342c5E64401a5B6381;
+    address User3 = 0xfd182E53C17BD167ABa87592C5ef6414D25bb9B4;
+    address User4 = 0xBB9F947cB5b21292DE59EFB0b1e158e90859dddb;
 
-//         IUSDT(address(LPToken)).approve(address(Genesis), (200000 * 10 ** 18));
-//         IUSDT(address(LPToken)).mint(Admin, (200000 * 10 ** 18));
-//         address newLaunchpad = Genesis.createLaunchPad(
-//             101,
-//             address(LPToken),
-//             "TEST",
-//             "TST",
-//             (100000 * 10 ** 18),
-//             (100000 * 10 ** 18),
-//             5,
-//             10
-//         );
-//         vm.stopPrank();
+    MockToken public GIT;
+    MockToken public LPToken;
+    IgniteLaunchPadFactory public LPFactory;
+    GovernanceTokenFactory public GTokenFactory;
+    GovernanceFactory public GFactory;
+    GenesisIgniteController public GenesisController;
 
-//         participate(Admin, address(newLaunchpad), address(GIT));
+    uint proposalId =
+        42263944791628653919593695388098034558077919607370133745859912031683553496920;
+    address _newLaunchpad;
+    uint presaleId =
+        13451033083514596939918063210787257970623327842460883485067275258480664413022;
+    uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
 
-//         participate(User2, address(newLaunchpad), address(GIT));
+    function run() public {
+        vm.startBroadcast(deployerPrivateKey);
+        GIT = new MockToken();
+        writeAddressesToFile(address(GIT), "GIT token");
+        LPToken = new MockToken();
+        writeAddressesToFile(address(LPToken), "LP token");
+        GTokenFactory = new GovernanceTokenFactory();
+        writeAddressesToFile(
+            address(GTokenFactory),
+            "Governance token factory"
+        );
+        LPFactory = new IgniteLaunchPadFactory(address(GTokenFactory));
+        writeAddressesToFile(address(LPFactory), "LAUNCHPAD FACTORY");
 
-//         participate(User3, address(newLaunchpad), address(GIT));
+        GenesisController = new GenesisIgniteController(
+            Admin,
+            10,
+            address(GIT),
+            address(GIT),
+            address(LPFactory),
+            address(GTokenFactory),
+            500000 * 10 ** 18
+        );
+        writeAddressesToFile(
+            address(GenesisController),
+            "GOVERNANCE CONTROLLER"
+        );
 
-//         participate(User4, address(newLaunchpad), address(GIT));
+        GFactory = new GovernanceFactory(
+            address(GTokenFactory),
+            address(GenesisController)
+        );
+        writeAddressesToFile(address(GFactory), "GOVERNANCE FACTORY");
+        GTokenFactory.initialize(address(LPFactory), address(GFactory));
+        GenesisController.registerLaunchPads(
+            Admin,
+            address(LPToken),
+            101,
+            block.timestamp,
+            (100000 * 10 ** 18),
+            3
+        );
 
-//         vm.warp(10 minutes);
+        IUSDT(address(LPToken)).approve(
+            address(GenesisController),
+            (200000 * 10 ** 18)
+        );
 
-//         WithdrawLPToken(Admin, address(newLaunchpad));
-//         WithdrawLPToken(User2, address(newLaunchpad));
-//         WithdrawLPToken(User3, address(newLaunchpad));
-//         WithdrawLPToken(User4, address(newLaunchpad));
+        IUSDT(address(LPToken)).mint(Admin, (200000 * 10 ** 18));
+        address newLaunchpad = GenesisController.createLaunchPad(
+            101,
+            address(LPToken),
+            "ALPHA CORE",
+            "AHC",
+            (100000 * 10 ** 18),
+            (100000 * 10 ** 18),
+            10080,
+            10
+        );
+        writeAddressesToFile(address(newLaunchpad), "TEST LAUNCHPAD");
 
-//         vm.startPrank(Admin);
+        vm.stopBroadcast();
+    }
 
-//         ILAUNCHPAD(newLaunchpad).requestInstalmentWithdrawal("FIRST PAYMENT");
-//         ILAUNCHPAD(newLaunchpad).requestInstalmentWithdrawal("SECOND PAYMENT");
-//         vm.stopPrank();
+    //     participate(Admin, address(newLaunchpad), address(GIT));
 
-//         // GET GOVERNANCE AND GOVERNANCE TOKEN ADDRESS
-//         (address _Governor, address GToken) = ILAUNCHPAD(newLaunchpad)
-//             .viewGovernanceAddresses();
+    //     participate(User2, address(newLaunchpad), address(GIT));
 
-//         Delegate(Admin, GToken);
-//         Delegate(User2, GToken);
-//         Delegate(User3, GToken);
-//         Delegate(User4, GToken);
+    //     participate(User3, address(newLaunchpad), address(GIT));
 
-//         vm.warp(100 minutes);
-//         vm.warp(21600);
+    //     participate(User4, address(newLaunchpad), address(GIT));
 
-//         IGOVERN(_Governor).votingPeriod();
-//         IGOVERN(_Governor).state(proposalId);
+    //     vm.warp(10 minutes);
 
-//         // VOTE IN DAO
-//         // Vote(proposalId, 1, Admin, _Governor);
-//         Vote(proposalId, 1, User2, _Governor);
-//         Vote(proposalId, 1, User3, _Governor);
-//         Vote(proposalId, 1, User4, _Governor);
-//     }
+    //     WithdrawLPToken(Admin, address(newLaunchpad));
+    //     WithdrawLPToken(User2, address(newLaunchpad));
+    //     WithdrawLPToken(User3, address(newLaunchpad));
+    //     WithdrawLPToken(User4, address(newLaunchpad));
 
-//     function WithdrawLPToken(address user, address newLaunchpad) internal {
-//         vm.prank(user);
-//         ILAUNCHPAD(newLaunchpad).WithdrawLaunchPadToken();
-//     }
+    //     vm.startPrank(Admin);
 
-//     function participate(
-//         address user,
-//         address newLaunchpad,
-//         address _GIT
-//     ) internal {
-//         vm.prank(Admin);
-//         IUSDT(_GIT).mint(user, (20000 * 10 ** 18));
+    //     ILAUNCHPAD(newLaunchpad).requestInstalmentWithdrawal("FIRST PAYMENT");
+    //     ILAUNCHPAD(newLaunchpad).requestInstalmentWithdrawal("SECOND PAYMENT");
+    //     vm.stopPrank();
 
-//         vm.startPrank(user);
-//         IUSDT(_GIT).approve(newLaunchpad, (20000 * 10 ** 18));
-//         ILAUNCHPAD(newLaunchpad).participateInLaunchPad(20000 * 10 ** 18);
-//         vm.stopPrank();
-//     }
+    //     // GET GOVERNANCE AND GOVERNANCE TOKEN ADDRESS
+    //     (address _Governor, address GToken) = ILAUNCHPAD(newLaunchpad)
+    //         .viewGovernanceAddresses();
 
-//     function Delegate(address user, address GTA) internal {
-//         vm.prank(user);
-//         IGIToken(GTA).delegate(user);
-//     }
+    //     Delegate(Admin, GToken);
+    //     Delegate(User2, GToken);
+    //     Delegate(User3, GToken);
+    //     Delegate(User4, GToken);
 
-//     function Vote(
-//         uint Id,
-//         uint8 support,
-//         address user,
-//         address _Governor
-//     ) internal {
-//         vm.prank(user);
-//         IGOVERN(_Governor).castVote(Id, support);
-//     }
-// }
+    //     vm.warp(100 minutes);
+    //     vm.warp(21600);
+
+    //     IGOVERN(_Governor).votingPeriod();
+    //     IGOVERN(_Governor).state(proposalId);
+
+    //     // VOTE IN DAO
+    //     // Vote(proposalId, 1, Admin, _Governor);
+    //     Vote(proposalId, 1, User2, _Governor);
+    //     Vote(proposalId, 1, User3, _Governor);
+    //     Vote(proposalId, 1, User4, _Governor);
+    // }
+
+    // function WithdrawLPToken(address user, address newLaunchpad) internal {
+    //     vm.prank(user);
+    //     ILAUNCHPAD(newLaunchpad).WithdrawLaunchPadToken();
+    // }
+
+    // function participate(
+    //     address user,
+    //     address newLaunchpad,
+    //     address _GIT
+    // ) internal {
+    //     vm.prank(Admin);
+    //     IUSDT(_GIT).mint(user, (20000 * 10 ** 18));
+
+    //     vm.startPrank(user);
+    //     IUSDT(_GIT).approve(newLaunchpad, (20000 * 10 ** 18));
+    //     ILAUNCHPAD(newLaunchpad).participateInLaunchPad(20000 * 10 ** 18);
+    //     vm.stopPrank();
+    // }
+
+    // function Delegate(address user, address GTA) internal {
+    //     vm.prank(user);
+    //     IGIToken(GTA).delegate(user);
+    // }
+
+    // function Vote(
+    //     uint Id,
+    //     uint8 support,
+    //     address user,
+    //     address _Governor
+    // ) internal {
+    //     vm.prank(user);
+    //     IGOVERN(_Governor).castVote(Id, support);
+    // }
+
+    function writeAddressesToFile(address addr, string memory text) public {
+        string memory filename = "./deployed_contracts.txt";
+
+        vm.writeLine(
+            filename,
+            "-------------------------------------------------"
+        );
+        vm.writeLine(filename, text);
+        vm.writeLine(filename, vm.toString(addr));
+        vm.writeLine(
+            filename,
+            "-------------------------------------------------"
+        );
+    }
+}
