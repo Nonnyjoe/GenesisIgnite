@@ -2,15 +2,14 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "../src/contracts/swapDexPoseidon.sol";
 import "../src/contracts/GenesisSwap.sol";
-import "../src/contracts/IgniteLaunchPad.sol";
-import "../src/contracts/swapDexPoseidon.sol";
-import "../src/contracts/IgniteLaunchPadFactory.sol";
+import "../src/contracts/LaunchPad/IgniteLaunchPad.sol";
+import "../src/contracts/LaunchPad/GenesisIgniteController.sol";
+import "../src/contracts/LaunchPad/IgniteLaunchPadFactory.sol";
 import "../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
 import "../src/interface/IUSDT.sol";
 import "../src/contracts/GenesisSwap.sol";
-import "../src/interface/ILAUNCHPADFACTORY.sol";
+import "../src/interface/IGENESISCONTROLLER.sol";
 import "../src/contracts/tokens/mockToken.sol";
 
 import "../src/interface/ILAUNCHPAD.sol";
@@ -26,16 +25,18 @@ contract testGovernance is Test {
     address User2 = 0x13B109506Ab1b120C82D0d342c5E64401a5B6381;
     address User3 = 0xfd182E53C17BD167ABa87592C5ef6414D25bb9B4;
     address User4 = 0xBB9F947cB5b21292DE59EFB0b1e158e90859dddb;
-    swapDexPoseidon public Router;
     MockToken public GIT;
     MockToken public LPToken;
-    IgniteLaunchPadFactory public Genesis;
+    IgniteLaunchPadFactory public LPFactory;
     GovernanceTokenFactory public GToken;
     GovernanceFactory public GFactory;
+    GenesisIgniteController public GenesisController;
 
     uint proposalId =
-        106532852134550793658734984844247972623827391862316310033891756738136628541900;
+        42263944791628653919593695388098034558077919607370133745859912031683553496920;
     address _newLaunchpad;
+    uint presaleId =
+        13451033083514596939918063210787257970623327842460883485067275258480664413022;
 
     function setUp() public {}
 
@@ -43,25 +44,25 @@ contract testGovernance is Test {
         vm.startPrank(Admin);
         GIT = new MockToken();
         LPToken = new MockToken();
-        Router = new swapDexPoseidon();
-        GToken = new GovernanceTokenFactory(address(Router));
-        GFactory = new GovernanceFactory(address(GToken), address(Router));
+        GToken = new GovernanceTokenFactory();
+        LPFactory = new IgniteLaunchPadFactory(address(GToken));
 
-        Genesis = new IgniteLaunchPadFactory(
+        GenesisController = new GenesisIgniteController(
             Admin,
             10,
             address(GIT),
             address(GIT),
-            address(Router),
+            address(LPFactory),
             address(GToken),
             500000 * 10 ** 18
         );
 
-        Router.getRegisteredLaunchpads();
-
-        Router.initialize(address(Genesis), address(GIT));
-        GToken.initialize(address(Genesis), address(GFactory));
-        Genesis.registerLaunchPads(
+        GFactory = new GovernanceFactory(
+            address(GToken),
+            address(GenesisController)
+        );
+        GToken.initialize(address(LPFactory), address(GFactory));
+        GenesisController.registerLaunchPads(
             Admin,
             address(LPToken),
             101,
@@ -70,9 +71,12 @@ contract testGovernance is Test {
             3
         );
 
-        IUSDT(address(LPToken)).approve(address(Genesis), (200000 * 10 ** 18));
+        IUSDT(address(LPToken)).approve(
+            address(GenesisController),
+            (200000 * 10 ** 18)
+        );
         IUSDT(address(LPToken)).mint(Admin, (200000 * 10 ** 18));
-        address newLaunchpad = Genesis.createLaunchPad(
+        address newLaunchpad = GenesisController.createLaunchPad(
             101,
             address(LPToken),
             "TEST",
@@ -104,6 +108,7 @@ contract testGovernance is Test {
         vm.startPrank(Admin);
         ILAUNCHPAD(_newLaunchpad).requestInstalmentWithdrawal("FIRST PAYMENT");
         ILAUNCHPAD(_newLaunchpad).requestInstalmentWithdrawal("SECOND PAYMENT");
+        ILAUNCHPAD(_newLaunchpad).getProposalIds();
         vm.stopPrank();
     }
 
@@ -115,24 +120,63 @@ contract testGovernance is Test {
         Delegate(User2, GovToken);
         Delegate(User3, GovToken);
         Delegate(User4, GovToken);
-
-        vm.warp(4 days);
-        vm.roll(block.number + 3);
-        Vote(proposalId, 1, Admin, _Governor);
-        vm.roll(block.number + 3);
-
         vm.warp(10);
     }
 
     function testVoteInGovernance() public {
-        console.log(block.number);
         testAnotherWithdrawal();
         (address _Governor, address GovToken) = ILAUNCHPAD(_newLaunchpad)
             .viewGovernanceAddresses();
-        // Vote(proposalId, 1, Admin, _Governor);
+        vm.roll(block.number + 3);
+        Vote(proposalId, 1, Admin, _Governor);
+        vm.roll(block.number + 3);
         Vote(proposalId, 1, User2, _Governor);
         Vote(proposalId, 1, User3, _Governor);
         Vote(proposalId, 1, User4, _Governor);
+    }
+
+    function testExexuteGovernance() public {
+        testVoteInGovernance();
+        vm.roll(block.number + 21600);
+        ILAUNCHPAD(_newLaunchpad).Execute(proposalId);
+    }
+
+    function testPresalseParticipation() public {
+        testVoteInGovernance();
+        vm.warp(1 days);
+        participateInPresale(Admin, address(_newLaunchpad), address(GIT));
+        participateInPresale(User2, address(_newLaunchpad), address(GIT));
+        participateInPresale(User3, address(_newLaunchpad), address(GIT));
+        participateInPresale(User4, address(_newLaunchpad), address(GIT));
+    }
+
+    function testEmergencyWithdrawal() public {
+        testPresalseParticipation();
+        vm.startPrank(Admin);
+        ILAUNCHPAD(_newLaunchpad).endPresale();
+        ILAUNCHPAD(_newLaunchpad).requestEmmergencyWithdrawal(
+            (20000 * 10 ** 18),
+            "EMERGENCY PAYMENT"
+        );
+        vm.stopPrank();
+    }
+
+    function testEmergencyWithdrawalVotting() public {
+        testEmergencyWithdrawal();
+        (address _Governor, address GovToken) = ILAUNCHPAD(_newLaunchpad)
+            .viewGovernanceAddresses();
+        vm.roll(block.number + 3);
+        Vote(presaleId, 1, Admin, _Governor);
+        vm.roll(block.number + 3);
+        Vote(presaleId, 1, User2, _Governor);
+        Vote(presaleId, 1, User3, _Governor);
+        Vote(presaleId, 0, User4, _Governor);
+    }
+
+    function testzEmergrncyGovernance() public {
+        testEmergencyWithdrawalVotting();
+        vm.roll(block.number + 21600);
+        ILAUNCHPAD(_newLaunchpad).Execute(presaleId);
     }
 
     function Vote(
@@ -161,6 +205,20 @@ contract testGovernance is Test {
         vm.startPrank(user);
         IUSDT(_GIT).approve(newLaunchpad, (20000 * 10 ** 18));
         ILAUNCHPAD(newLaunchpad).participateInLaunchPad(20000 * 10 ** 18);
+        vm.stopPrank();
+    }
+
+    function participateInPresale(
+        address user,
+        address newLaunchpad,
+        address _GIT
+    ) internal {
+        vm.prank(Admin);
+        IUSDT(_GIT).mint(user, (20000 * 10 ** 18));
+
+        vm.startPrank(user);
+        IUSDT(_GIT).approve(newLaunchpad, (20000 * 10 ** 18));
+        ILAUNCHPAD(newLaunchpad).participateInPresale(20000 * 10 ** 18);
         vm.stopPrank();
     }
 

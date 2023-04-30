@@ -3,7 +3,7 @@ pragma solidity ^0.8.17;
 import "./GovernanceContract.sol";
 
 interface IRouter {
-    function saveLaunchpad(
+    function saveLaunchpadGovernance(
         address governance,
         address _launchPad,
         address _governanceToken
@@ -12,13 +12,13 @@ interface IRouter {
 
 contract GovernanceFactory {
     address GTFactory;
-    address Router;
+    address GenesisController;
 
     event Factory_Called();
 
-    constructor(address _GTFactory, address _Router) {
+    constructor(address _GTFactory, address _GenesisController) {
         GTFactory = _GTFactory;
-        Router = _Router;
+        GenesisController = _GenesisController;
     }
 
     modifier OnlyFactory() {
@@ -35,7 +35,7 @@ contract GovernanceFactory {
             _launchPad
         );
         emit Factory_Called();
-        IRouter(Router).saveLaunchpad(
+        IRouter(GenesisController).saveLaunchpadGovernance(
             address(governance),
             _launchPad,
             _governanceToken

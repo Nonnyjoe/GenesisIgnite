@@ -1,15 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../interface/IUSDT.sol";
-import "../interface/IROUTER.sol";
-import "../interface/ILAUNCHPAD.sol";
-import "../../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
-import "../../lib/openzeppelin-contracts/contracts/governance/IGovernor.sol";
+import "../../interface/IUSDT.sol";
+import "../../interface/IGENESISCONTROLLER.sol";
+import "../../interface/ILAUNCHPAD.sol";
+import "../../../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
 
-// import "../lib/forge-std/src/console.sol";
-
-// import "../lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
+import "../../../lib/openzeppelin-contracts/contracts/governance/IGovernor.sol";
 
 contract IgniteLaunchPad {
     /**
@@ -69,7 +66,6 @@ contract IgniteLaunchPad {
      * --------------------------- GENERAL RECORD------------------------------ *
      * ======================================================================== *
      */
-    address GeneRouter;
     address feeReceiver;
     address contractOverseer;
     address GenesisToken;
@@ -127,6 +123,7 @@ contract IgniteLaunchPad {
         uint256 RequestTime;
         uint256 RequestAmount;
         string Description;
+        bytes[] calldatas;
     }
     address Governor;
     address GovernanceToken;
@@ -157,10 +154,9 @@ contract IgniteLaunchPad {
         uint _percentagePresalePriceIncrease,
         address _nativeToken,
         uint _rewardCondition,
-        address _GeneRouter,
-        uint _instalments
+        uint _instalments,
+        address _feeReceiver
     ) {
-        GeneRouter = _GeneRouter;
         GenesisToken = _nativeToken;
         rewardCondition = _rewardCondition;
         Instalments = _instalments;
@@ -168,7 +164,7 @@ contract IgniteLaunchPad {
             _contractOverseer,
             _launchPadFee,
             _padToken,
-            msg.sender,
+            _feeReceiver,
             _LaunchPadTSupply,
             _preSaleTokenSupply,
             _PadDuration,
@@ -190,7 +186,7 @@ contract IgniteLaunchPad {
         address _governor,
         address _governanceToken
     ) external {
-        require(msg.sender == GeneRouter, "NOT ROUTER CONTRACT");
+        require(msg.sender == feeReceiver, "NOT ROUTER CONTRACT");
         Governor = _governor;
         GovernanceToken = _governanceToken;
         emit GovernanceInitialized(Governor, GovernanceToken);
@@ -287,7 +283,17 @@ contract IgniteLaunchPad {
             ProposalData[proposalID].Description = _description;
             ProposalData[proposalID].RequestAmount = amount;
             ProposalData[proposalID].RequestTime = block.timestamp;
+            ProposalData[proposalID].calldatas = calldatas;
         }
+    }
+
+    function Execute(uint256 proposalId) external {
+        IGovernor(Governor).execute(
+            target,
+            value,
+            ProposalData[proposalId].calldatas,
+            keccak256(bytes(ProposalData[proposalId].Description))
+        );
     }
 
     function requestEmmergencyWithdrawal(
@@ -308,6 +314,7 @@ contract IgniteLaunchPad {
         ProposalData[proposalID].Description = _description;
         ProposalData[proposalID].RequestAmount = _amount;
         ProposalData[proposalID].RequestTime = block.timestamp;
+        ProposalData[proposalID].calldatas = calldatas;
     }
 
     function setCalldata(uint _amount, uint choice) internal {
@@ -488,7 +495,7 @@ contract IgniteLaunchPad {
             hasBeenRewarded[msg.sender] == false
         ) {
             hasBeenRewarded[msg.sender] = true;
-            IROUTER(GeneRouter).mintNft(msg.sender);
+            IGENESISCONTROLLER(feeReceiver).mintNft(msg.sender);
             emit NftMinted(msg.sender);
         }
         reward = ((contribution.mul(LaunchPadTSupply)).div(GenesRaisedByPad));

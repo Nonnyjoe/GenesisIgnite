@@ -18,4 +18,11 @@ interface IGOVERN {
     function votingPeriod() external pure returns (uint256);
 
     function state(uint256 proposalId) external returns (ProposalState);
+
+    function execute(
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory calldatas,
+        bytes32 descriptionHash
+    ) external returns (uint256);
 }

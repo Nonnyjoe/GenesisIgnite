@@ -4,13 +4,13 @@ pragma solidity ^0.8.13;
 import "forge-std/Script.sol";
 import "../lib/forge-std/src/Test.sol";
 // import "../src/contracts/StarDaoToken.sol";
-import "../src/contracts/IgniteLaunchPad.sol";
+import "../src/contracts/LaunchPad/IgniteLaunchPad.sol";
 import "../src/contracts/swapDexPoseidon.sol";
-import "../src/contracts/IgniteLaunchPadFactory.sol";
+import "../src/contracts/LaunchPad/IgniteLaunchPadFactory.sol";
 import "../lib/openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
 import "../src/interface/IUSDT.sol";
 import "../src/contracts/GenesisSwap.sol";
-import "../src/interface/ILAUNCHPADFACTORY.sol";
+import "../src/interface/IGENESISCONTROLLER.sol";
 
 contract mint is Script {
     GenesisSwap public swapPad;
@@ -249,7 +249,7 @@ contract mint is Script {
         uint duration,
         uint pIncrease
     ) internal {
-        ILAUNCHPADFACTORY igniteLaunchPadFactory = ILAUNCHPADFACTORY(
+        IGENESISCONTROLLER igniteLaunchPadFactory = IGENESISCONTROLLER(
             0x063F23aAfaA0B39a1Cf42827f77da0CA04840523
         );
         igniteLaunchPadFactory.registerLaunchPads(

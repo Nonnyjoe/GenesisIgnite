@@ -8,7 +8,6 @@ import "../../interface/IROUTER.sol";
 
 contract GovernanceTokenFactory {
     address LaunchPadFactory;
-    address Router;
     bool initialized;
     address GovernanceFactory;
 
@@ -17,9 +16,7 @@ contract GovernanceTokenFactory {
         _;
     }
 
-    constructor(address _router) {
-        Router = _router;
-    }
+    constructor() {}
 
     function initialize(
         address _launchPadFactory,

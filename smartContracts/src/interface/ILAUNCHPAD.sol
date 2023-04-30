@@ -45,4 +45,10 @@ interface ILAUNCHPAD {
         external
         view
         returns (address _governor, address _governanceToken);
+
+    function Execute(uint256 proposalId) external;
+
+    function endPresale() external;
+
+    function getProposalIds() external view returns (uint256[] memory);
 }

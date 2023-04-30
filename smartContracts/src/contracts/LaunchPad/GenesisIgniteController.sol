@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../interface/IUSDT.sol";
-import "../interface/IROUTER.sol";
-import "./IgniteLaunchPad.sol";
-import "../interface/ILAUNCHPAD.sol";
+import "../../interface/IUSDT.sol";
+import "../../interface/IROUTER.sol";
+import "../../interface/ILAUNCHPAD.sol";
+import "../../interface/INFT.sol";
 
 // import "../lib/forge-std/src/console.sol";
 
-contract IgniteLaunchPadFactory {
+contract GenesisIgniteController {
     event LaunchPadRegistered(address PadToken, uint regId);
     event launchpadCreated(
         address moderator,
@@ -17,6 +17,7 @@ contract IgniteLaunchPadFactory {
     );
     event presale_Activated(address Launchpad);
     event presale_Ended(address Launchpad);
+    event Factory_Called(address Factory);
 
     error Id_Already_Taken();
     error Cannot_Be_Address_Zero();
@@ -28,8 +29,9 @@ contract IgniteLaunchPadFactory {
     address ProjectAdmin;
     address GenesisToken;
     address GenesisNft;
-    address GenesRouter;
+    uint256 public NftCounter;
     address GovernanceTokenFactory;
+    address LaunchPadFactory;
     uint launchPadFee;
     uint rewardCondition;
 
@@ -39,6 +41,11 @@ contract IgniteLaunchPadFactory {
         address LaunchPadAdmin;
         uint LaunchpadTotalSupply;
         uint Instalments;
+    }
+
+    struct governanceDetails {
+        address governanceToken;
+        address Governor;
     }
 
     struct tokenDetails {
@@ -61,6 +68,7 @@ contract IgniteLaunchPadFactory {
     mapping(address => bool) LPrequested;
     mapping(address => address) LPrequester;
     mapping(address => string) LPTokenCid;
+    mapping(address => governanceDetails) GovernanceDetails;
 
     modifier IsAdmin() {
         require(msg.sender == ProjectAdmin, "NOT THE PROJECT ADMIN");
@@ -69,6 +77,14 @@ contract IgniteLaunchPadFactory {
 
     modifier isValidChild() {
         require((validCildRecord[msg.sender] == true), "NOT A VALID CHILD");
+        _;
+    }
+
+    modifier validCaller() {
+        require(
+            validCildRecord[address(msg.sender)] == true,
+            "NOT A VALID CALLER"
+        );
         _;
     }
 
@@ -99,7 +115,7 @@ contract IgniteLaunchPadFactory {
         uint _launchPadFees,
         address _nativeToken,
         address _GenesisNft,
-        address _GenesRouter,
+        address _LaunchPadFactory,
         address _governanceTokenFactory,
         uint _rewardCondition
     ) {
@@ -107,7 +123,7 @@ contract IgniteLaunchPadFactory {
         launchPadFee = _launchPadFees;
         GenesisToken = _nativeToken;
         GenesisNft = _GenesisNft;
-        GenesRouter = _GenesRouter;
+        LaunchPadFactory = _LaunchPadFactory;
         rewardCondition = _rewardCondition;
         GovernanceTokenFactory = _governanceTokenFactory;
     }
@@ -169,44 +185,56 @@ contract IgniteLaunchPadFactory {
         onlyVerifiedAdmin(regId, _padToken, _LaunchPadTSupply)
         returns (address)
     {
-        uint Instalments = LaunchPadRecord[regId].Instalments;
-        IgniteLaunchPad igniteLaunchPad = new IgniteLaunchPad(
+        string memory name = _tokenName;
+        string memory symbol = _tokenSymbol;
+        address padToken = _padToken;
+        uint _regId = regId;
+        uint percentagePresalePriceIncrease = _percentagePresalePriceIncrease;
+        uint LaunchPadTSupply = _LaunchPadTSupply;
+        uint256 preSaleTokenSupply = _preSaleTokenSupply;
+        uint256 PadDuration = _PadDuration;
+
+        uint Instalments = LaunchPadRecord[_regId].Instalments;
+        address igniteLaunchPad = IROUTER(LaunchPadFactory).newIgniteLaunchPad(
             ProjectAdmin,
             launchPadFee,
-            _padToken,
-            _LaunchPadTSupply,
-            _preSaleTokenSupply,
-            _PadDuration,
+            padToken,
+            LaunchPadTSupply,
+            preSaleTokenSupply,
+            PadDuration,
             msg.sender,
-            _percentagePresalePriceIncrease,
+            percentagePresalePriceIncrease,
             GenesisToken,
             rewardCondition,
-            GenesRouter,
             Instalments
         );
-        uint totalToken = _LaunchPadTSupply + _preSaleTokenSupply;
-        uint Id = regId;
-        LaunchPadRecord[Id].LaunchpadAddress = address(igniteLaunchPad);
-        IROUTER(GovernanceTokenFactory).CreateGovernanceToken(
-            address(igniteLaunchPad),
-            totalToken
-        );
-        TokenDetails[address(igniteLaunchPad)].name = _tokenName;
-        TokenDetails[address(igniteLaunchPad)].symbol = _tokenSymbol;
-        IUSDT(_padToken).transferFrom(
+        uint totalToken = LaunchPadTSupply + preSaleTokenSupply;
+        saveDetails(name, symbol, igniteLaunchPad, _regId);
+        IUSDT(padToken).transferFrom(
             msg.sender,
             address(igniteLaunchPad),
             totalToken
         );
-        if (_preSaleTokenSupply != 0) {
+        if (preSaleTokenSupply != 0) {
             allPresaleTokens.push(address(igniteLaunchPad));
         }
+
+        TokenToLaunchPadRecord[padToken] = address(igniteLaunchPad);
+        emit launchpadCreated(address(igniteLaunchPad), padToken, PadDuration);
+        return address(igniteLaunchPad);
+    }
+
+    function saveDetails(
+        string memory Name,
+        string memory Symbol,
+        address igniteLaunchPad,
+        uint _regId
+    ) internal {
+        TokenDetails[address(igniteLaunchPad)].name = Name;
+        TokenDetails[address(igniteLaunchPad)].symbol = Symbol;
         launchpads.push(address(igniteLaunchPad));
         validCildRecord[address(igniteLaunchPad)] = true;
-        address pad = _padToken;
-        TokenToLaunchPadRecord[pad] = address(igniteLaunchPad);
-        emit launchpadCreated(address(igniteLaunchPad), pad, _PadDuration);
-        return address(igniteLaunchPad);
+        LaunchPadRecord[_regId].LaunchpadAddress = address(igniteLaunchPad);
     }
 
     function setLaunchPadFee(uint _amount) public IsAdmin {
@@ -302,6 +330,27 @@ contract IgniteLaunchPadFactory {
 
     function EmergencyRefund(address _pad, uint _amount) external IsAdmin {
         ILAUNCHPAD(_pad).emergencyRefund(_amount);
+    }
+
+    function mintNft(address receiver) external validCaller {
+        NftCounter++;
+        INFT(GenesisNft).mint(receiver, NftCounter);
+    }
+
+    function saveLaunchpadGovernance(
+        address governance,
+        address _launchPad,
+        address _governanceToken
+    ) external {
+        ILAUNCHPAD(_launchPad).InitializeGovernance(
+            address(governance),
+            address(_governanceToken)
+        );
+        GovernanceDetails[_launchPad].Governor = address(governance);
+        GovernanceDetails[_launchPad].governanceToken = address(
+            _governanceToken
+        );
+        emit Factory_Called(msg.sender);
     }
 
     receive() external payable {}

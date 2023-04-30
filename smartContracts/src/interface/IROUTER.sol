@@ -9,8 +9,17 @@ interface IROUTER {
         address _governanceToken
     ) external;
 
-    function CreateGovernanceToken(
-        address _launchPad,
-        uint256 _totalSupply
-    ) external;
+    function newIgniteLaunchPad(
+        address ProjectAdmin,
+        uint256 launchPadFee,
+        address _padToken,
+        uint256 _LaunchPadTSupply,
+        uint256 _preSaleTokenSupply,
+        uint256 _PadDuration,
+        address admin,
+        uint256 _percentagePresalePriceIncrease,
+        address GenesisToken,
+        uint256 rewardCondition,
+        uint256 Instalments
+    ) external returns (address);
 }
