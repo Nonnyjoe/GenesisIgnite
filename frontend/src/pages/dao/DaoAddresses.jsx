@@ -19,7 +19,6 @@ import Header from "../../components/header";
 import styles from "../../styles/LaunchPads.module.css";
 import Image from "next/image";
 import igniteNft from "../../images/dodge.png";
-import Vote from "./votes";
 import Proposal from "./Proposals/proposal";
 import Link from "next/link";
 
@@ -321,7 +320,7 @@ const DaoAddresses = (props) => {
         {/* <div className={styles.flexpage}> */}
           <div className={styles.dynamiclaunch}>
             <div
-              className={`${styles.dynamicheader} flex-row-reverse flex gap-6 w-[100%] p-0 m-0 ${styles.uppercase}`}
+              className={`${styles.dynamicheader} font-pop flex-row-reverse flex gap-6 w-[100%] p-0 m-0 ${styles.uppercase}`}
             >
               <div className="w-[90%]">
                 <div className={`${styles.flex1} justify-center items-center`}>
@@ -348,12 +347,12 @@ const DaoAddresses = (props) => {
               </div>
             </div>
            
-          <div className={`${styles.proposals} mt-4`}>
-             <div className="mb-5">
+          <div className={`${styles.participate} mt-8 font-pop`}>
+             <div className="mb-8">
               <h1>List of available proposals, both active, complete and cancelled, Click to participate.</h1>
             </div>
 
-            <div className="mt-2">             
+            <div className="mt-5">             
               <div className="mb-5">
               <Proposal />
               </div>

@@ -8,8 +8,6 @@ import igniteNft from "../../images/dodge.png";
 import Image from "next/image";
 import LPABI from "../../utils/LPABI.json";
 
-// import PageLayout from "../../layout/PageLayoutt";
-// https://${cid}.ipfs.w3s.link/tokenLogo
 
 const Daocards = ({ contractAddress }) => {
   const [LaunchPadData, setLaunchPadData] = useState({});
@@ -34,15 +32,6 @@ const Daocards = ({ contractAddress }) => {
 
   console.log(contractAddress);
 
-  useContractRead({
-    address: contractAddress,
-    abi: LPABI,
-    functionName: "viewLaunchPadEndTime",
-    onSuccess(data) {
-      setLaunchPadEndTime(data.toString());
-      console.log(data);
-    },
-  });
 
   useContractRead({
     address: contractAddress,
@@ -65,39 +54,10 @@ const Daocards = ({ contractAddress }) => {
     },
   });
 
-  const epochTime = () => {
-    const now = new Date();
-    const epochTime = Math.floor(now.getTime() / 1000);
-    if (epochTime > LaunchPadEndTime) {
-      return false;
-    } else {
-      return true;
-    }
-  };
 
-  function getTimeAgo(epochTime) {
-    const now = new Date().getTime() / 1000;
-    const diffInSeconds = now - epochTime;
-    const diffInDays = Math.floor(diffInSeconds / (60 * 60 * 24));
-    const diffInHours = Math.floor(diffInSeconds / (60 * 60));
-    const date = new Date(epochTime * 1000);
-    const dateString = date.toDateString();
-
-    if (diffInDays > 0) {
-      return `${diffInDays} days ago`;
-    } else if (diffInHours > 0) {
-      return `${diffInHours} hrs ago`;
-    } else {
-      return `less than an hour ago`;
-    }
-  }
 
   const FP = contractAddress ? contractAddress.slice(0, 4) : `0X000`;
   const LP = contractAddress ? contractAddress.slice(-4) : `0000`;
-
-  const launchStatusClassName = epochTime()
-    ? styles.launchongoing
-    : styles.launchended;
 
   return (
     <div className="cursor-pointer">
@@ -132,10 +92,6 @@ const Daocards = ({ contractAddress }) => {
               <div
                 className={`${styles.symboladdress} mt-[0rem] flex flex-row-reverse`}
               >
-                {/* <p className={`text-sm ${launchStatusClassName}`}>
-                  {epochTime() ? `ONGOING` : `ENDED`}
-                </p> */}
-
                 <p>{`${FP}...${LP}`}</p>
               </div>
             </div>

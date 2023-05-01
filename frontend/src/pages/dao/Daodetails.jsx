@@ -35,9 +35,9 @@ export default function Daodetails() {
   });
 
   return (
-    <div className={`${styles.launchpad} flex flex-col`}>
+    <div className={`${styles.launchpad} flex flex-col font-pop`}>
       <div>
-        <h3 className={Daostyles.headers}>Available DAOs</h3>
+        <h3 className={Daostyles.headers}>AVAILABLE DAO's</h3>
         <p>Note: To Participate in a DAO, you must have Purchased the DAO's token, either from a Launchpad or presale session</p>
       </div>
       <div className={styles.lauchpadscards}>
@@ -45,7 +45,6 @@ export default function Daodetails() {
           return (
             <div key={i}>
               <Tilt glareEnable={true} glareBorderRadius={"2rem"}>
-                {/* // {e} */}
                 <Daocards key={i} contractAddress={e} />
               </Tilt>
             </div>
