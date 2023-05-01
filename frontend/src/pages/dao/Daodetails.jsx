@@ -38,7 +38,7 @@ export default function Daodetails() {
     <div className={`${styles.launchpad} flex flex-col`}>
       <div>
         <h3 className={Daostyles.headers}>Available DAOs</h3>
-        <p>Note: To join a DAO, you must have the DAO Token</p>
+        <p>Note: To Participate in a DAO, you must have Purchased the DAO's token, either from a Launchpad or presale session</p>
       </div>
       <div className={styles.lauchpadscards}>
         {LaunchPads?.map((e, i) => {

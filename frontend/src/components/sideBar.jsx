@@ -41,6 +41,14 @@ const Sidebar = (props) => {
               </Link>
             </div>
           </li>
+           <li className={`${styles.item} ${check == 6 ? styles.active : ""}`}>
+            <div className="flex flex-row gap-6">
+              <div className={`${styles.dao} w-7 h-7 mt-[.5rem]`}></div>
+              <Link href="/dao">
+                <a>Governance</a>
+              </Link>
+            </div>
+          </li>
           <li className={`${styles.item} ${check == 5 ? styles.active : ""}`}>
             <div className="flex flex-row gap-6">
               <div className={`${styles.p2p} w-7 h-7 mt-[.5rem]`}></div>
@@ -49,14 +57,7 @@ const Sidebar = (props) => {
               </Link>
             </div>
           </li>
-          <li className={`${styles.item} ${check == 6 ? styles.active : ""}`}>
-            <div className="flex flex-row gap-6">
-              <div className={`${styles.dao} w-7 h-7 mt-[.5rem]`}></div>
-              <Link href="/dao">
-                <a>DAO</a>
-              </Link>
-            </div>
-          </li>
+         
         </ul>
       </nav>
     </div>

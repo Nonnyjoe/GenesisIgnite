@@ -20,6 +20,8 @@ import styles from "../../styles/LaunchPads.module.css";
 import Image from "next/image";
 import igniteNft from "../../images/dodge.png";
 import Vote from "./votes";
+import Proposal from "./Proposals/proposal";
+import Link from "next/link";
 
 const DaoAddresses = (props) => {
   const { address } = useAccount();
@@ -316,15 +318,15 @@ const DaoAddresses = (props) => {
     <div className={styles.LaunchpadWhite1}>
       <div className={styles.LaunchpadSecondWhite}>
         <div className={styles.Banner}></div>
-        <div className={styles.flexpage}>
+        {/* <div className={styles.flexpage}> */}
           <div className={styles.dynamiclaunch}>
             <div
               className={`${styles.dynamicheader} flex-row-reverse flex gap-6 w-[100%] p-0 m-0 ${styles.uppercase}`}
             >
-              <div className="w-[75%]">
+              <div className="w-[90%]">
                 <div className={`${styles.flex1} justify-center items-center`}>
                   <p className={`${styles.launchpadname} font-pop `}>
-                    {LaunchPadData.name} DAO
+                    {LaunchPadData.name} DAO PROPOSALS
                   </p>
                 </div>
               </div>
@@ -345,79 +347,25 @@ const DaoAddresses = (props) => {
                 )}
               </div>
             </div>
-
-            <div className="flex justify-center items-center my-8">
-              <h1 className="text-2xl">PROPOSALS</h1>
+           
+          <div className={`${styles.proposals} mt-4`}>
+             <div className="mb-5">
+              <h1>List of available proposals, both active, complete and cancelled, Click to participate.</h1>
             </div>
 
-            <Vote/>
-            {/* <div className="flex flex-col gap-6 h-[100%]">
-              <div
-                className={`${styles.generaldetails} font-pop text-center justify-center align-middle flex mt-6`}
-              >
-                <div>
-                  <h5 class="mt-6 font-pop">
-                    CONTRIBUTORS:{" "}
-                    <span className={styles.launcpdetailed}>
-                      {noOfLaunchPadContributors}
-                    </span>{" "}
-                  </h5>
-                </div>
-                <div>
-                  <h5 class="mt-4 font-pop">
-                    Total Supply:{" "}
-                    <span className={styles.launcpdetailed}>
-                      {Math.floor(LaunchPadTotalSupply / 10 ** 18)}{" "}
-                      {LaunchPadData.symbol}{" "}
-                    </span>
-                  </h5>
-                </div>
-                <div>
-                  <h5 class="mt-4 font-pop">
-                    GIT RAISED :{" "}
-                    <span className={styles.launcpdetailed}>
-                      {Math.floor(genesRaisedFromLaunchPad / 10 ** 18)} GIT
-                    </span>
-                  </h5>
-                </div>
+            <div className="mt-2">             
+              <div className="mb-5">
+              <Proposal />
               </div>
 
-              <div className={`${styles.moreDetails}`}>
-                <div className="mt-10">
-                  <h5 class="mt-4 font-pop">
-                    GIT depositd by user:{" "}
-                    <p>{genesDepositedByUser / 10 ** 18} GIT</p>
-                  </h5>
-                </div>
-                <div className="">
-                  <div className="">
-                    <h5 class="mt-4 font-pop">Token presale budget: </h5>
-                    <p>
-                      {Math.floor(presaleTokenBalance / 10 ** 18)}{" "}
-                      {LaunchPadData.symbol}
-                    </p>
-                  </div>
-
-                  <div className="">
-                    <h5 class="mt-4 font-pop">
-                      Price increase after Launchpad:{" "}
-                    </h5>
-                    <p>{`${priceIncrease} %`}</p>
-                  </div>
-                </div>
-                <div className="">
-                  <h5 class="mt-4 font-pop">Launchpad contract address: </h5>
-                  <p>{contractAddress}</p>
-                </div>
+              <div>
+              <Proposal />
               </div>
-            </div> */}
+            </div>
+
+          </div>        
           </div>
-        </div>
-        {/* <div className="flex justify-center items-center">
-          <button className={`${styles.launchpadbtn2} font-pop text-sm`}>
-            Check {LaunchPadData.name} DAO proposals
-          </button>
-        </div> */}
+
       </div>
     </div>
   );

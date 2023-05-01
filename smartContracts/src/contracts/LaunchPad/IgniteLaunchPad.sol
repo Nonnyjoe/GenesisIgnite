@@ -308,6 +308,7 @@ contract IgniteLaunchPad {
             _description
         );
         EmergencyproposalIds.push(proposalID);
+        proposalIds.push(proposalID);
         ProposalData[proposalID].Description = _description;
         ProposalData[proposalID].RequestAmount = _amount;
         ProposalData[proposalID].RequestTime = block.timestamp;

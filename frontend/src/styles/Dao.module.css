@@ -43,3 +43,16 @@
 .poll ul.results li {
   border-color: #999;
 } */
+.proposal{
+    padding: .5rem 1.5rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* backdrop-filter: blur(5px) !important; */
+    box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+    background-size: cover;
+    border-radius: 1rem;
+    transition: all 0.3s ease-out;
+}
+
