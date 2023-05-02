@@ -350,7 +350,7 @@ const DaoAddresses = (props) => {
               <h1 className="text-2xl">PROPOSALS</h1>
             </div>
 
-            <Vote/>
+            {/* <Vote/> */}
             {/* <div className="flex flex-col gap-6 h-[100%]">
               <div
                 className={`${styles.generaldetails} font-pop text-center justify-center align-middle flex mt-6`}
