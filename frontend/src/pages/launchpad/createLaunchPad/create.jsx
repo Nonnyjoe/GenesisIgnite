@@ -7,8 +7,8 @@ import { create, Web3Storage } from 'web3.storage'
 import Image from "next/image";
 import click from "../../../images/click.png"
 import Link from "next/link";
-import { LaunchPadFacoryAddr } from "../../../utils/addresses";
-import LPFactory from "../../../utils/LPFactory.json";
+import {GENESISCONTROLLER} from "../../../utils/addresses";
+import controllerABI from "../../../utils/controllerABI.json";
 import tokenABI from "../../../utils/token_ABI.json";
 import { ethers } from "ethers";
 
@@ -63,7 +63,7 @@ console.log(JSON.stringify(convert(7580, 'ether').wei))
     address: formData?.tokenAddress ? ethers.utils.getAddress(formData.tokenAddress) : undefined,
     abi: tokenABI,
     functionName: "approve",
-    args: [LaunchPadFacoryAddr(), ethers.utils.parseEther(formData.LPTotalSupply ? String(formData.LPTotalSupply) : "0")],
+    args: [GENESISCONTROLLER(), ethers.utils.parseEther(formData.LPTotalSupply ? String(formData.LPTotalSupply) : "0")],
   });
 
   const { data: alaweeWaitData, isLoading: loadingAlaweeWaitData } =
@@ -89,8 +89,8 @@ console.log(JSON.stringify(convert(7580, 'ether').wei))
     isLoading: createLaunchPadLoading,
   } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: LaunchPadFacoryAddr(),
-    abi: LPFactory,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "createLaunchPad",
     args: [formData.RegId, formData.tokenAddress, formData.projectName, formData.Symbol, ethers.utils.parseEther(formData.LPTotalSupply ? String(formData.LPTotalSupply) : "0"), ethers.utils.parseEther(formData.PSTotalSupply ? String(formData.PSTotalSupply) : "0"), formData.LPDuration, formData.percentageIncrease],
   });

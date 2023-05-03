@@ -18,7 +18,8 @@ interface IGENESISCONTROLLER {
         address PadToken,
         uint regId,
         uint _startTime,
-        uint _LaunchpadTotalSupply
+        uint _LaunchpadTotalSupply,
+        uint _Instalments
     ) external;
 
     function getLaunchPadAddress(

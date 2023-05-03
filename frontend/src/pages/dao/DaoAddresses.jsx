@@ -7,12 +7,14 @@ import {
   useWaitForTransaction,
   wagmi,
 } from "wagmi";
+import plus from "../../images/plus.png";
+import styles2 from "../../styles/launchpad.module.css"
 import { useContext, useState, useEffect } from "react";
-import LPFactoryABI from "../../utils/LPFactory.json";
+import {GENESISCONTROLLER} from "../../utils/addresses";
+import controllerABI from "../../utils/controllerABI.json";
 import { useRouter } from "next/router";
 import LPABI from "../../utils/LPABI.json";
 import tokenABI from "../../utils/token_ABI.json";
-import { LaunchPadFacoryAddr } from "../../utils/addresses";
 import { GeneAddress } from "../../utils/addresses";
 import { ethers } from "ethers";
 import Header from "../../components/header";
@@ -25,34 +27,18 @@ import Link from "next/link";
 const DaoAddresses = (props) => {
   const { address } = useAccount();
   const { contractAddress } = props;
-  const DropdownOptions2 = [
-    {
-      id: 0,
-      name: "GENE",
-      address: "0x8717F0F7D4b06a52Aa2484b33DA1b6ea13519a6E",
-    },
-  ];
-  const LaunchPadFactory = LaunchPadFacoryAddr();
   const geneAddress = GeneAddress();
   const [LaunchPadData, setLaunchPadData] = useState({});
-  const [option, setOption] = useState("");
   const [Amount, setAmount] = useState(0);
-  const [noOfLaunchPadContributors, setNoOfLaunchPadContributors] =
-    useState(null);
-  const [genesRaisedFromLaunchPad, setGenesRaisedFromLaunchPad] =
-    useState(null);
-  const [presaleTokenBalance, setPresaleTokenBalance] = useState(null);
-  const [LaunchPadTotalSupply, setLaunchPadTotalSupply] = useState(null);
+
   const [LaunchPadDeadline, setLaunchPadDeadline] = useState(null);
   const [activateButton, setActivateButton] = useState(true);
-  const [LPEndDate, setLPEndDate] = useState(null);
-  const [genesDepositedByUser, setGenesDepositedByUser] = useState(null);
   const [userAllowance, setUserAllowance] = useState();
-  const [UserBalance, setUserBalance] = useState();
   const [hovered, setHovered] = useState(false);
   const [cid, setCid] = useState();
   const [LaunchPadToken, setLaunchPadToken] = useState();
-  const [priceIncrease, setPriceIncrease] = useState();
+  const [ProposalIds, setProposalIds] = useState([]);
+
 
   /// FETCH THE CONTRACT TOKEN NAME AND SYMBOL
   const {
@@ -60,8 +46,8 @@ const DaoAddresses = (props) => {
     isError,
     isLoading,
   } = useContractRead({
-    address: LaunchPadFactory,
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "displayTokenDetails",
     args: [contractAddress],
     onSuccess(data) {
@@ -69,15 +55,7 @@ const DaoAddresses = (props) => {
     },
   });
 
-  /// SET THE PRICE INCREASE:
-  useContractRead({
-    address: contractAddress,
-    abi: LPABI,
-    functionName: "PercentagePriceIncrease",
-    onSuccess(data) {
-      setPriceIncrease(data);
-    },
-  });
+
 
   useContractRead({
     address: contractAddress,
@@ -85,158 +63,31 @@ const DaoAddresses = (props) => {
     functionName: "viewLaunchPadToken",
     onSuccess(data) {
       setLaunchPadToken(data.toString());
-      console.log(data);
+    },
+  });
+
+    useContractRead({
+    address: contractAddress,
+    abi: LPABI,
+    functionName: "getProposalIds",
+    onSuccess(data) {
+      setProposalIds(data);
+      console.log(data + ' PROPOSAL IDS');
     },
   });
 
   useContractRead({
-    address: LaunchPadFacoryAddr(),
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "returnCid",
     args: [LaunchPadToken ?? "0x00"],
     onSuccess(data) {
       setCid(data.toString());
-      console.log(data);
     },
   });
 
-  //// CHECK THE ALLOWANCE THE USER HAS GRANTED THE CONTRACT
-  useContractRead({
-    address: geneAddress,
-    abi: tokenABI,
-    functionName: "allowance",
-    args: [address, contractAddress],
-    watch: true,
-    onSuccess(data) {
-      setUserAllowance(Number(data));
-    },
-  });
 
-  // GRANT ALLOWANCE
-  const {
-    data: alawee,
-    write: getAlawee,
-    isLoading: alaweeLoading,
-  } = useContractWrite({
-    mode: "recklesslyUnprepared",
-    address: geneAddress,
-    abi: tokenABI,
-    functionName: "approve",
-    args: [contractAddress, ethers.utils.parseEther(String(Amount) ?? "0")],
-  });
 
-  const { data: alaweeWaitData, isLoading: loadingAlaweeWaitData } =
-    useWaitForTransaction({
-      hash: alawee?.hash,
-      onSuccess(result) {
-        handleSubmit2b();
-      },
-      onError(error) {
-        console.log("Error: ", error);
-      },
-    });
-
-  /// MAIN INTEGRATION TO PARTICIPATE IN LAUNCHPAD
-  const {
-    data: participate,
-    write: getParticipate,
-    isLoading: participateLoading,
-  } = useContractWrite({
-    mode: "recklesslyUnprepared",
-    address: contractAddress,
-    abi: LPABI,
-    functionName: "participateInLaunchPad",
-    args: [ethers.utils.parseEther(String(Amount) ?? "0")],
-  });
-
-  const { data: participateWaitData, isLoading: loadingParticipateWaitData } =
-    useWaitForTransaction({
-      hash: participate?.hash,
-      onSuccess(result) {},
-      onError(error) {
-        console.log("Error: ", error);
-      },
-    });
-
-  /// WITHDRAW LAUNCHPAD REWARD
-  const {
-    data: withdraw,
-    write: getWithdraw,
-    isLoading: withdrawalLoading,
-  } = useContractWrite({
-    mode: "recklesslyUnprepared",
-    address: contractAddress,
-    abi: LPABI,
-    functionName: "WithdrawLaunchPadToken",
-  });
-
-  const { data: withdrawWaitData, isLoading: loadingWithdrawWaitData } =
-    useWaitForTransaction({
-      hash: withdraw?.hash,
-      onSuccess(result) {},
-      onError(error) {
-        console.log("Error: ", error);
-      },
-    });
-
-  // function to read contract details from blockchain
-  const {
-    data: LPData,
-    isError: ReadsError,
-    isLoading: ReadsLoading,
-  } = useContractReads({
-    contracts: [
-      {
-        address: contractAddress,
-        abi: LPABI,
-        functionName: "displayNoOfLaunchPadContributors",
-      },
-      {
-        address: contractAddress,
-        abi: LPABI,
-        functionName: "viewGenesRaisedFromLaunchPad",
-      },
-      {
-        address: contractAddress,
-        abi: LPABI,
-        functionName: "viewPresaleTokenBalance",
-      },
-      {
-        address: contractAddress,
-        abi: LPABI,
-        functionName: "getGenesDepositedByUser",
-        args: [address],
-      },
-      {
-        address: geneAddress,
-        abi: tokenABI,
-        functionName: "balanceOf",
-        args: [address],
-      },
-      {
-        address: contractAddress,
-        abi: LPABI,
-        functionName: "viewLaunchPadTSupply",
-      },
-      {
-        address: contractAddress,
-        abi: LPABI,
-        functionName: "viewLaunchPadEndTime",
-      },
-    ],
-    watch: true,
-    onSuccess: (data) => {
-      setNoOfLaunchPadContributors(data[0]?.toString());
-      setGenesRaisedFromLaunchPad(data[1]?.toString());
-      setPresaleTokenBalance(data[2]?.toString());
-      setGenesDepositedByUser(data[3]?.toString());
-      setUserBalance(data[4]?.toString());
-      setLaunchPadTotalSupply(data[5]?.toString());
-      setLaunchPadDeadline(data[6]?.toString());
-      setLPEndDate(new Date(data[6] * 1000));
-      Timestamp(data[6]);
-    },
-  });
 
   const Timestamp = (data) => {
     const now = new Date();
@@ -347,24 +198,33 @@ const DaoAddresses = (props) => {
               </div>
             </div>
            
-          <div className={`${styles.participate} mt-8 font-pop`}>
-             <div className="mb-8">
+          <div className={`${styles.participate} mt-10 font-pop`}>
+
+          <div className={`${styles2.topBar} flex flex-row `}>
+            <Link href={`/dao/createProposal/${contractAddress}`}>
+          <div className={`flex flex-row w-[14rem] h-[3.1rem] px-[rem] justify-center ml-auto gap-0 ${styles2.createBtn}`}>
+            <div className="m-0 w-15 h-15">
+              <Image src={plus} />
+            </div>
+            <button className={`h-[3rem] w-[12rem] font-pop text-sm`}> CREATE PROPOSAL </button>
+          </div>
+            </Link>
+          </div>            
+             <div className="mb-8 pl-4">
               <h1>List of available proposals, both active, complete and cancelled, Click to participate.</h1>
             </div>
 
-            <div className="mt-5">             
-              <div className="mb-5">
-              <Proposal />
-              </div>
-
-              <div>
-              <Proposal />
-              </div>
+            <div className="mt-5">              
+              {ProposalIds?.map((e, i) => {
+                return (
+                  <div key={i} className="mb-5">
+                      <Proposal key={i} ProposalId={e} index={i} contractAddress={contractAddress}/>
+                  </div>
+                );
+              })}
             </div>
-
           </div>        
           </div>
-
       </div>
     </div>
   );

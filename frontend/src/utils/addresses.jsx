@@ -2,13 +2,13 @@ export const LaunchPadFacoryAddr = () => {
     return("0x063F23aAfaA0B39a1Cf42827f77da0CA04840523");
 }
 export const GenesisigniteTokenAddr = () => {
-    return ("0x8760DD5CCDe41e812E62D6df4c3e06f8233931df");
+    return ("0xCF22316d0C63b3616a027620A703f362287Ca106");
 }
 export const GeneAddress = () => {
-    return("0x8760DD5CCDe41e812E62D6df4c3e06f8233931df");
+    return("0xCF22316d0C63b3616a027620A703f362287Ca106");
 }
 export const swapPadAddr = () => {
-    return("0xE1c977876670e419883497067D005bd3AB54cf17");
+    return("0x329C6E14B812E1735eA921771A2eF27B2e1c3D71");
 }
 
 export const DaiAddress = () => {
@@ -40,3 +40,6 @@ export const GITNFT = () =>{
     return("0x55Caa700bbc4D5321be2f89aC0b48938367D6b3e");
 }
 
+export const GENESISCONTROLLER = () =>{
+    return("0x6E87d1935C377B6A82Abc33693ED1edCf7F2F235");
+}

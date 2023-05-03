@@ -3,15 +3,7 @@ import Sidebar from "../../components/sideBar";
 import styles from "../../styles/dashboard2.module.css"
 import { useRouter } from "next/router";
 import LaunchPadDetails from "./LaunchPadDetails"
-import {
-  erc20ABI,
-  useContractRead,
-  useContractReads,
-  useAccount,
-  useContractWrite,
-  useWaitForTransaction,
-  wagmi,
-} from "wagmi";
+
 
 
 const SelectedLaunchpad = () => {

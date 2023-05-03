@@ -19,6 +19,11 @@ import Header from "../../components/header";
 import styles from "../../styles/LaunchPads.module.css";
 import Image from "next/image";
 import igniteNft from "../../images/dodge.png";
+import {GENESISCONTROLLER} from "../../utils/addresses";
+import controllerABI from "../../utils/controllerABI.json";
+import dao from "../../images/governance.png";
+import Link from "next/link";
+
 
 const LaunchPadDetails = (props) => {
   const { address } = useAccount();
@@ -30,7 +35,7 @@ const LaunchPadDetails = (props) => {
       address: "0x8717F0F7D4b06a52Aa2484b33DA1b6ea13519a6E",
     },
   ];
-  const LaunchPadFactory = LaunchPadFacoryAddr();
+
   const geneAddress = GeneAddress();
   const [LaunchPadData, setLaunchPadData] = useState({});
   const [option, setOption] = useState("");
@@ -51,6 +56,7 @@ const LaunchPadDetails = (props) => {
   const [cid, setCid] = useState();
   const [LaunchPadToken, setLaunchPadToken] = useState();
   const [priceIncrease, setPriceIncrease] = useState();
+  const [presaleTBalance, setpresaleTBalance] = useState();
 
   /// FETCH THE CONTRACT TOKEN NAME AND SYMBOL
   const {
@@ -58,8 +64,8 @@ const LaunchPadDetails = (props) => {
     isError,
     isLoading,
   } = useContractRead({
-    address: LaunchPadFactory,
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "displayTokenDetails",
     args: [contractAddress],
     onSuccess(data) {
@@ -88,8 +94,8 @@ const LaunchPadDetails = (props) => {
   });
 
   useContractRead({
-    address: LaunchPadFacoryAddr(),
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "returnCid",
     args: [LaunchPadToken ?? "0x00"],
     onSuccess(data) {
@@ -221,6 +227,12 @@ const LaunchPadDetails = (props) => {
         abi: LPABI,
         functionName: "viewLaunchPadEndTime",
       },
+      {
+        address: LaunchPadToken,
+        abi: tokenABI,
+        functionName: "balanceOf",
+        args: [address],
+      },
     ],
     watch: true,
     onSuccess: (data) => {
@@ -233,6 +245,7 @@ const LaunchPadDetails = (props) => {
       setLaunchPadDeadline(data[6]?.toString());
       setLPEndDate(new Date(data[6] * 1000));
       Timestamp(data[6]);
+      setpresaleTBalance(data[7])
     },
   });
 
@@ -313,9 +326,19 @@ const LaunchPadDetails = (props) => {
 
   return (
     <div className={styles.LaunchpadWhite1}>
+      <div className="flex flex-row font-pop mb-4 ">
+         <Link href={`/dao/${contractAddress}`}>
+          <button className={`${styles.launchpadbtn2} font-pop text-sm ml-auto flex flex-row gap-3`}>
+            <div className="m-0 w-8 h-8">
+              <Image src={dao} />
+            </div>
+            Check {LaunchPadData.name} DAO proposals
+          </button>
+          </Link>
+        </div>
       <div className={styles.LaunchpadSecondWhite}>
         <div className={styles.Banner}></div>
-        <div className={styles.flexpage}>
+        <div className={`${styles.flexpage} gap-5`}>
           <div className={styles.dynamiclaunch}>
             <div
               className={`${styles.dynamicheader} flex-row-reverse flex gap-6 w-[100%] p-0 m-0 ${styles.uppercase}`}
@@ -359,7 +382,7 @@ const LaunchPadDetails = (props) => {
                 <div>
                   <h5 class="mt-6 font-pop">
                     CONTRIBUTORS:{" "}
-                    <span className={styles.launcpdetailed}>
+                    <span className={styles.launcpdetailed}><br/>
                       {noOfLaunchPadContributors}
                     </span>{" "}
                   </h5>
@@ -367,7 +390,7 @@ const LaunchPadDetails = (props) => {
                 <div>
                   <h5 class="mt-4 font-pop">
                     Total Supply:{" "}
-                    <span className={styles.launcpdetailed}>
+                    <span className={styles.launcpdetailed}><br/>
                       {Math.floor(LaunchPadTotalSupply / 10 ** 18)}{" "}
                       {LaunchPadData.symbol}{" "}
                     </span>
@@ -376,7 +399,7 @@ const LaunchPadDetails = (props) => {
                 <div>
                   <h5 class="mt-4 font-pop">
                     GIT RAISED :{" "}
-                    <span className={styles.launcpdetailed}>
+                    <span className={styles.launcpdetailed}><br/>
                       {Math.floor(genesRaisedFromLaunchPad / 10 ** 18)} GIT
                     </span>
                   </h5>
@@ -384,15 +407,22 @@ const LaunchPadDetails = (props) => {
               </div>
 
               <div className={`${styles.moreDetails}`}>
-                <div className="mt-10">
-                  <h5 class="mt-4 font-pop">
+                <div className="mt-5">
+                  <h5 class="font-pop">
                     GIT depositd by user:{" "}
                     <p>{genesDepositedByUser / 10 ** 18} GIT</p>
                   </h5>
                 </div>
                 <div className="">
+                    <div className="">
+                    <h5 class="mt-2 font-pop">{`Your ${LaunchPadData.symbol} balance`}</h5>
+                    <p>
+                      {Math.floor(presaleTBalance / 10 ** 18)}{" "}
+                      {LaunchPadData.symbol}
+                    </p>
+                  </div>
                   <div className="">
-                    <h5 class="mt-4 font-pop">Token presale budget: </h5>
+                    <h5 class="mt-2 font-pop">Token presale budget: </h5>
                     <p>
                       {Math.floor(presaleTokenBalance / 10 ** 18)}{" "}
                       {LaunchPadData.symbol}
@@ -400,14 +430,14 @@ const LaunchPadDetails = (props) => {
                   </div>
 
                   <div className="">
-                    <h5 class="mt-4 font-pop">
+                    <h5 class="mt-2 font-pop">
                       Price increase after Launchpad:{" "}
                     </h5>
                     <p>{`${priceIncrease} %`}</p>
                   </div>
                 </div>
                 <div className="">
-                  <h5 class="mt-4 font-pop">Launchpad contract address: </h5>
+                  <h5 class="mt-2 font-pop">Launchpad contract address: </h5>
                   <p>{contractAddress}</p>
                 </div>
               </div>
@@ -431,7 +461,7 @@ const LaunchPadDetails = (props) => {
 
                 <div className={`${styles.pl2} mt-9 font-pop w-[100%]`}>
                   <p className="mb-7">
-                    Your GIT BALANCE: {UserBalance / 10 ** 18} GIT
+                    Your GIT BALANCE: {Math.floor(UserBalance / 10 ** 18)} GIT
                   </p>
 
                   <input
@@ -479,6 +509,7 @@ const LaunchPadDetails = (props) => {
                       >
                         {epochTime2() > LaunchPadDeadline
                           ? "Launchpad Ended"
+                          :loadingAlaweeWaitData || alaweeLoading ? "APPROVING....."
                           : userAllowance < Amount * 10 ** 18
                           ? "APPROVE"
                           : hovered
@@ -496,11 +527,6 @@ const LaunchPadDetails = (props) => {
               </div>
             </form>
           </div>
-        </div>
-        <div className="flex justify-center items-center">
-          <button className={`${styles.launchpadbtn2} font-pop text-sm`}>
-            Check {LaunchPadData.name} DAO proposals
-          </button>
         </div>
       </div>
     </div>

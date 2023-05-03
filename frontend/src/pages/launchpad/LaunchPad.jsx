@@ -1,5 +1,6 @@
 import styles from "../../styles/launchpad.module.css"
-import {LaunchPadFacoryAddr} from "../../utils/addresses";
+import {GENESISCONTROLLER} from "../../utils/addresses";
+import controllerABI from "../../utils/controllerABI.json";
 import LPFactoryABI from "../../utils/LPFactory.json";
 import { useAccount, useContractRead, Suspense, useContractReads, usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
@@ -12,15 +13,15 @@ import Tilt from 'react-parallax-tilt';
 export default function Launchpad(){
 
 const { address } = useAccount();
-const LaunchPadFactory = LaunchPadFacoryAddr();
+const GenesisController = GENESISCONTROLLER();
 const [LaunchPads, setLaunchPads] =  useState([]);
 
 
 
 // GET A LIST OF ALL THE LAUNCHPADS
  useContractRead({
-    address: LaunchPadFactory,
-    abi: LPFactoryABI,
+    address: GenesisController,
+    abi: controllerABI,
     functionName: 'getLaunchPads',
     onSuccess(data){
     setLaunchPads(data);

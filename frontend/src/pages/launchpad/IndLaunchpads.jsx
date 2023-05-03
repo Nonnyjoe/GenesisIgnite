@@ -1,6 +1,8 @@
 import { erc20ABI, useContractRead } from "wagmi";
 import { useContext, useState } from "react";
 import LPFactoryABI from "../../utils/LPFactory.json";
+import {GENESISCONTROLLER} from "../../utils/addresses";
+import controllerABI from "../../utils/controllerABI.json";
 import { LaunchPadFacoryAddr } from "../../utils/addresses";
 import Link from "next/link";
 import styles from "../../styles/launchpad.module.css"
@@ -23,8 +25,8 @@ const IndLaunchpads = ({ contractAddress }) => {
     isError,
     isLoading,
   } = useContractRead({
-    address: LaunchPadFacoryAddr(),
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "displayTokenDetails",
     args: [contractAddress],
     onSuccess(data) {
@@ -56,8 +58,8 @@ const IndLaunchpads = ({ contractAddress }) => {
   });
 
     useContractRead({
-    address: LaunchPadFacoryAddr(),
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "returnCid",
     args:[LaunchPadToken??"0x00"],
     onSuccess(data) {

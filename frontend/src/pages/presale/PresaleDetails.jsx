@@ -8,11 +8,11 @@ import {
   wagmi,
 } from "wagmi";
 import { useContext, useState, useEffect } from "react";
-import LPFactoryABI from "../../utils/LPFactory.json";
+import {GENESISCONTROLLER} from "../../utils/addresses";
+import controllerABI from "../../utils/controllerABI.json";
 import { useRouter } from "next/router";
 import LPABI from "../../utils/LPABI.json";
 import tokenABI from "../../utils/token_ABI.json";
-import { LaunchPadFacoryAddr } from "../../utils/addresses";
 import { GeneAddress } from "../../utils/addresses";
 import { ethers } from "ethers";
 import Header from "../../components/header";
@@ -76,8 +76,8 @@ const PresaleDetails = (props) => {
   });
 
     useContractRead({
-    address: LaunchPadFacoryAddr(),
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "returnCid",
     args:[LaunchPadToken??"0x00"],
     onSuccess(data) {
@@ -151,22 +151,6 @@ const PresaleDetails = (props) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    const LaunchPadFactory = LaunchPadFacoryAddr();
     const [PresalePadData, setPresaleData] = useState({});
     const [Amount, setAmount] = useState(0);
     const [userAllowance, setUserAllowance] = useState( );
@@ -182,8 +166,8 @@ const PresaleDetails = (props) => {
 
   /// FETCH THE CONTRACT TOKEN NAME AND SYMBOL
     const { data:BuyersData, isError, isLoading } = useContractRead({
-    address: LaunchPadFactory,
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: 'displayTokenDetails',
     args:[contractAddress],
     onSuccess(data){
@@ -329,7 +313,7 @@ const PresaleDetails = (props) => {
     <div className={styles.LaunchpadWhite1}>
     <div className={styles.LaunchpadSecondWhite}>
       <div className={styles.Banner}></div>
-      <div className={styles.flexpage}>
+      <div className={`${styles.flexpage} gap-6`}>
         <div className={styles.dynamiclaunch}>
           <div className={`${styles.dynamicheader} flex-row-reverse flex gap-6 w-[100%] p-0 m-0 ${styles.uppercase}`}>
             <div className="w-[75%]">
@@ -437,7 +421,7 @@ const PresaleDetails = (props) => {
               <div className={`${styles.pl2} mt-9 font-pop w-[100%]`}>
               
                 <p className="mb-7">
-                  Your GIT BALANCE: {UserBalance / 10 ** 18} GIT
+                  Your GIT BALANCE: {Math.floor(UserBalance / 10 ** 18)} GIT
                 </p>
                 
                 <input
@@ -458,7 +442,7 @@ const PresaleDetails = (props) => {
                   className={styles.launchpadbtn}
                   disabled={ alaweeLoading || loadingAlaweeWaitData || participateLoading || loadingParticipateWaitData}
                 >
-             { (userAllowance < (Amount * 10**18)) ? "APPROVE"  : alaweeLoading || loadingAlaweeWaitData || participateLoading || loadingParticipateWaitData ? "LOADING...." : "PARTICIPATE"}
+             {loadingAlaweeWaitData || alaweeLoading ? "APPROVING....." : (userAllowance < (Amount * 10**18)) ? "APPROVE"  : alaweeLoading || loadingAlaweeWaitData || participateLoading || loadingParticipateWaitData ? "LOADING...." : "PARTICIPATE"}
                 </button>
               </div>
             </div>

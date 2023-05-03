@@ -8,7 +8,6 @@
       },
       { "internalType": "uint256", "name": "_launchPadFee", "type": "uint256" },
       { "internalType": "address", "name": "_padToken", "type": "address" },
-      { "internalType": "address", "name": "_feeReceiver", "type": "address" },
       {
         "internalType": "uint256",
         "name": "_LaunchPadTSupply",
@@ -32,7 +31,8 @@
         "name": "_rewardCondition",
         "type": "uint256"
       },
-      { "internalType": "address", "name": "_GeneRouter", "type": "address" }
+      { "internalType": "uint256", "name": "_instalments", "type": "uint256" },
+      { "internalType": "address", "name": "_feeReceiver", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -40,6 +40,8 @@
   { "inputs": [], "name": "Already_Claimed_Token", "type": "error" },
   { "inputs": [], "name": "Amount_Exceeds_Balance", "type": "error" },
   { "inputs": [], "name": "Didnt_Participate_in_Launchpad", "type": "error" },
+  { "inputs": [], "name": "Exceededs_Instalment_Limit", "type": "error" },
+  { "inputs": [], "name": "Exceeds_Presale_Balance", "type": "error" },
   { "inputs": [], "name": "Insufficient_Presale_Liquidity", "type": "error" },
   { "inputs": [], "name": "LaunchPad_Still_In_Progress", "type": "error" },
   { "inputs": [], "name": "No_Presale_Liquidity", "type": "error" },
@@ -98,6 +100,25 @@
       }
     ],
     "name": "GenesWithdrawnByAdmin",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "Governor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "GovernanceToken",
+        "type": "address"
+      }
+    ],
+    "name": "GovernanceInitialized",
     "type": "event"
   },
   {
@@ -224,6 +245,29 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "uint256", "name": "proposalId", "type": "uint256" }
+    ],
+    "name": "Execute",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_governor", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_governanceToken",
+        "type": "address"
+      }
+    ],
+    "name": "InitializeGovernance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "PercentagePriceIncrease",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
@@ -234,7 +278,16 @@
     "inputs": [
       { "internalType": "uint256", "name": "_amount", "type": "uint256" }
     ],
-    "name": "WithdrawGenes",
+    "name": "TransferEmergencyFund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "TransferToAdmin",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -317,6 +370,15 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "getProposalIds",
+    "outputs": [
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "address", "name": "_user", "type": "address" }
     ],
@@ -351,9 +413,41 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
+      { "internalType": "string", "name": "_description", "type": "string" }
+    ],
+    "name": "requestEmmergencyWithdrawal",
+    "outputs": [
+      { "internalType": "uint256", "name": "proposalID", "type": "uint256" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_description", "type": "string" }
+    ],
+    "name": "requestInstalmentWithdrawal",
+    "outputs": [
+      { "internalType": "uint256", "name": "proposalID", "type": "uint256" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "returnPadModerator",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewEmergencyProposalIds",
+    "outputs": [
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -371,6 +465,44 @@
     "name": "viewGenesRaisedFromPresale",
     "outputs": [
       { "internalType": "uint256", "name": "Genes", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewGovernanceAddresses",
+    "outputs": [
+      { "internalType": "address", "name": "_governor", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_governanceToken",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "viewGovernanceData",
+    "outputs": [
+      { "internalType": "uint256", "name": "Instalments_", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "WithdrawnInstalments_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "TotalEmergencyWithdrawals_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "GovernanceBallance_",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -401,6 +533,35 @@
     "name": "viewPresaleTokenBalance",
     "outputs": [
       { "internalType": "uint256", "name": "tokenBalance", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_ProposalId", "type": "uint256" }
+    ],
+    "name": "viewProposalData",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "RequestTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "RequestAmount",
+            "type": "uint256"
+          },
+          { "internalType": "string", "name": "Description", "type": "string" },
+          { "internalType": "bytes[]", "name": "calldatas", "type": "bytes[]" }
+        ],
+        "internalType": "struct IgniteLaunchPad.GovernanceData",
+        "name": "governanceDetails_",
+        "type": "tuple"
+      }
     ],
     "stateMutability": "view",
     "type": "function"

@@ -1,6 +1,6 @@
 import styles from "../../styles/launchpad.module.css";
-import { LaunchPadFacoryAddr } from "../../utils/addresses";
-import LPFactoryABI from "../../utils/LPFactory.json";
+import {GENESISCONTROLLER} from "../../utils/addresses";
+import controllerABI from "../../utils/controllerABI.json";
 import {
   useAccount,
   useContractRead,
@@ -20,13 +20,12 @@ import Daostyles from "../../styles/Dao.module.css"
 
 export default function Daodetails() {
   const { address } = useAccount();
-  const LaunchPadFactory = LaunchPadFacoryAddr();
   const [LaunchPads, setLaunchPads] = useState([]);
 
   // GET A LIST OF ALL THE LAUNCHPADS
   useContractRead({
-    address: LaunchPadFactory,
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "getLaunchPads",
     onSuccess(data) {
       setLaunchPads(data);

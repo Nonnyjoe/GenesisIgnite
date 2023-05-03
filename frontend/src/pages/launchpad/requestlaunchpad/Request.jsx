@@ -9,8 +9,9 @@ import click from "../../../images/click.png"
 import loader from "../../../images/loading.png"
 import good from "../../../images/good.png"
 import Link from "next/link";
-import { LaunchPadFacoryAddr } from "../../../utils/addresses";
-import LPFactoryABI from "../../../utils/LPFactory.json";
+import {GENESISCONTROLLER} from "../../../utils/addresses";
+import controllerABI from "../../../utils/controllerABI.json";
+
 import {
   erc20ABI,
   useContractRead,
@@ -24,7 +25,6 @@ import {
 const token = process.env.API_TOKEN
 
 export default function RequestLaunchPad() {
-  const LaunchPadFactory = LaunchPadFacoryAddr();
   const [messages, showMessage] = useReducer((msgs, m) => msgs.concat(m), [])
   const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGIyMjlDQjE4MTU3QUU2NTBhMEIzMkNhNjZFNzczYzNFQjYzOUI2QzAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE1NjM0NTI0ODAsIm5hbWUiOiJHZW5lc2lzSWduaXRlIn0.5dVJUn5YTwFuEZC10Mv4PD7IpWdNIHj0hgu3EkSGEjA')
   const [files, setFiles] = useState([])
@@ -62,8 +62,8 @@ const {
   isLoading: setTokenCidLoading,
 } = useContractWrite({
   mode: "recklesslyUnprepared",
-  address: LaunchPadFactory?.toLowerCase(),
-  abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
   functionName: "requestLaunchPad",
   args: [
     formData?.tokenAddress ? utils.getAddress(formData.tokenAddress) : undefined,

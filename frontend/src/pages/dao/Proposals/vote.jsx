@@ -1,8 +1,13 @@
 import styles1 from "../../../styles/Dao.module.css"
 import styles from "../../../styles/LaunchPads.module.css";
 import styles2 from "../../../styles/launchpad.module.css";
-import { LaunchPadFacoryAddr } from "../../../utils/addresses";
-import LPFactoryABI from "../../../utils/LPFactory.json";
+import {GENESISCONTROLLER} from "../../../utils/addresses";
+import controllerABI from "../../../utils/controllerABI.json";
+import governanceABI from "../../../utils/governanceABI.json";
+import GTABI from "../../../utils/governanceTokenABI.json";
+import LPABI from "../../../utils/LPABI.json";
+import TOKENABI from "../../../utils/token_ABI.json";
+
 import {
   useAccount,
   useContractRead,
@@ -17,18 +22,180 @@ import Daocards from "../Daocards";
 import Link from "next/link";
 
 
-export default function Vote() {
+export default function Vote(props) {
+  const { pad, proposalID } = props;
   const { address } = useAccount();
-  const LaunchPadFactory = LaunchPadFacoryAddr();
   const [LaunchPads, setLaunchPads] = useState([]);
   const [vote, setVote] = useState('');
-    const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [Governance, setGovernance] = useState();
+  const [GovernanceToken, setGovernanceToken] = useState();
+  const [VotesFor, setVotesFor] = useState();
+  const [VotesAgainst, setVotesAgainst] = useState();
+  const [VotesAbstained, setVotesAbstained] = useState();
+  const [emergencyProposals, setEmergencyProposals] = useState([]);
+  const [PropossalDate, setPropossalDate] = useState();
+  const [ProposalDescription, setProposalDescription] = useState();
+  const [RequestAmount, setRequestAmount] = useState();
+  const [Instalments, setInstalments] = useState();
+  const [PaidInstalments, setPaidInstalments] = useState();
+  const [EndDate, setEndDate] = useState();
+  const [VotingPower, setVotingPower] = useState();
+  const [VoteOption, setVoteOption] = useState();
+  const [votes, setVotes] = useState();
+  const [hasVoted, setHasVoted] = useState();
 
+
+      /// VOTE FOR PROPOSALS
+    const { data: castVote, write: startCastVote, isLoading:castVoteLoading } = useContractWrite({
+    mode: "recklesslyUnprepared",
+    address: Governance,
+    abi: governanceABI,
+    functionName: "castVote",
+    args: [proposalID, VoteOption],
+  });
+
+    const { data: waitCastVote, isLoading: waitCastVoteLoading } = useWaitForTransaction({
+    hash: castVote?.hash,
+    onSuccess(result) {
+
+    },
+    onError(error) {
+      console.log("Error: ", error);
+    },
+  });
+
+
+      /// DELEGATE VOTE
+    const { data: delegateVote, write: startdelegateVote, isLoading:delegateVoteLoading } = useContractWrite({
+    mode: "recklesslyUnprepared",
+    address: GovernanceToken,
+    abi: GTABI,
+    functionName: "delegate",
+    args: [address],
+  });
+
+    const { data: waitdelegateVote, isLoading: waitdelegateVoteLoading } = useWaitForTransaction({
+    hash: delegateVote?.hash,
+    onSuccess(result) {
+      startCastVote?.();
+    },
+    onError(error) {
+      console.log("Error: ", error);
+    },
+  })
+
+    useContractRead({
+    address: Governance,
+    watch: true,
+    abi: governanceABI,
+    functionName: "hasVoted",
+    args: [proposalID, address],
+    onSuccess(data) {
+      setHasVoted(data);
+    },
+  });
+
+    useContractRead({
+    address: GovernanceToken,
+    abi: GTABI,
+    functionName: "getVotes",
+    watch: true,
+    args: [address],
+    onSuccess(data) {
+      setVotes(data);
+      console.log(data.toString())
+    },
+  });
+
+
+  useContractRead({
+    address: pad,
+    abi: LPABI,
+    functionName: "viewGovernanceAddresses",
+    watch: true,
+    args: [],
+    onSuccess(data) {
+      setGovernanceToken(data._governanceToken);
+      setGovernance(data._governor);
+    },
+  });
+
+  useContractRead({
+    address: GovernanceToken,
+    abi: TOKENABI,
+    functionName: "balanceOf",
+    args: [address],
+    watch: true,
+    onSuccess(data) {
+     setVotingPower(data);
+    },
+  });
+
+    useContractRead({
+    address: pad,
+    abi: LPABI,
+    functionName: "viewGovernanceData",
+    args: [],
+    watch: true,
+    onSuccess(data) {
+      setInstalments(data.Instalments_);
+      setPaidInstalments(data.WithdrawnInstalments_);
+    },
+  });
+
+    useContractRead({
+    address: Governance,
+    abi: governanceABI,
+    functionName: "proposalVotes",
+    args: [proposalID],
+    watch: true,
+    onSuccess(data) {
+      setVotesFor(data.forVotes);
+      setVotesAgainst(data.againstVotes);
+      setVotesAbstained(data.abstainVotes);
+    },
+  });
+
+    useContractRead({
+    address: pad,
+    abi: LPABI,
+    functionName: "viewEmergencyProposalIds",
+    args: [],
+    watch: true,
+    onSuccess(data) {
+      setEmergencyProposals(data);
+    },
+  });
+
+    useContractRead({
+    address: pad,
+    abi: LPABI,
+    functionName: "viewProposalData",
+    args: [proposalID],
+    watch: true,
+    onSuccess(data) {
+      setRequestAmount(data.RequestAmount);
+      setProposalDescription(data.Description);
+      setPropossalDate((new Date(data.RequestTime * 1000)) );
+      const time = (data.RequestTime.toNumber() + 259200);
+      setEndDate(new Date(time * 1000))
+    },
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(vote); 
+    console.log(VoteOption); 
+    votes == 0 ? startdelegateVote?.() : startCastVote?.();
   };
+
+
+  const FP = proposalID ? (proposalID.toString()).slice( 0, 13): `0X000`;
+  const LP = proposalID ? (proposalID.toString()).slice(-13) : `0000`;
+  const cartegory = emergencyProposals.indexOf(proposalID) == (-1) ? `Milestone Payment` : `Emergency Withdrawal`;
+
+const userStatus = hasVoted ? `YOU'VE VOTED ALREADY!` : `YOU'RE YET TO PARTICIPATE.`;
 
   // GET A LIST OF ALL THE LAUNCHPADS
 
@@ -55,7 +222,7 @@ export default function Vote() {
                 <h5 class="mt-6 font-pop">
                   <span className={styles.launcpdetailed}>
                    ACCEPTED VOTES:{" "} <br />
-                   1000 tokens
+                   {VotesFor ? Math.floor((VotesFor.toString()) / 10**18): '000'}
                   </span>{" "}
                 </h5>
               </div>
@@ -63,28 +230,28 @@ export default function Vote() {
                 <h5 class="mt-4 font-pop">
                   ABSTAINED VOTES:{" "} <br/>
                   <span className={styles.launcpdetailed}>
-                        1000 token
+                        {VotesAbstained ?  Math.floor((VotesAbstained.toString() / 10**18)): '000'}
                   </span>
                 </h5>
               </div>
               <div>
                 <h5 class="mt-4 font-pop">
-                  REJECTED VOTES: {" "} <br/>
+                  AGAINST VOTES: {" "} <br/>
                   <span className={styles.launcpdetailed}>
-                    1000 tokens
+                    {VotesAgainst ?  Math.floor((VotesAgainst.toString() / 10**18)) : '000'}
                   </span>
                 </h5>
               </div>
             </div>
-            <div className="mt-5 ml-3">
-            <p className="mb-3">Proposal Id: 1</p>  
-            <p className="mb-3">Proposal Cartegory: 1</p>  
-            <p className="mb-3">Proposal Date: 1</p>  
-            <p className="mb-3">Total Instalment: 1</p>  
-            <p className="mb-3">Paid Instalment: 1</p> 
-            <p className="mb-3">Payment Amount: 1</p> 
-            <p className="mb-3">Admin Address: 1</p> 
-
+            <div className="mt-8 ml-3">
+            <p className="mb-3"><span className="uppercase mr-3 text-green-400">Proposal Id:</span> {`${FP} ..... ${LP}`}</p>  
+            <p className="mb-3"><span className="uppercase mr-3 text-green-400">Proposal Cartegory:</span> {cartegory}</p>  
+            <p className="mb-3"><span className="uppercase mr-3 text-green-400">Proposal Date:</span> {PropossalDate?.toLocaleString()}</p>  
+            <p className="mb-3"><span className="uppercase mr-3 text-green-400">Proposal Description:</span> {ProposalDescription}</p>  
+            <p className="mb-3"><span className="uppercase mr-3 text-green-400">Total Instalment:</span> {Instalments ? Instalments.toString() : ""}</p>  
+            <p className="mb-3"><span className="uppercase mr-3 text-green-400">Paid Instalment:</span> {PaidInstalments ? PaidInstalments.toString() : ""}</p> 
+            <p className="mb-3"><span className="uppercase mr-3 text-green-400">Payment Amount:</span> {`${RequestAmount ? (RequestAmount / 10**18).toString(): " "} GIT`}</p> 
+            <p className="mb-3"><span className="uppercase mr-3 text-green-400">VOTTING ENDS:</span> {EndDate?.toLocaleString()}</p>  
             </div>
         </div>
         <div className={`${styles.participate}`}>
@@ -93,13 +260,15 @@ export default function Vote() {
               <h5 className={`${styles.participationheader} font-pop`}>PARTICIPATE</h5>
               <p className={`${styles.participationparagraph} text-base`}>
                 {" "}
-                <span className="uppercase">Requirement : </span> You must have earned Governance Token by participating in this tokens Launchpad or presale.{" "}
+                <span className="uppercase text-green-400">Requirement: </span> You must have earned Governance Token by participating in this tokens Launchpad or presale.{" "}
+                <br/>
+                <br/>
+                <span className="mt-5 "> <span className="text-green-400">VOTE STATUS:</span> {userStatus}</span>
               </p>
 
               <div className={`${styles.pl2} mt-9 font-pop w-[100%]`}>
-              
                 <p className="mb-7">
-                  Your VOTING POWER: {100} GIT
+                  YOUR VOTING POWER: {votes ? Math.floor(votes.toString() / 10**18) : ""} UNITS
                 </p>
                 
             <label className={`${styles1.VoteOption}`}>
@@ -108,7 +277,7 @@ export default function Vote() {
                     value="accept"
                     className={`${styles1.voteInput}`}
                     checked={vote === 'accept'}
-                    onChange={(event) => setVote(event.target.value)}
+                    onChange={(event) => {setVote(event.target.value); setVoteOption(1)}}
                     />
                     Accept
                 </label>
@@ -118,7 +287,7 @@ export default function Vote() {
                     className={`${styles1.voteInput}`}
                     value="abstain"
                     checked={vote === 'abstain'}
-                    onChange={(event) => setVote(event.target.value)}
+                    onChange={(event) => {setVote(event.target.value); setVoteOption(2)}}
                     />
                     Abstain
                 </label>
@@ -127,8 +296,9 @@ export default function Vote() {
                     type="radio"
                     className={`${styles1.voteInput}`}
                     value="reject"
+                    disabled={false}
                     checked={vote === 'reject'}
-                    onChange={(event) => setVote(event.target.value)}
+                    onChange={(event) => {setVote(event.target.value); setVoteOption(0)}}
                     />
                     Reject
                 </label>
@@ -140,7 +310,7 @@ export default function Vote() {
                   className={styles.launchpadbtn}
                   disabled={ 100 < 99 }
                 >
-             { (100 < 20) ? "APPROVE"  : (100 > 20) ? "LOADING...." : "PARTICIPATE"}
+                {waitCastVoteLoading || castVoteLoading ? "VOTING......."  : waitdelegateVoteLoading || delegateVoteLoading ? "DELEGATING...." : votes == 0 ? "DELEGATE YOURSELF" :  "CAST VOTE"}
                 </button>
               </div>
             </div>

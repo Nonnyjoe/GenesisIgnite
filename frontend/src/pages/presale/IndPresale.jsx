@@ -1,7 +1,7 @@
 import { erc20ABI, useContractRead } from "wagmi";
 import { useContext, useState } from "react";
-import LPFactoryABI from "../../utils/LPFactory.json";
-import { LaunchPadFacoryAddr } from "../../utils/addresses";
+import {GENESISCONTROLLER} from "../../utils/addresses";
+import controllerABI from "../../utils/controllerABI.json";
 import Link from "next/link";
 import styles from "../../styles/launchpad.module.css"
 import igniteNft from "../../images/dodge.png";
@@ -22,8 +22,8 @@ const IndPresale = ({ contractAddress }) => {
     isError,
     isLoading,
   } = useContractRead({
-    address: LaunchPadFacoryAddr(),
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "displayTokenDetails",
     args: [contractAddress],
     onSuccess(data) {
@@ -67,8 +67,8 @@ const IndPresale = ({ contractAddress }) => {
 
 
     useContractRead({
-    address: LaunchPadFacoryAddr(),
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: "returnCid",
     args:[LaunchPadToken??"0x00"],
     onSuccess(data) {

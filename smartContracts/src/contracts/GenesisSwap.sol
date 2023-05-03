@@ -11,7 +11,6 @@ contract GenesisSwap {
     error minimumConversionIs_10_Dollar();
 
     address Admin;
-    address Poseidon;
     address GeneToken;
     address DaiAddress;
     address UsdcAddress;
@@ -24,8 +23,7 @@ contract GenesisSwap {
     AggregatorV3Interface internal priceFeedUni;
     AggregatorV3Interface internal priceFeedUsdc;
 
-    constructor(address _poseidon, address _geneToken) {
-        Poseidon = _poseidon;
+    constructor(address _geneToken) {
         GeneToken = _geneToken;
         Admin = msg.sender;
 

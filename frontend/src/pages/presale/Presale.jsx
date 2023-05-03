@@ -1,6 +1,6 @@
 import styles from "../../styles/launchpad.module.css"
-import {LaunchPadFacoryAddr} from "../../utils/addresses";
-import LPFactoryABI from "../../utils/LPFactory.json";
+import {GENESISCONTROLLER} from "../../utils/addresses";
+import controllerABI from "../../utils/controllerABI.json";
 import { useAccount, useContractRead, Suspense, useContractReads, usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import IndPresale from "./IndPresale";
@@ -13,7 +13,6 @@ import Tilt from 'react-parallax-tilt';
 export default function Presale(){
 
 const { address } = useAccount();
-const LaunchPadFactory = LaunchPadFacoryAddr();
 const [PresalePads, setPresalePads] =  useState([]);
 
 
@@ -21,8 +20,8 @@ const [PresalePads, setPresalePads] =  useState([]);
 
 // GET A LIST OF ALL THE PRESALES
  useContractRead({
-    address: LaunchPadFactory,
-    abi: LPFactoryABI,
+    address: GENESISCONTROLLER(),
+    abi: controllerABI,
     functionName: 'DisplayPresales',
     onSuccess(data){
     setPresalePads(data);

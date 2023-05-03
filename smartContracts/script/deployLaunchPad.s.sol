@@ -26,6 +26,6 @@ contract deployLaunchPad is Script {
         vm.startBroadcast(deployerPrivateKey);
         // SwapDexPoseidon = new swapDexPoseidon();
         // starDaoToken = new StarDaoToken(deployer);
-        genesisSwap = new GenesisSwap(poseidon, GENESIS);
+        genesisSwap = new GenesisSwap(GENESIS);
     }
 }
