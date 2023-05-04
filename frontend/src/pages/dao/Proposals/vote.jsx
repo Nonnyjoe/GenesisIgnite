@@ -45,6 +45,7 @@ export default function Vote(props) {
   const [VoteOption, setVoteOption] = useState();
   const [votes, setVotes] = useState();
   const [hasVoted, setHasVoted] = useState();
+  const [proposalStatus, setProposalStatus] = useState();
 
 
       /// VOTE FOR PROPOSALS
@@ -81,6 +82,26 @@ export default function Vote(props) {
     onSuccess(result) {
       toast.success("Delegation Successful");
       startCastVote?.();
+    },
+    onError(error) {
+        toast.error(`ERROR ${error}`);
+    },
+  })
+
+
+        /// DELEGATE VOTE
+    const { data: executeVote, write: startexecuteVote, isLoading:executeVoteLoading } = useContractWrite({
+    mode: "recklesslyUnprepared",
+    address: pad,
+    abi: LPABI,
+    functionName: "Execute",
+    args: [proposalID],
+  });
+
+    const { data: waitExecuteVote, isLoading: waitExecuteVoteLoading } = useWaitForTransaction({
+    hash: executeVote?.hash,
+    onSuccess(result) {
+      toast.success("Execution Successful");
     },
     onError(error) {
         toast.error(`ERROR ${error}`);
@@ -182,14 +203,28 @@ export default function Vote(props) {
       setPropossalDate((new Date(data.RequestTime * 1000)) );
       const time = (data.RequestTime.toNumber() + 259200);
       setEndDate(new Date(time * 1000))
+      Timestamp(time);
     },
   });
+
+
+    const Timestamp = (data) => {
+    const now = new Date();
+    const epochTime = Math.floor(now.getTime() / 1000);
+    console.log(`Current epoch time: ${epochTime}`);
+    if (epochTime > data) {
+      setProposalStatus("false");
+    } else {
+      setProposalStatus("true")
+    }
+  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(vote); 
     console.log(VoteOption); 
-    votes == 0 ? startdelegateVote?.() : startCastVote?.();
+    !proposalStatus ? startexecuteVote?.() : votes == 0 ? startdelegateVote?.() : startCastVote?.();
   };
 
 
@@ -312,7 +347,7 @@ const userStatus = hasVoted ? `YOU'VE VOTED ALREADY!` : `YOU'RE YET TO PARTICIPA
                   className={styles.launchpadbtn}
                   disabled={ 100 < 99 }
                 >
-                {waitCastVoteLoading || castVoteLoading ? "VOTING......."  : waitdelegateVoteLoading || delegateVoteLoading ? "DELEGATING...." : votes == 0 ? "DELEGATE YOURSELF" :  "CAST VOTE"}
+                {waitExecuteVoteLoading || executeVoteLoading ? `Executing Vote...` : waitCastVoteLoading || castVoteLoading ? "VOTING......."  : waitdelegateVoteLoading || delegateVoteLoading ? "DELEGATING...." : votes == 0 ? "DELEGATE YOURSELF" :  "CAST VOTE"}
                 </button>
               </div>
             </div>
