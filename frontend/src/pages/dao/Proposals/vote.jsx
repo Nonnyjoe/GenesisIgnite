@@ -89,7 +89,7 @@ export default function Vote(props) {
   })
 
 
-        /// DELEGATE VOTE
+        /// EXECUTE VOTE
     const { data: executeVote, write: startexecuteVote, isLoading:executeVoteLoading } = useContractWrite({
     mode: "recklesslyUnprepared",
     address: pad,
