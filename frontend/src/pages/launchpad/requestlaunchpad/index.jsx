@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import Navbar from "../../../components/Navbar";
 import Sidebar from "../../../components/sideBar";
 import styles from "../../../styles/dashboard2.module.css"
@@ -11,6 +12,18 @@ export default function RequestPad(){
         <Navbar />
         <div className="flex flex-row mt-10 gap-11">
             <Sidebar check={3} />
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />            
             <RequestLaunchPad />
         </div>
 

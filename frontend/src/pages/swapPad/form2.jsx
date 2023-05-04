@@ -39,7 +39,7 @@ export default function SwappIn() {
   const [userUsdcAllowance, setUserUsdcAllowance] = useState();
   const [userDaiAllowance, setUserDaiAllowance] = useState();
 
-const notify = () => toast("Wow so easy !");
+
 
   // CHECK ALLOWANCE THE USER HAS GRANTED
   useContractRead({
@@ -82,12 +82,11 @@ const notify = () => toast("Wow so easy !");
       hash: UsdcAlawee?.hash,
       onSuccess(result) {
         handleSubmit2b();
-       toast("Approval Granted, Swap Initiated");
+       toast.success("Approval Granted, Swap Initiated");
 
       },
       onError(error) {
-        console.log("Error: ", error);
-        toast(`ERROR ${error}`);
+        toast.error(`ERROR ${error.slice(0, 20)}`);
 
       },
     });
@@ -109,12 +108,11 @@ const notify = () => toast("Wow so easy !");
       hash: alawee?.hash,
       onSuccess(result) {
         handleSubmit2b();
-        toast("Approval Granted, Swap Initiated");
+        toast.success("Approval Granted, Swap Initiated");
 
       },
       onError(error) {
-        console.log("Error: ", error);
-        toast(`ERROR ${error}`);
+        toast.error(`ERROR ${error.slice(0, 20)}`);
 
       },
     });
@@ -153,7 +151,6 @@ const notify = () => toast("Wow so easy !");
   function handleSubmit(e) {
     e.preventDefault();
 
-    notify();
     if (option == DropdownOptions[0].address) {
       swapEthToGene?.();
     } else if (option == DropdownOptions[1].address) {
@@ -213,15 +210,11 @@ const notify = () => toast("Wow so easy !");
     useWaitForTransaction({
       hash: swapData?.hash,
       onSuccess(result) {
-        console.log("DATA: ", result);
-        console.log("mintWaitData: ", swapWaitData);
-        console.log("mintData (tokenId): ", swapData);
-        toast("TRANSACTION SUCCESSFUL..... SWAP COMPLETED");
+        toast.success("Transaction Successful..... Swap completed");
 
       },
       onError(error) {
-        console.log("Error: ", error);
-        toast(`ERROR ${error}`);
+        toast.error(`ERROR:`, error.slice(0, 20));
 
       },
     });
@@ -243,16 +236,10 @@ const notify = () => toast("Wow so easy !");
     useWaitForTransaction({
       hash: swapData3?.hash,
       onSuccess(result) {
-        console.log("DATA: ", result);
-        console.log("mintWaitData: ", swapWaitData3);
-        console.log("mintData (tokenId): ", swapData3);
-        toast("TRANSACTION SUCCESSFUL..... SWAP COMPLETED");
-
+        toast.success("Transaction Successful..... Swap completed");
       },
       onError(error) {
-        console.log("Error: ", error);
-       toast(`ERROR ${error}`);
-
+       toast.error(`ERROR ${error}`);
       },
     });
 
@@ -273,16 +260,10 @@ const notify = () => toast("Wow so easy !");
     useWaitForTransaction({
       hash: swapDataDai?.hash,
       onSuccess(result) {
-        console.log("DATA: ", result);
-        console.log("mintWaitData: ", swapWaitDataDai);
-        console.log("mintData (tokenId): ", swapDataDai);
-        toast("TRANSACTION SUCCESSFUL..... SWAP COMPLETED");
-
+        toast.success("Transaction Successful..... Swap completed");
       },
       onError(error) {
-        console.log("Error: ", error);
-        toast(`ERROR ${error}`);
-
+        toast.error(`ERROR ${error}`);
       },
     });
 

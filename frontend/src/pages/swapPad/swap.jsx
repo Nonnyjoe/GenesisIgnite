@@ -18,6 +18,7 @@ import SwappOut from "./form1";
 import SwappIn from "./form2";
 import tokenABI from "../../utils/token_ABI.json"
 import Tilt from 'react-parallax-tilt';
+import { ToastContainer } from "react-toastify";
 
 
 export default function Dcontents(){
@@ -59,6 +60,7 @@ const [swapBalance, setSwapBalance] = useState();
 
 
     return(
+      
         <div className={`${styles2.Dcontents} flex flex-row`}>
             <div className="mt-12 ml-5">
                  <div className={styles.swaplhstop}>

@@ -11,7 +11,8 @@ import good from "../../../images/good.png"
 import Link from "next/link";
 import {GENESISCONTROLLER} from "../../../utils/addresses";
 import controllerABI from "../../../utils/controllerABI.json";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   erc20ABI,
   useContractRead,
@@ -66,7 +67,7 @@ const {
     abi: controllerABI,
   functionName: "requestLaunchPad",
   args: [
-    formData?.tokenAddress ? utils.getAddress(formData.tokenAddress) : undefined,
+    formData?.tokenAddress ? utils.getAddress(formData.tokenAddress) : '',
     (imageCID).toString() || undefined,
   ],
 });
@@ -76,9 +77,10 @@ const {
       hash: tokenCid?.hash,
       onSuccess(result) {
         console.log("stored succesfully")
+        toast.success("LaunchPad Request Successful");
       },
       onError(error) {
-        console.log("Error: ", error);
+        toast.error(`ERROR:`, error.slice(0, 20));
       },
     });
 

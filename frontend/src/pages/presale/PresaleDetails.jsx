@@ -20,7 +20,8 @@ import styles from "../../styles/LaunchPads.module.css";
 import Image from "next/image";
 import dodge from "../../images/dodge.png";
 import igniteNft from "../../images/dodge.png";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PresaleDetails = (props) => {
    const { contractAddress } = props;
@@ -37,7 +38,16 @@ const PresaleDetails = (props) => {
   const [genesDepositedByUser, setGenesDepositedByUser] = useState(null);
   const [cid, setCid] = useState();
   const [LaunchPadToken, setLaunchPadToken] = useState();
-
+    const [PresalePadData, setPresaleData] = useState({});
+    const [Amount, setAmount] = useState(0);
+    const [userAllowance, setUserAllowance] = useState( );
+    const [hovered, setHovered] = useState(false);
+    const [TokenPrice, setTokenPrice] = useState();
+    const [GenesRaisedFromPresale, setGenesRaisedFromPresale] = useState();
+    const [PresaleTokenBalance, setPresaleTokenBalance] = useState();
+    const [UserBalance, setUserBalance] = useState();
+    const [UserPTBalance, setUserPTBalance] = useState();
+    const [PTAddress, setPTAddress] = useState();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -85,9 +95,6 @@ const PresaleDetails = (props) => {
       console.log(data);
     },
   });
-
-
-
 
 
     const {
@@ -149,21 +156,6 @@ const PresaleDetails = (props) => {
 
 
 
-
-
-    const [PresalePadData, setPresaleData] = useState({});
-    const [Amount, setAmount] = useState(0);
-    const [userAllowance, setUserAllowance] = useState( );
-    const [hovered, setHovered] = useState(false);
-    const [TokenPrice, setTokenPrice] = useState();
-    const [GenesRaisedFromPresale, setGenesRaisedFromPresale] = useState();
-    const [PresaleTokenBalance, setPresaleTokenBalance] = useState();
-    const [UserBalance, setUserBalance] = useState();
-    const [UserPTBalance, setUserPTBalance] = useState();
-    const [PTAddress, setPTAddress] = useState();
-
-
-
   /// FETCH THE CONTRACT TOKEN NAME AND SYMBOL
     const { data:BuyersData, isError, isLoading } = useContractRead({
     address: GENESISCONTROLLER(),
@@ -199,10 +191,11 @@ const PresaleDetails = (props) => {
     const { data: alaweeWaitData, isLoading:loadingAlaweeWaitData } = useWaitForTransaction({
     hash: alawee?.hash,
     onSuccess(result) {
+      toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+      toast.error(`ERROR ${error}`);
     },
   })
 
@@ -219,11 +212,27 @@ const PresaleDetails = (props) => {
     const { data: participateWaitData, isLoading:loadingParticipateWaitData } = useWaitForTransaction({
     hash: participate?.hash,
     onSuccess(result) {
+       toast.success("Presale Participation Successful");
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
+
+
+    useContractRead({
+    address: contractAddress,
+    abi: LPABI,
+    functionName: "viewGenesRaisedFromPresale",
+    watch: true,
+    onSuccess(data) {
+      console.log(Number(data));
+      setGenesRaisedFromPresale((data)?.toString());
+
+    },
+  });
+
+
 
   /// FETCH PRESALEDATA FROM THE CONTRACT 
   const { data: LPData, isError: ReadsError, isLoading: ReadsLoading } = useContractReads({
@@ -257,8 +266,7 @@ const PresaleDetails = (props) => {
       watch: true,
       onSuccess: (data) => {
       setTokenPrice((data[0])?.toString());
-      setGenesRaisedFromPresale((data[1])?.toString());
-      console.log(`${data[1]} raised`)
+      // setGenesRaisedFromPresale((data[1])?.toString());
       setPresaleTokenBalance((data[2]?.toString()));
       setUserBalance((data[3])?.toString());
       setPTAddress((data[4])?.toString());

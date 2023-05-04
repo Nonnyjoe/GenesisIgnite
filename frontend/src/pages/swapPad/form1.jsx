@@ -10,6 +10,8 @@ import swapABI from "../../utils/swap_ABI.json";
 import { ethers } from "ethers";
 import React, { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { stringify } from "querystring";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import tokenABI from "../../utils/token_ABI.json";
 import { swapPadAddr } from "../../utils/addresses";
 import { DaiAddress } from "../../utils/addresses";
@@ -65,10 +67,11 @@ export default function SwappOut() {
     useWaitForTransaction({
       hash: alawee?.hash,
       onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
         handleSubmit2b();
       },
       onError(error) {
-        console.log("Error: ", error);
+        toast.error(`ERROR:`, error.slice(0, 20));
       },
     });
 
@@ -78,7 +81,6 @@ export default function SwappOut() {
   };
 
   // USEEFFECT TO CHECK THE ALLOWANCE ON LOAD
-
   // HANDLE CHANGES IN THE SWAPOUT DROPDOWN MENU
   const handleOptionChange2 = async (event) => {
     // setOption(0)
@@ -147,12 +149,10 @@ export default function SwappOut() {
     useWaitForTransaction({
       hash: swapData2?.hash,
       onSuccess(result) {
-        console.log("DATA: ", result);
-        console.log("mintWaitData: ", swapWaitData2);
-        console.log("mintData (tokenId): ", swapData2);
+           toast.success("Transaction Successful..... Swap completed");
       },
       onError(error) {
-        console.log("Error: ", error);
+        toast.error(`ERROR:`, error.slice(0, 20));
       },
     });
 
@@ -172,12 +172,11 @@ export default function SwappOut() {
     useWaitForTransaction({
       hash: swapData4?.hash,
       onSuccess(result) {
-        console.log("DATA: ", result);
-        console.log("mintWaitData: ", swapWaitData4);
-        console.log("mintData (tokenId): ", swapData4);
+        toast.success("Transaction Successful..... Swap completed");
       },
       onError(error) {
         console.log("Error: ", error);
+        toast.error(`ERROR:`, error.slice(0, 20));
       },
     });
 
@@ -197,16 +196,15 @@ export default function SwappOut() {
     useWaitForTransaction({
       hash: swapData5?.hash,
       onSuccess(result) {
-        console.log("DATA: ", result);
-        console.log("mintWaitData: ", swapWaitData5);
-        console.log("mintData (tokenId): ", swapData5);
+        toast.success("Transaction Successful..... Swap completed");
       },
       onError(error) {
-        console.log("Error: ", error);
+        toast.error(`ERROR:`, error.slice(0, 20));
       },
     });
 
   return (
+    
     <div>
       {/*---------------------- SWAPP OUT SECTION STARTS HERE ----------------*/}
 
@@ -289,7 +287,8 @@ export default function SwappOut() {
                 loadingWaitData4
               }
             >
-              {userAllowance / 10 ** 18 < AmountO
+              {alaweeLoading ||
+              loadingAlaweeWaitData ? `APPROVING....` : userAllowance / 10 ** 18 < AmountO
                 ? " APPROVE"
                 : alaweeLoading ||
                   loadingAlaweeWaitData ||

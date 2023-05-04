@@ -1,6 +1,8 @@
 import React from "react";
 import { ethers } from "ethers";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   useContractRead,
   useAccount,
@@ -97,10 +99,11 @@ const AdForm = (props) => {
     const { data: alaweeWaitData, isLoading:loadingAlaweeWaitData } = useWaitForTransaction({
     hash: alawee?.hash,
     onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -116,10 +119,11 @@ const AdForm = (props) => {
     const { data: alaweeWaitData2, isLoading:loadingAlaweeWaitData2 } = useWaitForTransaction({
     hash: alaweeSHIB?.hash,
     onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -135,10 +139,11 @@ const AdForm = (props) => {
     const { data: alaweeWaitData3, isLoading:loadingAlaweeWaitData3 } = useWaitForTransaction({
     hash: alaweeARB?.hash,
     onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -155,10 +160,11 @@ const AdForm = (props) => {
     const { data: alaweeWaitData4, isLoading:loadingAlaweeWaitData4 } = useWaitForTransaction({
     hash: alaweeETC?.hash,
     onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -174,7 +180,7 @@ const AdForm = (props) => {
     if ((anotherProp).toString() == "true") {
         if((contractAddress).toString() == Arbitrum()) {
             console.log(UserAllowanceARB);
-            if(UserAllowanceARB < amount){
+            if(UserAllowanceARB < (amount * 10**18)){
                 console.log(`pass`);
               getAlaweeARB?.()
             } else {
@@ -182,20 +188,20 @@ const AdForm = (props) => {
               handleSubmit2b();
             }
         } else if((contractAddress).toString() == EthClasic()){
-            if(UserAllowanceETC < amount) {
+            if(UserAllowanceETC < (amount * 10**18)) {
               getAlaweeETC?.()
             } else {
                 handleSubmit2b();
             }
         } else if((contractAddress).toString() == Shiba()){
-            if(UserAllowanceSHIB < amount) {
+            if(UserAllowanceSHIB < (amount * 10**18)) {
               getAlaweeShib?.()
             } else {
                 handleSubmit2b();
             }
       }
     } else if ((anotherProp).toString() == "false") {
-            if(UserAllowanceGIT < amount) {
+            if(UserAllowanceGIT < (amount * 10**18)) {
               getAlawee?.()
             } else {
                 handleSubmit2b();
@@ -221,10 +227,10 @@ const AdForm = (props) => {
     const { data: placeSellAddDataWait, isLoading:placeSellAddLoading2 } = useWaitForTransaction({
     hash: placeSellAddData?.hash,
     onSuccess(result) {
-
+       toast.success("Sell Ad. placed Successfully");
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -245,10 +251,10 @@ const AdForm = (props) => {
     const { data: placeBuyAddDataWait, isLoading:placeBuyAddLoading2 } = useWaitForTransaction({
     hash: placeBuyAddData?.hash,
     onSuccess(result) {
-
+       toast.success("Buy Ad. placed Successfully");
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 

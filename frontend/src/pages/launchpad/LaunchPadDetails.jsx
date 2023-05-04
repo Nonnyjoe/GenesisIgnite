@@ -23,7 +23,8 @@ import {GENESISCONTROLLER} from "../../utils/addresses";
 import controllerABI from "../../utils/controllerABI.json";
 import dao from "../../images/governance.png";
 import Link from "next/link";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LaunchPadDetails = (props) => {
   const { address } = useAccount();
@@ -133,10 +134,11 @@ const LaunchPadDetails = (props) => {
     useWaitForTransaction({
       hash: alawee?.hash,
       onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
         handleSubmit2b();
       },
       onError(error) {
-        console.log("Error: ", error);
+        toast.error(`ERROR:`, error.slice(0, 20));
       },
     });
 
@@ -156,9 +158,11 @@ const LaunchPadDetails = (props) => {
   const { data: participateWaitData, isLoading: loadingParticipateWaitData } =
     useWaitForTransaction({
       hash: participate?.hash,
-      onSuccess(result) {},
+      onSuccess(result) {
+       toast.success("LaunchPad Participation Successful");
+      },
       onError(error) {
-        console.log("Error: ", error);
+        toast.error(`ERROR:`, error.slice(0, 20));
       },
     });
 
@@ -177,9 +181,11 @@ const LaunchPadDetails = (props) => {
   const { data: withdrawWaitData, isLoading: loadingWithdrawWaitData } =
     useWaitForTransaction({
       hash: withdraw?.hash,
-      onSuccess(result) {},
+      onSuccess(result) {
+       toast.success("LaunchPad Token Withdrawn");
+      },
       onError(error) {
-        console.log("Error: ", error);
+        toast.error(`ERROR:`, error.slice(0, 20));
       },
     });
 

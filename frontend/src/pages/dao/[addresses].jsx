@@ -13,7 +13,7 @@ import {
   wagmi,
 } from "wagmi";
 
-const SelectedLaunchpad = () => {
+const SelectedLaunchpad = (props) => {
   const { addresses: contractAddress } = useRouter().query;
 
   return (

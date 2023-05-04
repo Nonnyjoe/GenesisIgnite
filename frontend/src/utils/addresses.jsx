@@ -29,7 +29,7 @@ export const EthClasic = () => {
     return("0xD9faA0667434dF28e7F5Df15C0521f9D98CefCCf");
 }
 export const Swapp = () => {
-    return("0xFC852156524396fF3aF4903Fa9F348cc4e83AA0A");
+    return("0xE1cB449D59409ae904a1d4630598d91933240c77");
 }
 
 export const Router = () =>{

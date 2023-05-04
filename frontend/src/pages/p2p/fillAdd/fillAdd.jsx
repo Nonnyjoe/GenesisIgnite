@@ -21,7 +21,8 @@ import {EthClasic} from "../../../utils/addresses";
 import {Arbitrum} from "../../../utils/addresses";
 import {Shiba} from "../../../utils/addresses";
 import {GenesisigniteTokenAddr} from "../../../utils/addresses";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import Select, { SelectChangeEvent } from "@mui/material/Select";
 const FillOrder = (props) => {
@@ -83,7 +84,6 @@ const FillOrder = (props) => {
     })
 
 
-
       /// APROVE THE CONTRACT TO SPEND THE USER TOKENS
     const { data: alawee, write: getAlawee, isLoading:alaweeLoading } = useContractWrite({
     mode: "recklesslyUnprepared",
@@ -96,10 +96,11 @@ const FillOrder = (props) => {
     const { data: alaweeWaitData, isLoading:loadingAlaweeWaitData } = useWaitForTransaction({
     hash: alawee?.hash,
     onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -115,10 +116,11 @@ const FillOrder = (props) => {
     const { data: alaweeWaitData2, isLoading:loadingAlaweeWaitData2 } = useWaitForTransaction({
     hash: alaweeSHIB?.hash,
     onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -134,10 +136,11 @@ const FillOrder = (props) => {
     const { data: alaweeWaitData3, isLoading:loadingAlaweeWaitData3 } = useWaitForTransaction({
     hash: alaweeARB?.hash,
     onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -154,10 +157,11 @@ const FillOrder = (props) => {
     const { data: alaweeWaitData4, isLoading:loadingAlaweeWaitData4 } = useWaitForTransaction({
     hash: alaweeETC?.hash,
     onSuccess(result) {
+       toast.success("Approval Granted, Swap Initiated");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -173,10 +177,11 @@ const FillOrder = (props) => {
     const { data: fillBuyAddData2, isLoading:fillBuyAddIsLoading2 } = useWaitForTransaction({
     hash: fillBuyAddData?.hash,
     onSuccess(result) {
+       toast.success("Transaction successful");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -192,10 +197,11 @@ const FillOrder = (props) => {
     const { data: fillSellAddData2, isLoading:fillSellAddIsLoading2 } = useWaitForTransaction({
     hash: fillSellAddData?.hash,
     onSuccess(result) {
+       toast.success("Transaction successful");
      handleSubmit2b();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -235,7 +241,6 @@ function handleSubmit2b() {
         startFillSellAddData?.();
       }
 }
-
 
 
   // functions //
@@ -283,7 +288,6 @@ function handleSubmit2b() {
 
   return (
     <div className={`${styles.launchpad} flex flex-row items-center justify-evenly gap-8 `}>
-      <Tilt>
 
       <div className={`${styles.card3}`}>
         <p className={`${styles.cardTitle} font-pop text-3xl`}> FILL AD #{escrowId}</p>
@@ -334,7 +338,6 @@ function handleSubmit2b() {
         </div>
       </form>
       </div>
-      </Tilt>
     
     </div>
   );

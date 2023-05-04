@@ -4,6 +4,7 @@ import styles from "../../../styles/dashboard2.module.css"
 import FillOrder from "./fillAdd";
 import { useRouter } from 'next/router';
 import { data } from "autoprefixer";
+import { ToastContainer } from "react-toastify";
 // import Dcontents from "./Dcontents";
 // import Addss from "./addss";
 
@@ -23,6 +24,18 @@ const router = useRouter();
         <Navbar />
         <div className="flex flex-row mt-10 gap-11">
             <Sidebar check={5}/>
+           <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            />            
             <FillOrder escrowId = {addId} Tstatus = {type} />
         </div>
 

@@ -7,7 +7,8 @@ import governanceABI from "../../../utils/governanceABI.json";
 import GTABI from "../../../utils/governanceTokenABI.json";
 import LPABI from "../../../utils/LPABI.json";
 import TOKENABI from "../../../utils/token_ABI.json";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   useAccount,
   useContractRead,
@@ -58,10 +59,10 @@ export default function Vote(props) {
     const { data: waitCastVote, isLoading: waitCastVoteLoading } = useWaitForTransaction({
     hash: castVote?.hash,
     onSuccess(result) {
-
+      toast.success("Vote Recorded Succesfully");
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   });
 
@@ -78,10 +79,11 @@ export default function Vote(props) {
     const { data: waitdelegateVote, isLoading: waitdelegateVoteLoading } = useWaitForTransaction({
     hash: delegateVote?.hash,
     onSuccess(result) {
+      toast.success("Delegation Successful");
       startCastVote?.();
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 

@@ -16,11 +16,12 @@ import {
 } from "wagmi";
 import back from "../../../images/goback.png";
 import Image from "next/image";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ProposalForm(props) {
+
     const {contractAddress} = props;
-console.log(contractAddress);
   const [Governance, setGovernance] = useState();
   const [GovernanceToken, setGovernanceToken] = useState();
   const [proposalStatus, setProposalStatus] = useState();
@@ -28,10 +29,6 @@ console.log(contractAddress);
     const [isInstallment, setIsInstallment] = useState(true);
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
-
-
-
-
 
 
 
@@ -61,10 +58,10 @@ console.log(contractAddress);
     const { data: waitinstalment, isLoading: waitinstalmentLoading } = useWaitForTransaction({
     hash: instalment?.hash,
     onSuccess(result) {
-
+      toast.success("Withdrawal Request Successful");
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 
@@ -81,10 +78,10 @@ console.log(contractAddress);
     const { data: waitEmergency, isLoading: waitEmergencyLoading } = useWaitForTransaction({
     hash: Emergency?.hash,
     onSuccess(result) {
-
+      toast.success("Withdrawal Request Successful");
     },
     onError(error) {
-      console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
     },
   })
 

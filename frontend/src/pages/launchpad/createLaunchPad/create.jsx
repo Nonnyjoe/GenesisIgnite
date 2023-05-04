@@ -11,6 +11,8 @@ import {GENESISCONTROLLER} from "../../../utils/addresses";
 import controllerABI from "../../../utils/controllerABI.json";
 import tokenABI from "../../../utils/token_ABI.json";
 import { ethers } from "ethers";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const token = process.env.API_TOKEN
 
@@ -70,15 +72,14 @@ console.log(JSON.stringify(convert(7580, 'ether').wei))
     useWaitForTransaction({
       hash: alawee?.hash,
       onSuccess(result) {
+      toast.success("Allowance granted..... initiating transaction");
       createLaunchPad?.();
 
       },
       onError(error) {
-        console.log("Error: ", error);
+        toast.error(`ERROR ${error}`);
       },
     });
-
-
 
 
 
@@ -99,12 +100,11 @@ console.log(JSON.stringify(convert(7580, 'ether').wei))
     useWaitForTransaction({
       hash: createLaunchPadData?.hash,
       onSuccess(result) {
-       toast("LaunchPad created succesfully");
+       toast.success("LaunchPad created succesfully");
 
       },
       onError(error) {
-        console.log("Error: ", error);
-        toast(`ERROR ${error}`);
+        toast.error(`ERROR ${error}`);
 
       },
     });
