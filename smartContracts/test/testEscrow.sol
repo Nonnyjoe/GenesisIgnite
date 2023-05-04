@@ -31,12 +31,17 @@ contract EscrowContractTest is Test {
 
     function setUp() public {
         vm.startPrank(arbitrator);
-        escrow = new Escrow();
         tokenM = new MockToken();
         flk = new FlokiToken();
         lkt = new LinkToken();
         sbt = new ShibaToken();
         uit = new UniToken();
+        escrow = new Escrow(
+            address(tokenM),
+            address(sbt),
+            address(flk),
+            address(uit)
+        );
     }
 
     function testOpenEscrows() public {
@@ -88,7 +93,6 @@ contract EscrowContractTest is Test {
 
         vm.prank(buyer1);
         escrow.cancelEscrow(4);
-
     }
 
     function mkaddr(string memory name) public returns (address) {

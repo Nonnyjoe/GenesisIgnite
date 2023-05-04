@@ -64,12 +64,12 @@ contract Escrow {
         uint received;
     }
 
-    address public tokenIgnite = 0x68164C5890179267255ab9FE6d2Ad0DEAb47BEA5;
+    address public tokenIgnite;
     address private arbitrator;
-    address private shibaInu = 0x0d7aDD117A8F7B987Ea2Afe69d9D4b8c28f5367c;
-    address private uniToken = 0x9C513c5b33E9b005972956Ba7B8d5aFb1192Fe6F;
-    address private linkToken = 0xE98f7E8BFe055767cB7bb4525d5C07620F8aE790;
-    address private flokiToken = 0x0e9A422E75FF56ba26a2642D7E9cA7A3a19420BD;
+    address private shibaInu;
+    address private uniToken;
+    address private linkToken;
+    address private flokiToken;
 
     uint private escrowID;
     uint[] private escrowsTracker;
@@ -81,11 +81,15 @@ contract Escrow {
     mapping(address => uint256) feesGenerated;
     mapping(address => bool) public p2pTokens;
 
-    constructor() {
+    constructor(address GIT, address SHIB, address FLOKI, address UNI) {
         arbitrator = msg.sender;
+        tokenIgnite = GIT;
+        shibaInu = SHIB;
+        uniToken = UNI;
+        flokiToken = FLOKI;
         p2pTokens[shibaInu] = true;
         p2pTokens[uniToken] = true;
-        p2pTokens[linkToken] = true;
+        // p2pTokens[linkToken] = true;
         p2pTokens[flokiToken] = true;
         p2pTokens[tokenIgnite] = true;
     }
@@ -294,8 +298,9 @@ contract Escrow {
 
         escrowDetails[_escrowID].amount = 0;
         escrowDetails[_escrowID].status = SellStatus.canceled;
-        escrowPosition[_escrowID] == true?
-        IERC20(Etoken).transfer(proposer, escrowBal): IERC20(tokenIgnite).transfer(proposer, escrowBal);
+        escrowPosition[_escrowID] == true
+            ? IERC20(Etoken).transfer(proposer, escrowBal)
+            : IERC20(tokenIgnite).transfer(proposer, escrowBal);
 
         //@dev: lets not delete it so we can have the order details in record
         // delete escrowDetails[_escrowID];
