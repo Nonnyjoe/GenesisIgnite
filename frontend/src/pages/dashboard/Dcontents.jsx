@@ -133,7 +133,7 @@ const [userAddress, setUserAddress] =  useState([]);
                         <p className="mb-3">You can get quick responses to any question and chat with the team on Discord &quot;Link here&quot;</p>
                         <p className="mb-5"> Don&apos;t hesistate to refer friends</p>
                     <div className={styles.buyToken2}>
-                    <Link href={`https://github.com/Nonnyjoe/BunzzGenesisIgnite`}>
+                    <Link href={`https://github.com/Nonnyjoe/GenesisIgnite`}>
                         <p>Github</p>
                     </Link>
                     </div>
