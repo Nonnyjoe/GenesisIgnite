@@ -89,53 +89,53 @@ const {
 async function handleSubmit2() {
     // don't reload the page!
     // event.preventDefault()
-    setShowImageAndText(true); 
-    setUploadText("Sending to IPFS please wait........");
-    setLoaderImage(loader);
+    // setShowImageAndText(true); 
+    // setUploadText("Sending to IPFS please wait........");
+    // setLoaderImage(loader);
 
-    showMessage('> 📦 creating web3.storage client')
-    const client = new Web3Storage({ token })
+    // showMessage('> 📦 creating web3.storage client')
+    // const client = new Web3Storage({ token })
 
-    showMessage('> 🤖 chunking and hashing the files (in your browser!) to calculate the Content ID')
+    // showMessage('> 🤖 chunking and hashing the files (in your browser!) to calculate the Content ID')
 
-    // Filter the uploaded files to only accept .png files
-    const filteredFiles = Array.from(files).filter(file => file.type === 'image/png')
+    // // Filter the uploaded files to only accept .png files
+    // const filteredFiles = Array.from(files).filter(file => file.type === 'image/png')
 
-    // Rename the filtered files to "companyFile"
-    const renamedFiles = filteredFiles.map(file => {
-      const renamedFile = new File([file], 'tokenLogo', { type: 'image/png' })
-      return renamedFile
-    })
+    // // Rename the filtered files to "companyFile"
+    // const renamedFiles = filteredFiles.map(file => {
+    //   const renamedFile = new File([file], 'tokenLogo', { type: 'image/png' })
+    //   return renamedFile
+    // })
 
-    const cid = await client.put(renamedFiles, {
-      onRootCidReady: localCid => {
-        showMessage(`> 🔑 locally calculated Content ID: ${localCid} `)
-        showMessage('> 📡 sending files to web3.storage ')
-      },
-      onStoredChunk: bytes => showMessage(`> 🛰 sent ${bytes.toLocaleString()} bytes to web3.storage`)
-    })
-    // setimageCID({cid}.cid);
-    showMessage(`> ✅ web3.storage now hosting ${cid}`)
-    setimageCID((cid).toString());
-    showLink(`https://${cid}.ipfs.w3s.link/tokenLogo`)
+    // const cid = await client.put(renamedFiles, {
+    //   onRootCidReady: localCid => {
+    //     showMessage(`> 🔑 locally calculated Content ID: ${localCid} `)
+    //     showMessage('> 📡 sending files to web3.storage ')
+    //   },
+    //   onStoredChunk: bytes => showMessage(`> 🛰 sent ${bytes.toLocaleString()} bytes to web3.storage`)
+    // })
+    // // setimageCID({cid}.cid);
+    // showMessage(`> ✅ web3.storage now hosting ${cid}`)
+    // setimageCID((cid).toString());
+    // showLink(`https://${cid}.ipfs.w3s.link/tokenLogo`)
 
-    // update the useState for the item details 
-     setFormData(prevFormData => ({...prevFormData, imageCID: {cid}.cid}))
-    console.log(formData);
+    // // update the useState for the item details 
+    //  setFormData(prevFormData => ({...prevFormData, imageCID: {cid}.cid}))
+    // console.log(formData);
 
-    showMessage('> 📡 fetching the list of all unique uploads on this account');
-    showMessage('> 📡 SENDING DATA TO CONTRACT PLESASE SIGN TRANSACTION');
-    console.log(formData.tokenAddress);
-    console.log(`CIDDDD is ${imageCID}`);
+    // showMessage('> 📡 fetching the list of all unique uploads on this account');
+    // showMessage('> 📡 SENDING DATA TO CONTRACT PLESASE SIGN TRANSACTION');
+    // console.log(formData.tokenAddress);
+    // console.log(`CIDDDD is ${imageCID}`);
 
 
-    setUploadText("Upload complete, proceed with request");
-    setLoaderImage(good); // assuming there is a loader image for after the upload
+    // setUploadText("Upload complete, proceed with request");
+    // setLoaderImage(good); // assuming there is a loader image for after the upload
 
-    setTimeout(() => {
-    setShowImageAndText(false); 
+    // setTimeout(() => {
+    // setShowImageAndText(false); 
       
-    }, 4000);
+    // }, 4000);
   }
 
   function showLink(url) {
