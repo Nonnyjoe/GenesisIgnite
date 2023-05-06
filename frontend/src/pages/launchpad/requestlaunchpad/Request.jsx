@@ -3,7 +3,6 @@ const { utils } = require("ethers");
 import Header from "../../../components/header";
 import styles from "../../../styles/requestlaunchpad.module.css";
 import reusable from "../../../styles/reusable.module.css";
-import { create, Web3Storage } from 'web3.storage'
 import Image from "next/image";
 import click from "../../../images/click.png"
 import loader from "../../../images/loading.png"
