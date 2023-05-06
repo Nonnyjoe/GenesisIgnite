@@ -3969,45 +3969,6 @@ ipaddr.js@1.9.1:
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
 
 
-ipfs-core-types@^0.8.3, ipfs-core-types@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.npmjs.org/ipfs-core-types/-/ipfs-core-types-0.8.4.tgz"
-  integrity sha512-sbRZA1QX3xJ6ywTiVQZMOxhlhp4osAZX2SXx3azOLxAtxmGWDMkHYt722VV4nZ2GyJy8qyk5GHQIZ0uvQnpaTg==
-  dependencies:
-    interface-datastore "^6.0.2"
-    multiaddr "^10.0.0"
-    multiformats "^9.4.13"
-
-
-ipfs-unixfs@^6.0.0, ipfs-unixfs@^6.0.3, ipfs-unixfs@^6.0.5:
-  version "6.0.9"
-  resolved "https://registry.npmjs.org/ipfs-unixfs/-/ipfs-unixfs-6.0.9.tgz"
-  integrity sha512-0DQ7p0/9dRB6XCb0mVCTli33GzIzSVx5udpJuVM47tGcD+W+Bl4LsnoLswd3ggNnNEakMv1FdoFITiEnchXDqQ==
-  dependencies:
-    err-code "^3.0.1"
-    protobufjs "^6.10.2"
-
-ipfs-utils@^9.0.2:
-  version "9.0.14"
-  resolved "https://registry.npmjs.org/ipfs-utils/-/ipfs-utils-9.0.14.tgz"
-  integrity sha512-zIaiEGX18QATxgaS0/EOQNoo33W0islREABAcxXE8n7y2MGAlB+hdsxXn4J0hGZge8IqVQhW8sWIb+oJz2yEvg==
-  dependencies:
-    any-signal "^3.0.0"
-    browser-readablestream-to-it "^1.0.0"
-    buffer "^6.0.1"
-    electron-fetch "^1.7.2"
-    err-code "^3.0.1"
-    is-electron "^2.2.0"
-    iso-url "^1.1.5"
-    it-all "^1.0.4"
-    it-glob "^1.0.1"
-    it-to-stream "^1.0.0"
-    merge-options "^3.0.4"
-    nanoid "^3.1.20"
-    native-fetch "^3.0.0"
-    node-fetch "^2.6.8"
-    react-native-fetch-api "^3.0.0"
-    stream-to-it "^0.2.2"
 
 ipns@^0.16.0:
   version "0.16.0"
@@ -6579,26 +6540,6 @@ web-streams-polyfill@^3.1.1:
   resolved "https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-3.2.1.tgz"
   integrity sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==
 
-web3.storage@^3.1.0:
-  version "3.5.7"
-  resolved "https://registry.npmjs.org/web3.storage/-/web3.storage-3.5.7.tgz"
-  integrity sha512-TU8wmbocthzUwi4Enr2zSw5dUN593fYrDFEDzu5MHbUrF9e/pcfCLBxDa6ABD3/8LAq2JOjRT5sxY/lRfqESzg==
-  dependencies:
-    "@ipld/car" "^3.1.4"
-    "@web-std/blob" "^3.0.4"
-    "@web-std/fetch" "^3.0.3"
-    "@web-std/file" "^3.0.2"
-    "@web3-storage/parse-link-header" "^3.1.0"
-    browser-readablestream-to-it "^1.0.3"
-    carbites "^1.0.6"
-    cborg "^1.8.0"
-    files-from-path "^0.2.4"
-    ipfs-car "^0.6.2"
-    ipns "^0.16.0"
-    libp2p-crypto "^0.21.0"
-    p-retry "^4.5.0"
-    streaming-iterables "^6.2.0"
-    uint8arrays "^3.0.0"
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
