@@ -5,7 +5,9 @@ import Image from "next/image";
 import Bunzz from "../images/bunzzLogo.png"
 import Web3Africa from "../images/web3AfricaLogo.svg"
 import ChainID from "../images/chainIDELogo.png"
-import Web3Bridge from "../images/web3bridgeLogo.svg"
+import Web3Bridge from "../images/web3bridgeLogo.svg";
+import SpheronLogo from "../images/spheronLogo.png"
+import Chainlink from "../images/Chainlink_Logo_Blue.svg.png"
 
 export default function Sponsors() {
 
@@ -35,7 +37,7 @@ export default function Sponsors() {
          <div className="w-[40%] flex flex-col gap-5">
                     <div className={`flex flex-row gap-5 `}>
                         <div className={`${styles2.supporters} ${styles2.moveUp}`}>
-                            <Image src={Bunzz} />
+                            <Image src={SpheronLogo} />
                         </div>
                         <div className={`${styles2.supporters} ${styles2.moveRight}`}>
                             <Image src={Web3Africa} />
@@ -43,7 +45,7 @@ export default function Sponsors() {
                     </div>
                     <div className="flex flex-row gap-5">
                         <div className={`${styles2.supporters} ${styles2.moveDown}`}>
-                            <Image src={ChainID} />
+                            <Image src={Chainlink} />
                         </div>
                         <div className={`${styles2.supporters} ${styles2.moveRight}`}>
                             <Image src={Web3Bridge} />
