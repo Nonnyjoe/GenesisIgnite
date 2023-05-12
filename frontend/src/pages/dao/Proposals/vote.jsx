@@ -46,6 +46,8 @@ export default function Vote(props) {
   const [votes, setVotes] = useState();
   const [hasVoted, setHasVoted] = useState();
   const [proposalStatus, setProposalStatus] = useState();
+  const [EpochTime, setEpochTime] = useState();
+  const [EndEpoch, setEndEpoch] = useState();
 
 
       /// VOTE FOR PROPOSALS
@@ -203,6 +205,7 @@ export default function Vote(props) {
       setPropossalDate((new Date(data.RequestTime * 1000)) );
       const time = (data.RequestTime.toNumber() + 259200);
       setEndDate(new Date(time * 1000))
+      setEndEpoch(data.RequestTime.toNumber() + 259200);
       Timestamp(time);
     },
   });
@@ -212,8 +215,10 @@ export default function Vote(props) {
     const now = new Date();
     const epochTime = Math.floor(now.getTime() / 1000);
     console.log(`Current epoch time: ${epochTime}`);
+    setEpochTime(epochTime);
     if (epochTime > data) {
       setProposalStatus("false");
+
     } else {
       setProposalStatus("true")
     }
@@ -224,7 +229,8 @@ export default function Vote(props) {
     event.preventDefault();
     console.log(vote); 
     console.log(VoteOption); 
-    !proposalStatus ? startexecuteVote?.() : votes == 0 ? startdelegateVote?.() : startCastVote?.();
+    console.log(proposalStatus); 
+    (EpochTime > EndEpoch) ? startexecuteVote?.() : votes == 0 ? startdelegateVote?.() : startCastVote?.();
   };
 
 
@@ -347,7 +353,7 @@ const userStatus = hasVoted ? `YOU'VE VOTED ALREADY!` : `YOU'RE YET TO PARTICIPA
                   className={styles.launchpadbtn}
                   disabled={ 100 < 99 }
                 >
-                {waitExecuteVoteLoading || executeVoteLoading ? `Executing Vote...` : waitCastVoteLoading || castVoteLoading ? "VOTING......."  : waitdelegateVoteLoading || delegateVoteLoading ? "DELEGATING...." : votes == 0 ? "DELEGATE YOURSELF" :  "CAST VOTE"}
+                {(EpochTime > EndEpoch) ? "Execute Vote" : waitExecuteVoteLoading || executeVoteLoading ? `Executing Vote...` : waitCastVoteLoading || castVoteLoading ? "VOTING......."  : waitdelegateVoteLoading || delegateVoteLoading ? "DELEGATING...." : votes == 0 ? "DELEGATE YOURSELF" :  "CAST VOTE"}
                 </button>
               </div>
             </div>
