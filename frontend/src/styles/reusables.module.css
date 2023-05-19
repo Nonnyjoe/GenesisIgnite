@@ -9,7 +9,7 @@
 
 .btnHover{
     width: 150px;
-    font-size: 16px;
+    /* font-size: 16px; */
     margin-top: -0.5rem !important;
     font-weight: 600;
     color: #fff;
@@ -27,7 +27,16 @@
     transition: all .4s ease-in-out;
 }
 
-.btnHover:hover {
+.btnHover2 {
+    font-weight: 600;
+    background-size: 300% 100%;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btnHover:hover, .btnHover2:hover {
     background-position: 100% 0;
     moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
@@ -35,11 +44,11 @@
     transition: all .4s ease-in-out;
 }
 
-.btnHover:focus {
+.btnHover:focus, .btnHover2:focus{
     outline: none;
 }
 
-.btnHover.color7 {
+.btnHover.color7, .btnHover2.color7 {
     background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
     box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
 }

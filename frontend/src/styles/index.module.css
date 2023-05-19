@@ -1,18 +1,16 @@
 .body{
     /* background: rgb(18, 2, 38); */
         background: linear-gradient(139deg, rgba(18, 2, 38, 1) 28%, rgba(85, 37, 134, 1) 100%, rgba(9, 9, 121, 1) 100%);
-        /* background: url("../images/BUNZZROCKETLAUNCHING.png") center center no-repeat; */
-        height: 100vh;
+        height: fit-content;
         color: whitesmoke;
-        width: 100vw;
-        position: relative;
         /* display: flex; */
         justify-content: center;
         align-items: center;
         overflow-x: hidden;
 }
+
 .glassCard{
-    height: 90vh;
+    height: fit-content;
     width: 90vw;
     padding: 0,20px;
     background: rgba(255, 255, 255, 0.1);
@@ -24,9 +22,6 @@
     border: 2px solid rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(25px) !important;
     box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
-    top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
 }
 
 
@@ -178,4 +173,41 @@
         transform: translate(0, 0);
     }
 
+}
+
+/* Media query for small screens */
+@media screen and (max-width: 767px) {
+
+    /* CSS rules for small screens */
+    .body {
+        background-color: lightblue;
+    }
+}
+
+/* Media query for medium screens */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+    /* CSS rules for medium screens */
+   .body {
+        background-color: lightgreen;
+    }
+
+        .glassCard {
+            height: fit-content;
+            width: 90vw;
+            padding: 0, 20px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(25px) !important;
+            box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
+        }
+
+    .glassCard2 {
+        margin-top: 250px;
+    }
 }
