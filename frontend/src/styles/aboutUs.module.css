@@ -200,8 +200,6 @@
 }
 
 .suportedTokens{
-    height: 5rem;
-    width: 5rem;
     border-radius: .5rem;
     display: flex;
     justify-content: center;

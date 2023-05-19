@@ -7,8 +7,8 @@ import rocket2 from "../images/HowWeWork2.png"
 
 const HowWeWork = () => {
   return (
-        <div className={`  ${styles2.aboutUs} mt-[-20rem]`}>
-        <div className={`p-[6rem] mt-7 flex flex-row gap-11 px-[4rem]`}>
+        <div className={`  ${styles2.aboutUs} `}>
+        <div className={`p-[6rem] mt-7 flex flex-col md:flex-row gap-11 px-[4rem]`}>
             <div className={` ${styles2.glassCard8} p-[6rem] `}>
 
             </div>

@@ -30,8 +30,6 @@
 .glassCard2 {
     height: fit-content;
     width: 90vw;
-    padding: 0, 20px;
-    margin-top: 150px;
     background: rgba(255, 255, 255, 0.1);
     z-index: 10;
     display: flex;
@@ -41,9 +39,6 @@
     border: 2px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(25px) !important;
     box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .innerDiv {
@@ -206,8 +201,4 @@
             backdrop-filter: blur(25px) !important;
             box-shadow: -15px 17px 17px rgba(10, 10, 10, 0.25);
         }
-
-    .glassCard2 {
-        margin-top: 250px;
-    }
 }
