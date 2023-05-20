@@ -48,7 +48,7 @@
 }
 
 .glassCard6 {
-    height: 40vh;
+    height: fit-content;
     width: 90vw;
     /* margin-right: -10rem; */
     padding: 0, 20px;
