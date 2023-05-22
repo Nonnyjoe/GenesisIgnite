@@ -8,6 +8,7 @@ contract MockToken is ERC20 {
 
     constructor() ERC20("MockToken", "MTK") {
         owner = msg.sender;
+        _mint(owner, 2000000 * 10 ** 18);
     }
 
     modifier onlyOwner() {
