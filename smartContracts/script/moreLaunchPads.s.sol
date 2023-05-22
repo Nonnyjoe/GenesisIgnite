@@ -104,14 +104,14 @@ contract more is Script {
         IGENESISCONTROLLER igniteLaunchPadFactory = IGENESISCONTROLLER(
             0x063F23aAfaA0B39a1Cf42827f77da0CA04840523
         );
-        // igniteLaunchPadFactory.registerLaunchPads(
-        //     address(0x13B109506Ab1b120C82D0d342c5E64401a5B6381),
-        //     address(tokenAddr),
-        //     regNo,
-        //     (125415),
-        //     (700000 * 10 ** 18),
-        //     _instalments
-        // );
+        igniteLaunchPadFactory.registerLaunchPads(
+            address(0x13B109506Ab1b120C82D0d342c5E64401a5B6381),
+            address(tokenAddr),
+            regNo,
+            (125415),
+            (700000 * 10 ** 18),
+            _instalments
+        );
         IUSDT(tokenAddr).approve(
             address(igniteLaunchPadFactory),
             100000000000000 * 10 ** 18
