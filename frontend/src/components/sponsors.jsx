@@ -7,6 +7,7 @@ import Web3Africa from "../images/web3AfricaLogo.svg"
 import ChainID from "../images/chainIDELogo.png"
 import Web3Bridge from "../images/web3bridgeLogo.svg";
 import SpheronLogo from "../images/spheronLogo.png"
+import circleLogo from "../images/circleLogo2.png"
 import Chainlink from "../images/Chainlink_Logo_Blue.svg.png"
 
 export default function Sponsors() {
@@ -25,7 +26,7 @@ export default function Sponsors() {
       
 
         <div className={`  ${styles2.aboutUs}  mt-[1rem] mb-[5rem]`}>
-        <div className={`flex flex-row pl-[rem] flex justify-center items-center`}>
+        <div className={`flex flex-row pl-[rem] justify-center items-center`}>
             <div className={` ${styles2.glassCard5}  flex flex-row p-[6rem] gap-10`}>
               <div className="w-[60%]">
                 <p className="font-headers uppercase text-5xl mb-5 text-indigo-600">Partners </p>
@@ -37,7 +38,7 @@ export default function Sponsors() {
          <div className="w-[40%] flex flex-col gap-5">
                     <div className={`flex flex-row gap-5 `}>
                         <div className={`${styles2.supporters} ${styles2.moveUp}`}>
-                            <Image src={SpheronLogo} />
+                            <Image src={circleLogo} />
                         </div>
                         <div className={`${styles2.supporters} ${styles2.moveRight}`}>
                             <Image src={Web3Africa} />
